@@ -1,7 +1,10 @@
 
+import LoggerUtil from "../../Logger/logger_util";
+
 class XBarLoaderUIController {
     constructor() {
-        this.name = "x_bar_loader_ui"
+        this.name       = "x_bar_loader_ui";
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
     // Public method to expose components
@@ -26,27 +29,27 @@ class XBarLoaderUIController {
     // Lifecycle: created
     handleOnCreatedLogic = () => {
         try {
-            console.log(`[Created] Component ${this.name} has been created`);
+            this.logger.log(`[Created] Component ${this.name} has been created`);
         } catch (error) {
-            console.error(`[Created] Error in Component ${this.name}:`, error);
+            this.logger.error(`[Created] Error in Component ${this.name}:`, error);
         }
     };
 
     // Lifecycle: mounted
     handleOnMountedLogic = () => {
         try {
-            console.log(`[Mounted] Component ${this.name} has been mounted`);
+            this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
         } catch (error) {
-            console.error(`[Mounted] Error in component ${this.name}:`, error);
+            this.logger.error(`[Mounted] Error in component ${this.name}:`, error);
         }
     };
 
     // Lifecycle: beforeUnmount
     handleBeforeUnmountedLogic = () => {
         try {
-            console.log(`[BeforeUnmount] Component ${this.name} will unmount`);
+            this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
         } catch (error) {
-            console.error(`[BeforeUnmount] Error in component ${this.name}:`, error);
+            this.logger.error(`[BeforeUnmount] Error in component ${this.name}:`, error);
         }
     };
 

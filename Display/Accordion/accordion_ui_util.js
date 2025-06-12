@@ -1,8 +1,10 @@
+import LoggerUtil from "../../Logger/logger_util";
 
 class AccordionUIUtil {
     constructor (name, vue_isnatnce) {
-        this.name   = name
-        this.vm     = vue_isnatnce
+        this.name       = "accordion_ui_uitl";
+        this.vm         = vue_isnatnce;
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 
     // Method to hide all accordion bodies
@@ -62,7 +64,7 @@ class AccordionUIUtil {
         const head_el               = head_id ? document.getElementById(head_id) : null;
         const body_el               = body_id ? document.getElementById(body_id) : null;
 
-        if(!head_el || !body_el) { return console.log(`[${this.name} Component] Error invalid element for head ${head_el} or body ${body_el}`); }
+        if(!head_el || !body_el) { return this.logger.error(`[${this.name} Component] Error invalid element for head ${head_el} or body ${body_el}`); }
 
         const is_showing            = body_el.classList.contains("block");
 

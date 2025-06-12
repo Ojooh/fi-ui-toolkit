@@ -2,7 +2,7 @@
     <button 
     :type="config?.btn_type || 'button'" 
     :class="['w-full cursor-pointer', config?.class_style]" 
-    @click="config?.handleInputClickEvent?.($event)"
+    @click="config?.handleClickEvent?.($event)"
     v-html="config?.btn_text">
     </button>
 </template>

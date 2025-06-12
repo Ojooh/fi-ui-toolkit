@@ -1,13 +1,15 @@
 import { getCurrentInstance } from "vue";
 
+import LoggerUtil from "../../../Logger/logger_util";
 import InputUIUtil from "../utils/input_ui_util";
 
 class BaseInputUIController {
     constructor (name, input_default_config) {
         this.name                   = name;
-        this.input_default_config   = input_default_config
+        this.input_default_config   = input_default_config;
         this.vm                     = null; 
-        this.util                   = new InputUIUtil(this.name, this.vm)
+        this.util                   = new InputUIUtil(this.name, this.vm);
+        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
     // Public method to expose components
@@ -37,27 +39,27 @@ class BaseInputUIController {
     // Lifecycle: created
     handleOnCreatedLogic = () => {
         try {
-            console.log(`[Created] Component ${this.name} has been created`);
+            this.logger.log(`[Created] Component ${this.name} has been created`);
         } catch (error) {
-            console.error(`[Created] Error in Component ${this.name}:`, error);
+            this.logger.error(`[Created] Error in Component ${this.name}:`, error);
         }
     };
 
     // Lifecycle: mounted
     handleOnMountedLogic = () => {
         try {
-            console.log(`[Mounted] Component ${this.name} has been mounted`);
+            this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
         } catch (error) {
-            console.error(`[Mounted] Error in component ${this.name}:`, error);
+            this.logger.error(`[Mounted] Error in component ${this.name}:`, error);
         }
     };
 
     // Lifecycle: beforeUnmount
     handleBeforeUnmountedLogic = () => {
         try {
-            console.log(`[BeforeUnmount] Component ${this.name} will unmount`);
+            this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
         } catch (error) {
-            console.error(`[BeforeUnmount] Error in component ${this.name}:`, error);
+            this.logger.error(`[BeforeUnmount] Error in component ${this.name}:`, error);
         }
     };
 

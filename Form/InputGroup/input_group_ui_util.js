@@ -1,13 +1,16 @@
 import { markRaw } from "vue";
 
+import LoggerUtil from "../../Logger/logger_util";
+
 import TextAreaInputUI from "../Input/text_area_input_ui.vue";
 import TextInputUI from "../Input/text_input_ui.vue";
 
 
 class InputGroupUIUtil {
     constructor (name, vue_isnatnce) {
-        this.name   = name
-        this.vm     = vue_isnatnce
+        this.name       = "input_group_ui_util"
+        this.vm         = vue_isnatnce
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
     // Method to store input types map

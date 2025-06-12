@@ -13,7 +13,7 @@ class ActionButtonUIController extends BaseButtonUIController {
     // method to retrun text area default config
     static #getDefaultConfig = () => {
         return {
-            btn_type: "button", class_style: null, btn_text: null, handleInputClickEvent: null
+            btn_type: "button", class_style: null, btn_text: null, handleClickEvent: null
         }
     }
 
