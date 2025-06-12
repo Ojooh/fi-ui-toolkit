@@ -28,7 +28,7 @@ class ActionButtonUIController extends BaseButtonUIController {
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
-            methods: this.util.getActionBtnUtilMethods()
+            methods: this.util?.getActionBtnUtilMethods()
         };
     };
 

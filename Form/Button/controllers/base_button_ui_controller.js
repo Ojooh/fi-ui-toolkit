@@ -28,7 +28,7 @@ class BaseButtonUIController {
         this.vm         = getCurrentInstance();
         this.util       = new ButtonUIUtil(this.name, this.vm);
 
-        return { } 
+        return { util: this?.util } 
     };
 
     // Computed variables
@@ -75,7 +75,6 @@ class BaseButtonUIController {
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
-            methods: this.util.getUtilMethods()
         };
     };
 }

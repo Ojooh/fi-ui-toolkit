@@ -27,7 +27,7 @@ class BaseInputUIController {
         this.vm         = getCurrentInstance();
         this.util       = new InputUIUtil(this.name, this.vm);
 
-        return { } 
+        return { util: this.util } 
     };
 
     // Computed variables
@@ -74,7 +74,6 @@ class BaseInputUIController {
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
-            methods: this.util.getUtilMethods()
         };
     };
 }

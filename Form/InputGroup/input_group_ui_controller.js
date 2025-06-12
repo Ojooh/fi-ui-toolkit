@@ -30,7 +30,7 @@ class InputGroupUIController {
         this.vm         = getCurrentInstance();
         this.util       = new InputGroupUIUtil(this.name, this.vm);
 
-        return { } 
+        return { util: this.util } 
     };
 
     // Computed variables
@@ -77,7 +77,6 @@ class InputGroupUIController {
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
-            methods: this.util.getUtilMethods()
         };
     };
 }

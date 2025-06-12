@@ -7,7 +7,7 @@
             </span>
         </label>
         <component 
-            :is="getInputComponent(input_config?.input_type)" 
+            :is="util?.getInputComponent(input_config?.input_type)" 
             :config="input_config"
         />
     </div>

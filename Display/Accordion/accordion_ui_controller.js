@@ -50,7 +50,7 @@ class AccordionUIController{
     getAppStateData = () => {
         this.vm         = getCurrentInstance();
         this.util       = new AccordionUIUtil(this.name, this.vm);
-        return { } 
+        return { util: this.util } 
     };
 
     // Computed variables
@@ -97,7 +97,6 @@ class AccordionUIController{
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
-            methods: this.util.getUtilMethods()
         };
     };
 }
