@@ -10,7 +10,7 @@ class AccordionUIController{
     constructor() {
         this.name       = "accordion_ui";
         this.vm         = null; 
-        this.util       = new AccordionUIUtil(this.name, this.vm);
+        this.util       = null;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
@@ -49,7 +49,7 @@ class AccordionUIController{
     // State data
     getAppStateData = () => {
         this.vm         = getCurrentInstance();
-        this.util.vm    = this.vm;
+        this.util       = new AccordionUIUtil(this.name, this.vm);
         return { } 
     };
 

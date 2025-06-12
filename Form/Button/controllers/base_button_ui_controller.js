@@ -9,7 +9,7 @@ class BaseButtonUIController {
         this.name                   = name;
         this.btn_default_config     = btn_default_config
         this.vm                     = null; 
-        this.util                   = new ButtonUIUtil(this.name, this.vm);
+        this.util                   = null;
         this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 
@@ -26,7 +26,7 @@ class BaseButtonUIController {
     // State data
     getAppStateData = () => {
         this.vm         = getCurrentInstance();
-        this.util.vm    = this.vm;
+        this.util       = new ButtonUIUtil(this.name, this.vm);
 
         return { } 
     };

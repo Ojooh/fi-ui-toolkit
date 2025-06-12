@@ -8,7 +8,7 @@ class BaseInputUIController {
         this.name                   = name;
         this.input_default_config   = input_default_config;
         this.vm                     = null; 
-        this.util                   = new InputUIUtil(this.name, this.vm);
+        this.util                   = null;
         this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
@@ -25,7 +25,7 @@ class BaseInputUIController {
     // State data
     getAppStateData = () => {
         this.vm         = getCurrentInstance();
-        this.util.vm    = this.vm;
+        this.util       = new InputUIUtil(this.name, this.vm);
 
         return { } 
     };

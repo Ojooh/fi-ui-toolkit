@@ -7,7 +7,7 @@ class InputGroupUIController {
     constructor () {
         this.name                   = "input_group_ui";
         this.vm                     = null; 
-        this.util                   = new InputGroupUIUtil(this.name, this.vm);
+        this.util                   = null;
         this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
@@ -28,7 +28,7 @@ class InputGroupUIController {
     // State data
     getAppStateData = () => {
         this.vm         = getCurrentInstance();
-        this.util.vm    = this.vm;
+        this.util       = new InputGroupUIUtil(this.name, this.vm);
 
         return { } 
     };
