@@ -2,9 +2,9 @@
     <section :id="id" :class="['w-full p-0 h-auto flex flex-col items-center justify-center my-2', accordion_class_style]">
         <!-- acordion head -->
         <div 
-        @click="toggleBody($event)"
+        @click="util?.toggleBody($event)"
         :id="accordion_head_id" 
-        :class="[`accordion-${id}-head`,'cursor-pointer w-full items-center flex md:flex-row flex-col md:justify-between justify-center', accordion_head_class_style]">
+        :class="[`accordion-${group_id}-head`,'cursor-pointer w-full items-center flex md:flex-row flex-col md:justify-between justify-center', accordion_head_class_style]">
 
             <span :class="['font-bold uppercase', accordion_head_title_class_style]" v-html="accordion_head_title_content"></span>
 

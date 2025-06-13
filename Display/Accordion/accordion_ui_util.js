@@ -8,8 +8,8 @@ class AccordionUIUtil {
     }
 
     // Method to hide all accordion bodies
-    #hideAllBodies = (current_id, current_head_id, current_body_id, head_show_class, head_hide_class, body_show_class, body_hide_class) => {
-        const all_accordions = document.getElementsByClassName(`accordion-${current_id}-head`);
+    #hideAllBodies = (group_id, current_head_id, current_body_id, head_show_class, head_hide_class, body_show_class, body_hide_class) => {
+        const all_accordions = document.getElementsByClassName(`accordion-${group_id}-head`);
 
         for (const accordion of all_accordions) {
             const { id: head_id }   = accordion;
@@ -50,9 +50,10 @@ class AccordionUIUtil {
 
     // Method to show body
     toggleBody = (e) => {
-        const { id: head_id }       = e?.target;
+        const head_id      = e?.target?.id || e?.target?.parentElement ?.id || e?.target?.parentElement?.parentElement?.id || e?.target?.parentElement?.parentElement?.parentElement?.id;
+
         const { 
-            id,
+            id, group_id,
             accordion_head_class_style, accordion_head_show_class_style, 
             accordion_body_class_style, accordion_body_show_class_style 
         }   = this.vm?.props;
@@ -68,7 +69,7 @@ class AccordionUIUtil {
 
         const is_showing            = body_el.classList.contains("block");
 
-        this.#hideAllBodies(id, head_id, body_id, head_show_class, head_hide_class, body_show_class, body_hide_class) 
+        this.#hideAllBodies(group_id, head_id, body_id, head_show_class, head_hide_class, body_show_class, body_hide_class) 
         
         if (is_showing) { return this.#hideBody(head_el, body_el, head_show_class, head_hide_class, body_show_class, body_hide_class ); }
 

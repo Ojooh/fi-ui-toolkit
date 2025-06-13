@@ -22,6 +22,8 @@ class AccordionUIController{
         return {
             id: { type: String, default: "id", required: true },
 
+            group_id: { type: String, required: true },
+
             accordion_class_style: { type: String, default: null, required: false },
 
             accordion_head_id: { type: String, default: "head_id", required: true },
