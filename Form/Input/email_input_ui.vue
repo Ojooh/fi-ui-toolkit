@@ -1,6 +1,6 @@
 <template>
     <input 
-        type="text" 
+        type="email" 
         :class="['w-full py-2 px-1', config?.input_class_style]" 
         v-model="config.value"
         :placeholder="config.placeholder"
@@ -15,9 +15,9 @@
 
 <script>
 
-import TextInputUIController from "./controllers/text_input_ui_controller";
+import EmailInputUIController from "./controllers/email_input_ui_controller";
 
-export default TextInputUIController
+export default EmailInputUIController
 
 </script>
 

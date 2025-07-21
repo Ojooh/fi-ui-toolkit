@@ -1,45 +1,54 @@
+
 import { getCurrentInstance } from "vue";
-
 import LoggerUtil from "../../Logger/logger_util";
-import InputGroupUIUtil from "./input_group_ui_util";
+import FeedbackToastUIUtil from "./feedback_toast_ui_util";
 
-class InputGroupUIController {
-    constructor () {
-        this.name                   = "input_group_ui";
-        this.vm                     = null; 
-        this.util                   = null;
-        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
+class FeedbackToastController {
+    constructor() {
+        this.name       = "feedback_toast_controller";
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.util       = new FeedbackToastUIUtil();
     }
 
-    // Public method to expose components
+    // Method to return UI Components
     getUIComponents = () => { return {  }; };
 
-    // Method to get ui props
+    // Method to reurn UI Props
     getUIProps = () => { 
-        return {
-            input_group_class_style: { type: String, required: false, default: null },
+        return { 
+            status: { type: String, required: false },
 
-            label_config: { type: Object, required: true },
+            message: { type: String, required: false },
 
-            input_config: { type: Object, required: true },
+            toast_class_style: { type: String, default: "", required: false },
         } 
     }
 
-    // State data
-    getUIStateData = () => {
+    // Method to get UI State data
+    getUIStateData = () => { 
         this.vm         = getCurrentInstance();
-        this.util       = new InputGroupUIUtil(this.name, this.vm);
+        this.util.vm    = this.vm;
 
-        return { util: this.util } 
+        return {} 
     };
 
-    // Computed variables
-    getUIComputedData = () => { return { }; };
+    // Method to get UI cmputed data
+    getUIComputedData = () => { 
+        return {
+            border_class_tyle: this.util.getBorderStatusClassStyle,
 
-    // Watchers
+            status_icon: this.util.getStatusIcon,
+
+            icon_class_style: this.util.getStatusIconClassStyle,
+
+            text_class_style: this.util.getStatusTextClassStyle,
+        }; 
+    };
+
+    // Method to get UI watchers
     getUIWatchers = () => { return { } };
 
-    // Lifecycle: created
+    // Lifecycle method to handle on ui create logic
     handleOnCreatedLogic = () => {
         try {
             this.logger.log(`[Created] Component ${this.name} has been created`);
@@ -48,7 +57,7 @@ class InputGroupUIController {
         }
     };
 
-    // Lifecycle: mounted
+    // Lifecycle method to handle on ui mounted logic
     handleOnMountedLogic = () => {
         try {
             this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
@@ -57,7 +66,7 @@ class InputGroupUIController {
         }
     };
 
-    // Lifecycle: beforeUnmount
+    // Lifecycle method to handle before ui unmounted logic
     handleBeforeUnmountedLogic = () => {
         try {
             this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
@@ -66,7 +75,7 @@ class InputGroupUIController {
         }
     };
 
-    // Get final Vue component definition
+    // Method to retrun UI component definition
     getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
@@ -78,7 +87,9 @@ class InputGroupUIController {
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
         };
-    };
+    }
+
 }
 
-export default new InputGroupUIController().getUIComponentDefinition()
+
+export default new FeedbackToastController().getUIComponentDefinition();

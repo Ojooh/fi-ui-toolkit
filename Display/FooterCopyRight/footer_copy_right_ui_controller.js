@@ -27,13 +27,13 @@ class FooterCopyRightUIController{
     }
 
     // State data
-    getAppStateData = () => { return () => ({ }); };
+    getUIStateData = () => { return () => ({ }); };
 
     // Computed variables
-    getAppComputedVariables = () => { return { }; };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
-    getAppWatchers = () => { return { } };
+    getUIWatchers = () => { return { } };
 
     // Lifecycle: created
     handleOnCreatedLogic = () => {
@@ -63,13 +63,13 @@ class FooterCopyRightUIController{
     };
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData(),
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData(),
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -77,4 +77,4 @@ class FooterCopyRightUIController{
     };
 }
 
-export default new FooterCopyRightUIController().setVueJson();
+export default new FooterCopyRightUIController().getUIComponentDefinition();

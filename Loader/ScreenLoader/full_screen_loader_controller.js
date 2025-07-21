@@ -1,45 +1,44 @@
-import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import InputUIUtil from "../utils/input_ui_util";
+import LoggerUtil from "../../Logger/logger_util";
 
-class BaseInputUIController {
-    constructor (name, input_default_config) {
-        this.name                   = name;
-        this.input_default_config   = input_default_config;
-        this.vm                     = null; 
-        this.util                   = new InputUIUtil();;
-        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
+class FullScreenLoaderController {
+    constructor() {
+        this.name       = "full_screen_loader_controller";
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
-    // Public method to expose components
+    // Method to return UI Components
     getUIComponents = () => { return {  }; };
 
-    // Method to get ui props
+    // Method to reurn UI Props
     getUIProps = () => { 
         return {
-            config: { type: Object, required: true, default: this.input_default_config }
+            visible: { type: Boolean, default: false, required: false },
+
+            loader_overlay_class_style: { type: String, default: "", required: false },
+
+            loader_content_class_style: { type: String, default: "", required: false },
+
+            loader_content_symbol_class_style: { type: String, default: "", required: false },
+
+            loader_content_symbol_object: { type: Object, default: { type: "img", src: ""}, required: true },
+
+            loader_text: { type: String, default: "", required: false },
+
+            loader_content_text_class_style: { type: String, default: "", required: false },
         } 
     }
 
-    // State data
-    getUIStateData = () => {
-        this.vm = getCurrentInstance();
-        
-        this.util.setVueInstance(this.vm);
+    // Method to get UI State data
+    getUIStateData = () => { return {} };
 
-        const util  = this.util;
-
-        return { util } 
-    };
-
-    // Computed variables
+    // Method to get UI cmputed data
     getUIComputedData = () => { return { }; };
 
-    // Watchers
+    // Method to get UI watchers
     getUIWatchers = () => { return { } };
 
-    // Lifecycle: created
+    // Lifecycle method to handle on ui create logic
     handleOnCreatedLogic = () => {
         try {
             this.logger.log(`[Created] Component ${this.name} has been created`);
@@ -48,7 +47,7 @@ class BaseInputUIController {
         }
     };
 
-    // Lifecycle: mounted
+    // Lifecycle method to handle on ui mounted logic
     handleOnMountedLogic = () => {
         try {
             this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
@@ -57,7 +56,7 @@ class BaseInputUIController {
         }
     };
 
-    // Lifecycle: beforeUnmount
+    // Lifecycle method to handle before ui unmounted logic
     handleBeforeUnmountedLogic = () => {
         try {
             this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
@@ -66,7 +65,7 @@ class BaseInputUIController {
         }
     };
 
-    // Get final Vue component definition
+    // Method to retrun UI component definition
     getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
@@ -78,7 +77,9 @@ class BaseInputUIController {
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
         };
-    };
+    }
+
 }
 
-export default BaseInputUIController
+
+export default new FullScreenLoaderController().getUIComponentDefinition();

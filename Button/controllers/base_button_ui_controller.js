@@ -1,15 +1,16 @@
 import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import InputUIUtil from "../utils/input_ui_util";
+import LoggerUtil from "../../Logger/logger_util";
+import ButtonUIUtil from "../utils/button_ui_util";
 
-class BaseInputUIController {
-    constructor (name, input_default_config) {
+
+class BaseButtonUIController {
+    constructor (name, btn_default_config) {
         this.name                   = name;
-        this.input_default_config   = input_default_config;
+        this.btn_default_config     = btn_default_config
         this.vm                     = null; 
-        this.util                   = new InputUIUtil();;
-        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.util                   = null;
+        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 
     // Public method to expose components
@@ -18,19 +19,16 @@ class BaseInputUIController {
     // Method to get ui props
     getUIProps = () => { 
         return {
-            config: { type: Object, required: true, default: this.input_default_config }
+            config: { type: Object, required: true, default: this.btn_default_config }
         } 
     }
 
     // State data
     getUIStateData = () => {
-        this.vm = getCurrentInstance();
-        
-        this.util.setVueInstance(this.vm);
+        this.vm         = getCurrentInstance();
+        this.util       = new ButtonUIUtil(this.name, this.vm);
 
-        const util  = this.util;
-
-        return { util } 
+        return { util: this?.util } 
     };
 
     // Computed variables
@@ -81,4 +79,4 @@ class BaseInputUIController {
     };
 }
 
-export default BaseInputUIController
+export default BaseButtonUIController

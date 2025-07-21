@@ -18,13 +18,13 @@ class ActionButtonUIController extends BaseButtonUIController {
     }
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData,
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData,
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -34,4 +34,4 @@ class ActionButtonUIController extends BaseButtonUIController {
 
 }
 
-export default new ActionButtonUIController().setVueJson();
+export default new ActionButtonUIController().getUIComponentDefinition();

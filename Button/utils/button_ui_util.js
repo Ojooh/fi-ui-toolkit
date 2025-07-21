@@ -1,4 +1,4 @@
-import LoggerUtil from "../../../Logger/logger_util";
+import LoggerUtil from "../../Logger/logger_util";
 
 class ButtonUIUtil {
     constructor (name, vue_isnatnce) {

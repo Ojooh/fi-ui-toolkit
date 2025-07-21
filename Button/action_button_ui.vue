@@ -3,12 +3,12 @@
     :type="config?.btn_type || 'button'" 
     :class="['w-full cursor-pointer', config?.class_style]" 
     @click="config?.handleClickEvent?.($event)"
-    v-html="config?.btn_text">
+    v-html="config?.clicked && config?.show_loader ? config?.loader_text : config?.btn_text"
+    :disabled="config?.disabled || false">
     </button>
 </template>
 
 <script>
-
 import ActionButtonUIController from "./controllers/action_button_ui_controller";
 
 export default ActionButtonUIController

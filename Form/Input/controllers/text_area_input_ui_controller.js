@@ -23,4 +23,4 @@ class TextAreaInputUIController extends BaseInputUIController {
 
 }
 
-export default new TextAreaInputUIController().setVueJson();
+export default new TextAreaInputUIController().getUIComponentDefinition();

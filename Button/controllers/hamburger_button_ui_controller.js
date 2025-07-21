@@ -1,41 +1,38 @@
-import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import ButtonUIUtil from "../utils/button_ui_util";
+import LoggerUtil from "../../Logger/logger_util";
+import SVGIcons from "../../Resources/svg_icon_resource";
 
 
-class BaseButtonUIController {
-    constructor (name, btn_default_config) {
-        this.name                   = name;
-        this.btn_default_config     = btn_default_config
-        this.vm                     = null; 
-        this.util                   = null;
-        this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() })
+class HamburgerButtonUIController {
+    constructor() {
+        this.name       = "hamburger_button_ui";
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 
     // Public method to expose components
     getUIComponents = () => { return {  }; };
 
     // Method to get ui props
-    getUIProps = () => { 
+    getUIProps = () => {
         return {
-            config: { type: Object, required: true, default: this.btn_default_config }
-        } 
+            hamburger_class_style: { type: String, default: "", required: false },
+
+            hamburger_button_class_style: { type: String, default: "", required: false },
+
+            logo_class_style: { type: String, default: "", required: false },
+
+            config: { type: Object, default: {}, required: false },
+        }
     }
 
     // State data
-    getAppStateData = () => {
-        this.vm         = getCurrentInstance();
-        this.util       = new ButtonUIUtil(this.name, this.vm);
-
-        return { util: this?.util } 
-    };
+    getUIStateData = () => {  return { icons: SVGIcons }  };
 
     // Computed variables
-    getAppComputedVariables = () => { return { }; };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
-    getAppWatchers = () => { return { } };
+    getUIWatchers = () => { return { } };
 
     // Lifecycle: created
     handleOnCreatedLogic = () => {
@@ -65,13 +62,13 @@ class BaseButtonUIController {
     };
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData,
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData,
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -79,4 +76,4 @@ class BaseButtonUIController {
     };
 }
 
-export default BaseButtonUIController
+export default new HamburgerButtonUIController().getUIComponentDefinition();

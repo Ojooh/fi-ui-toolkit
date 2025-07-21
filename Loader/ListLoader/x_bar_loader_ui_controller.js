@@ -18,13 +18,13 @@ class XBarLoaderUIController {
     }
 
     // State data
-    getAppStateData = () => { return () => ({ }); };
+    getUIStateData = () => { return () => ({ }); };
 
     // Computed variables
-    getAppComputedVariables = () => { return { }; };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
-    getAppWatchers = () => { return { } };
+    getUIWatchers = () => { return { } };
 
     // Lifecycle: created
     handleOnCreatedLogic = () => {
@@ -54,13 +54,13 @@ class XBarLoaderUIController {
     };
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData(),
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData(),
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -70,4 +70,4 @@ class XBarLoaderUIController {
 
 
 
-export default new XBarLoaderUIController().setVueJson();
+export default new XBarLoaderUIController().getUIComponentDefinition();

@@ -49,17 +49,17 @@ class AccordionUIController{
     }
 
     // State data
-    getAppStateData = () => {
+    getUIStateData = () => {
         this.vm         = getCurrentInstance();
         this.util       = new AccordionUIUtil(this.name, this.vm);
         return { util: this.util } 
     };
 
     // Computed variables
-    getAppComputedVariables = () => { return { }; };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
-    getAppWatchers = () => { return { } };
+    getUIWatchers = () => { return { } };
 
     // Lifecycle: created
     handleOnCreatedLogic = () => {
@@ -89,13 +89,13 @@ class AccordionUIController{
     };
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData,
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData,
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -103,4 +103,4 @@ class AccordionUIController{
     };
 }
 
-export default new AccordionUIController().setVueJson();
+export default new AccordionUIController().getUIComponentDefinition();

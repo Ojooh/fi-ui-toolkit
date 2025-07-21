@@ -6,7 +6,7 @@
             :src="image_src" :alt="img_alt" :class="['object-contain', image_class]"
         />
 
-        <span :class="['text-base', text_class]">
+        <span v-if="text" :class="['text-base', text_class]">
             {{ text }}
         </span>
 

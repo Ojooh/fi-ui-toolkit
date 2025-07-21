@@ -13,7 +13,7 @@ class TextInputUIController extends BaseInputUIController {
     // method to retrun text  default config
     static #getDefaultConfig = () => {
         return {
-            id: "text_id", name: "text", rows: 4, value: null, placeholder: null, 
+            id: "text_id", name: "text", value: null, placeholder: null, 
 
             required: false, input_class_style: null, 
             
@@ -23,4 +23,4 @@ class TextInputUIController extends BaseInputUIController {
 
 }
 
-export default new TextInputUIController().setVueJson();
+export default new TextInputUIController().getUIComponentDefinition();

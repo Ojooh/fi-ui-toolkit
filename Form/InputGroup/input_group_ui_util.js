@@ -4,6 +4,9 @@ import LoggerUtil from "../../Logger/logger_util";
 
 import TextAreaInputUI from "../Input/text_area_input_ui.vue";
 import TextInputUI from "../Input/text_input_ui.vue";
+import EmailInputUI from "../Input/email_input_ui.vue";
+import PasswordInputUI from "../Input/password_input_ui.vue";
+import OTPInputUI from "../Input/otp_input_ui.vue";
 
 
 class InputGroupUIUtil {
@@ -19,6 +22,12 @@ class InputGroupUIUtil {
             textarea: markRaw(TextAreaInputUI),
 
             text: markRaw(TextInputUI),
+
+            email: markRaw(EmailInputUI),
+
+            password: markRaw(PasswordInputUI),
+
+            otp: markRaw(OTPInputUI)
         };
     }
 

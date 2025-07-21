@@ -14,6 +14,8 @@ class TopBarUIController {
         const config_default = { bg_color: "#052146", has_shadow: true, height: 62 };
         
         return {
+            top_bar_class_style: { type: String, default: "", required: false },
+
             config: { type: Object, default: config_default, required: false },
 
             section_1_component: {type: Object, default: null, required: false },
@@ -31,13 +33,13 @@ class TopBarUIController {
     }
 
     // State data
-    getAppStateData = () => { return () => ({ }); };
+    getUIStateData = () => { return {} };
 
     // Computed variables
-    getAppComputedVariables = () => { return { }; };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
-    getAppWatchers = () => { return { } };
+    getUIWatchers = () => { return { } };
 
     // Lifecycle: created
     handleOnCreatedLogic = () => {
@@ -67,13 +69,13 @@ class TopBarUIController {
     };
 
     // Get final Vue component definition
-    setVueJson = () => {
+    getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getAppStateData(),
-            computed: this.getAppComputedVariables(),
-            watch: this.getAppWatchers(),
+            data: this.getUIStateData,
+            computed: this.getUIComputedData(),
+            watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
@@ -81,4 +83,4 @@ class TopBarUIController {
     };
 }
 
-export default new TopBarUIController().setVueJson();
+export default new TopBarUIController().getUIComponentDefinition();
