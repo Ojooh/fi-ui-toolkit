@@ -1,42 +1,53 @@
 
-import LoggerUtil from "../../Logger/logger_util";
+import { getCurrentInstance } from "vue";
 
-class MemberAvatarUIController {
+import LoggerUtil from "../../Logger/logger_util";
+import DropdownUIUtil from "./dropdown_ui_util";
+import NavLinkUI from "../NavLink/nav_link_ui.vue";
+
+class DropdownUIController {
     constructor() {
-        this.name       = "image_text_ui";
-        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
+        this.name       = "dropdown_ui_controller";
+        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.util       = new DropdownUIUtil();
     }
 
     // Public method to expose components
-    getUIComponents = () => { return {  }; };
+    getUIComponents = () => { return { NavLinkUI }; };
 
     // Method to get ui props
     getUIProps = () => {        
         return {            
             parent_class_style: { type: String, default: "", required: false },
 
-            avatar_circle_class_style: { type: String, default: "", required: false },
+            btn_class_style: { type: String, default: "", required: false },
 
-            img_link: { type: String, required: false, default: null },
+            menu_parent_class_style: { type: String, default: "", required: false },
 
-            img_alt_text: { type: String, required: false, default: "" },
+            menu_class_style: { type: String, default: "", required: false },
 
-            img_class_style: { type: String, default: "", required: false },
+            menu_list_class_style: { type: String, default: "", required: false },
 
-            initials_class_style: { type: String, default: "", required: false },
+            btn_id: { type: String, required: true },
 
-            initials: { type: String, default: "", required: false },
+            menu_id: { type: String, required: true },
 
-            right_slot_class_style: { type: String, default: "", required: false },
+            btn_content: { type: String, required: true },
 
-            right_slot: { type: [Object, Function, String], default: null, required: false },
-
-            right_slot_props: { type: Object, default: null, required: false }
+            menu_list: { type: Array, required: true, default: [] },
+            
         }
     }
 
     // State data
-    getUIStateData = () => { return () => ({ }); };
+    getUIStateData = () => { 
+        this.vm = getCurrentInstance();
+        this.util.setVueInstance(this.vm);
+
+        const util = this.util;
+
+        return { util }
+     };
 
     // Computed variables
     getUIComputedData = () => { return { }; };
@@ -76,7 +87,7 @@ class MemberAvatarUIController {
         return {
             components: this.getUIComponents(),
             props: this.getUIProps(),
-            data: this.getUIStateData(),
+            data: this.getUIStateData,
             computed: this.getUIComputedData(),
             watch: this.getUIWatchers(),
             created: this.handleOnCreatedLogic,
@@ -86,4 +97,4 @@ class MemberAvatarUIController {
     };
 }
 
-export default new MemberAvatarUIController().getUIComponentDefinition();
+export default new DropdownUIController().getUIComponentDefinition();
