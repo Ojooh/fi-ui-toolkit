@@ -21,7 +21,9 @@ class ImageTextUIController {
 
             img_alt: { type: String, required: false, default: null },
 
-            image_class: { type: String, required: false, default: null },
+            img_class_style: { type: String, required: false, default: "" },
+
+            wrapper_class_style: { type: String, required: false, default: "" },
         }
     }
 

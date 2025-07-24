@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full flex items-center space-x-2">
+    <div :class="[wrapper_class_style, 'w-full flex items-center space-x-2']">
 
         <img
             v-if="image_src"
-            :src="image_src" :alt="img_alt" :class="['object-contain', image_class]"
+            :src="image_src" :alt="img_alt" :class="['object-contain', img_class_style]"
         />
 
         <span v-if="text" :class="['text-base', text_class]">
