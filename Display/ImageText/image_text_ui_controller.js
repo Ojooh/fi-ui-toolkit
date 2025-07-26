@@ -13,7 +13,7 @@ class ImageTextUIController {
     // Method to get ui props
     getUIProps = () => {        
         return {
-            text: { type: String, required: true },
+            text: { type: String, required: false, default: null },
             
             text_class: { type: String, default: "text-black" },
 

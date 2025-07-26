@@ -1,4 +1,3 @@
-import { Dropdown } from 'flowbite';
 
 import LoggerUtil from "../../Logger/logger_util";
 
@@ -8,7 +7,6 @@ class NavLinkUIUtil {
         this.vm                 = null;
         this.content_manager    = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
-        this.dropdown_instance  = null
     }
 
     // Method to set vue instance

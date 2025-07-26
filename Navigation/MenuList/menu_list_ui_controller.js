@@ -1,44 +1,50 @@
 
+import { getCurrentInstance } from "vue";
+
 import LoggerUtil from "../../Logger/logger_util";
+import MenuListUIUtil from "./menu_list_ui_util";
 
-class FullScreenLoaderController {
+import NavLinkUI from "../NavLink/nav_link_ui.vue";
+
+class MenuListUIController {
     constructor() {
-        this.name       = "full_screen_loader_controller";
+        this.name       = "menu_list_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.util       = new MenuListUIUtil();
     }
 
-    // Method to return UI Components
-    getUIComponents = () => { return {  }; };
+    // Public method to expose components
+    getUIComponents = () => { return { NavLinkUI  }; };
 
-    // Method to reurn UI Props
-    getUIProps = () => { 
-        return {
-            visible: { type: Boolean, default: false, required: false },
+    // Method to get ui props
+    getUIProps = () => {        
+        return {    
+            wrapper_class_style: { type: String, default: "", required: false },
 
-            loader_overlay_class_style: { type: String, default: "", required: false },
+            second_level_wrapper_class_style: { type: String, default: "pl-4 border-l border-gray-200", required: false },
 
-            loader_content_class_style: { type: String, default: "", required: false },
 
-            loader_content_symbol_class_style: { type: String, default: "", required: false },
-
-            loader_content_symbol_object: { type: Object, default: { type: "img", src: ""}, required: true },
-
-            loader_text: { type: String, default: "", required: false },
-
-            loader_content_text_class_style: { type: String, default: "", required: false },
-        } 
+            menus: { type: Array, required: true },
+        }
     }
 
-    // Method to get UI State data
-    getUIStateData = () => { return {} };
+    // State data
+    getUIStateData = () => { 
+        this.vm = getCurrentInstance();
+        this.util.setVueInstance(this.vm);
 
-    // Method to get UI cmputed data
-    getUIComputedData = () => { return { }; };
+        const util = this.util;
 
-    // Method to get UI watchers
+        return { util }
+     };
+
+    // Computed variables
+    getUIComputedData = () => { return {}; }
+
+    // Watchers
     getUIWatchers = () => { return { } };
 
-    // Lifecycle method to handle on ui create logic
+    // Lifecycle: created
     handleOnCreatedLogic = () => {
         try {
             this.logger.log(`[Created] Component ${this.name} has been created`);
@@ -47,7 +53,7 @@ class FullScreenLoaderController {
         }
     };
 
-    // Lifecycle method to handle on ui mounted logic
+    // Lifecycle: mounted
     handleOnMountedLogic = () => {
         try {
             this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
@@ -56,7 +62,7 @@ class FullScreenLoaderController {
         }
     };
 
-    // Lifecycle method to handle before ui unmounted logic
+    // Lifecycle: beforeUnmount
     handleBeforeUnmountedLogic = () => {
         try {
             this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
@@ -65,7 +71,7 @@ class FullScreenLoaderController {
         }
     };
 
-    // Method to retrun UI component definition
+    // Get final Vue component definition
     getUIComponentDefinition = () => {
         return {
             components: this.getUIComponents(),
@@ -77,9 +83,7 @@ class FullScreenLoaderController {
             mounted: this.handleOnMountedLogic,
             beforeUnmount: this.handleBeforeUnmountedLogic,
         };
-    }
-
+    };
 }
 
-
-export default new FullScreenLoaderController().getUIComponentDefinition();
+export default new MenuListUIController().getUIComponentDefinition();

@@ -22,19 +22,7 @@
                     :key="index"
                     :class="[menu_list_class_style]" 
                 >
-                    <NavLinkUI
-                        :wrapper_class_style="menu?.wrapper_class_style"
-                        :icon_parent_class_style="menu?.icon_parent_class_style"
-                        :icon_img_class_style="menu?.icon_img_class_style"
-                        :svg_icon_class_style="menu?.svg_icon_class_style"
-                        :content_class_style="menu?.content_class_style"
-                        :link ="menu?.link"
-                        :icon_img_link ="menu?.icon_img_link"
-                        :icon_img_alt_text="menu?.icon_img_alt_text"
-                        :svg_icon ="menu?.svg_icon"
-                        :html_content="menu?.html_content"
-                        :on_click="menu?.on_click"
-                    />
+                    <NavLinkUI v-bind="menu" />
                 </li>
                 
             </ul>

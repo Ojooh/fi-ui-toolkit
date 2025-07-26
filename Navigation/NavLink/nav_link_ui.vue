@@ -4,7 +4,7 @@
         :to="is_router_link ? link : undefined"
         :href="is_anchor ? link : undefined"
         :target="is_anchor ? '_blank' : undefined"
-        :class="['flex items-center cursor-pointer', wrapper_class_style]"
+        :class="['flex items-center cursor-pointer', wrapper_class_style, is_active(menu_id) ? active_menu_class_style : '' ]"
         @click="util?.handleOnClickEvent?.($event)"
     >
         <div v-if="icon_img_link || svg_icon" :class="['flex items-center justify-center overflow-hidden', icon_parent_class_style]">
