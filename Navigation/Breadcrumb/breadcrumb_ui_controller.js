@@ -2,28 +2,38 @@
 import { getCurrentInstance } from "vue";
 
 import LoggerUtil from "../../Logger/logger_util";
-import MenuListUIUtil from "./menu_list_ui_util";
+import BreadcrumbUIUtil from "./breadcrumb_ui_util";
 
-import NavLinkUI from "../NavLink/nav_link_ui.vue";
 
-class MenuListUIController {
+class BreadcrumbUIController {
     constructor() {
-        this.name       = "menu_list_ui_controller";
+        this.name       = "breadcrumb_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new MenuListUIUtil();
+        this.util       = new BreadcrumbUIUtil();
     }
 
     // Public method to expose components
-    getUIComponents = () => { return { NavLinkUI  }; };
+    getUIComponents = () => { return { }; };
 
     // Method to get ui props
     getUIProps = () => {        
         return {    
             wrapper_class_style: { type: String, default: "", required: false },
 
-            second_level_wrapper_class_style: { type: String, default: "pl-4 border-l border-gray-200", required: false },
+            link_class_style:  { type: String, default: "text-sm font-medium text-gray-700 hover:text-blue-600", required: false },
 
-            menus: { type: Array, required: true },
+            text_class_style:  { type: String, default: "text-sm font-medium text-gray-500", required: false },
+
+            divider_class_style:  { type: String, default: "px-2 text-gray-400", required: false },
+
+            // [{ text: "Home", link: "/" }, { text: "Settings" }]
+            items: { type: Array, required: true },
+            
+            // or "-", ".", "›", etc.
+            divider: { type: String, default: "\\" },
+
+            // start | center | end
+            align: { type: String, default: "start",  validator: (val) => ["start", "center", "end"].includes(val) }
         }
     }
 
@@ -38,7 +48,11 @@ class MenuListUIController {
      };
 
     // Computed variables
-    getUIComputedData = () => { return {}; }
+    getUIComputedData = () => { 
+        return {
+            alignment_class_style: this.util.getAlignmentClassStyle
+        }; 
+    }
 
     // Watchers
     getUIWatchers = () => { return { } };
@@ -85,4 +99,4 @@ class MenuListUIController {
     };
 }
 
-export default new MenuListUIController().getUIComponentDefinition();
+export default new BreadcrumbUIController().getUIComponentDefinition();
