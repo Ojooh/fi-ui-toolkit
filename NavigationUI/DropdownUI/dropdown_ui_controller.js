@@ -1,15 +1,15 @@
 
 import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import ModalSidebarUIUtil from "./modal_sidebar_ui_util";
-import NavLinkUI from "../../NavLink/nav_link_ui.vue";
+import LoggerUtil from "../../Logger/logger_util";
+import DropdownUIUtil from "./dropdown_ui_util";
+import NavLinkUI from "../NavLinkUI/nav_link_ui.vue";
 
-class ModalSidebarUIController {
+class DropdownUIController {
     constructor() {
-        this.name       = "modal_sidebar_ui_controller";
+        this.name       = "dropdown_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new ModalSidebarUIUtil();
+        this.util       = new DropdownUIUtil();
     }
 
     // Public method to expose components
@@ -17,28 +17,25 @@ class ModalSidebarUIController {
 
     // Method to get ui props
     getUIProps = () => {        
-        return { 
-            overlay_class_style: { type: String, default: "", required: false },
+        return {            
+            parent_class_style: { type: String, default: "", required: false },
 
-            sidebar_class_style: { type: String, default: "", required: false },
+            btn_class_style: { type: String, default: "", required: false },
 
-            section_1_class_style: { type: String, default: "", required: false },
+            menu_parent_class_style: { type: String, default: "", required: false },
 
-            section_2_class_style: { type: String, default: "", required: false },
+            menu_class_style: { type: String, default: "", required: false },
 
-            show: { type: Boolean, default: false },
+            menu_list_class_style: { type: String, default: "", required: false },
+
+            btn_id: { type: String, required: true },
+
+            menu_id: { type: String, required: true },
+
+            btn_content: { type: String, required: true },
+
+            menu_list: { type: Array, required: true, default: [] },
             
-            position: { type: String, default: "right", validator: (val) => ["left", "right"].includes(val) },
-
-            section_1_component: { type: Object, default: null, required: false },
-
-            section_1_props: { type: Object, default: null, required: false },
-
-            section_2_component: { type: Object, default: null, required: false },
-
-            section_2_props: { type: Object, default: null, required: false },
-
-            close_sidebar: { type: Function, default: null, required: false },
         }
     }
 
@@ -53,13 +50,7 @@ class ModalSidebarUIController {
      };
 
     // Computed variables
-    getUIComputedData = () => { 
-        return {
-            position_class_style: this.util.getPositionClassStyle,
-
-            show_class_style: this.util.getShowClassStyle,
-        };
-    };
+    getUIComputedData = () => { return { }; };
 
     // Watchers
     getUIWatchers = () => { return { } };
@@ -106,4 +97,4 @@ class ModalSidebarUIController {
     };
 }
 
-export default new ModalSidebarUIController().getUIComponentDefinition();
+export default new DropdownUIController().getUIComponentDefinition();

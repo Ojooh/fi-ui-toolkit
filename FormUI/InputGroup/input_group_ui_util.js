@@ -2,11 +2,11 @@ import { markRaw } from "vue";
 
 import LoggerUtil from "../../Logger/logger_util";
 
-import TextAreaInputUI from "../Input/text_area_input_ui.vue";
-import TextInputUI from "../Input/text_input_ui.vue";
-import EmailInputUI from "../Input/email_input_ui.vue";
-import PasswordInputUI from "../Input/password_input_ui.vue";
-import OTPInputUI from "../Input/otp_input_ui.vue";
+import TextAreaInputUI from "../InputUI/text_area_input_ui.vue";
+import TextInputUI from "../InputUI/text_input_ui.vue";
+import EmailInputUI from "../InputUI/email_input_ui.vue";
+import PasswordInputUI from "../InputUI/password_input_ui.vue";
+import OTPInputUI from "../InputUI/otp_input_ui.vue";
 
 
 class InputGroupUIUtil {

@@ -2,40 +2,28 @@
 import { getCurrentInstance } from "vue";
 
 import LoggerUtil from "../../Logger/logger_util";
-import DropdownUIUtil from "./dropdown_ui_util";
-import NavLinkUI from "../NavLink/nav_link_ui.vue";
+import MenuListUIUtil from "./menu_list_ui_util";
 
-class DropdownUIController {
+import NavLinkUI from "../NavLinkUI/nav_link_ui.vue";
+
+class MenuListUIController {
     constructor() {
-        this.name       = "dropdown_ui_controller";
+        this.name       = "menu_list_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new DropdownUIUtil();
+        this.util       = new MenuListUIUtil();
     }
 
     // Public method to expose components
-    getUIComponents = () => { return { NavLinkUI }; };
+    getUIComponents = () => { return { NavLinkUI  }; };
 
     // Method to get ui props
     getUIProps = () => {        
-        return {            
-            parent_class_style: { type: String, default: "", required: false },
+        return {    
+            wrapper_class_style: { type: String, default: "", required: false },
 
-            btn_class_style: { type: String, default: "", required: false },
+            second_level_wrapper_class_style: { type: String, default: "pl-4 border-l border-gray-200", required: false },
 
-            menu_parent_class_style: { type: String, default: "", required: false },
-
-            menu_class_style: { type: String, default: "", required: false },
-
-            menu_list_class_style: { type: String, default: "", required: false },
-
-            btn_id: { type: String, required: true },
-
-            menu_id: { type: String, required: true },
-
-            btn_content: { type: String, required: true },
-
-            menu_list: { type: Array, required: true, default: [] },
-            
+            menus: { type: Array, required: true },
         }
     }
 
@@ -50,7 +38,7 @@ class DropdownUIController {
      };
 
     // Computed variables
-    getUIComputedData = () => { return { }; };
+    getUIComputedData = () => { return {}; }
 
     // Watchers
     getUIWatchers = () => { return { } };
@@ -97,4 +85,4 @@ class DropdownUIController {
     };
 }
 
-export default new DropdownUIController().getUIComponentDefinition();
+export default new MenuListUIController().getUIComponentDefinition();

@@ -1,29 +1,44 @@
 
 import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../Logger/logger_util";
-import MenuListUIUtil from "./menu_list_ui_util";
+import LoggerUtil from "../../../Logger/logger_util";
+import ModalSidebarUIUtil from "./modal_sidebar_ui_util";
+import NavLinkUI from "../../NavLinkUI/nav_link_ui.vue";
 
-import NavLinkUI from "../NavLink/nav_link_ui.vue";
-
-class MenuListUIController {
+class ModalSidebarUIController {
     constructor() {
-        this.name       = "menu_list_ui_controller";
+        this.name       = "modal_sidebar_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new MenuListUIUtil();
+        this.util       = new ModalSidebarUIUtil();
     }
 
     // Public method to expose components
-    getUIComponents = () => { return { NavLinkUI  }; };
+    getUIComponents = () => { return { NavLinkUI }; };
 
     // Method to get ui props
     getUIProps = () => {        
-        return {    
-            wrapper_class_style: { type: String, default: "", required: false },
+        return { 
+            overlay_class_style: { type: String, default: "", required: false },
 
-            second_level_wrapper_class_style: { type: String, default: "pl-4 border-l border-gray-200", required: false },
+            sidebar_class_style: { type: String, default: "", required: false },
 
-            menus: { type: Array, required: true },
+            section_1_class_style: { type: String, default: "", required: false },
+
+            section_2_class_style: { type: String, default: "", required: false },
+
+            show: { type: Boolean, default: false },
+            
+            position: { type: String, default: "right", validator: (val) => ["left", "right"].includes(val) },
+
+            section_1_component: { type: Object, default: null, required: false },
+
+            section_1_props: { type: Object, default: null, required: false },
+
+            section_2_component: { type: Object, default: null, required: false },
+
+            section_2_props: { type: Object, default: null, required: false },
+
+            close_sidebar: { type: Function, default: null, required: false },
         }
     }
 
@@ -38,7 +53,13 @@ class MenuListUIController {
      };
 
     // Computed variables
-    getUIComputedData = () => { return {}; }
+    getUIComputedData = () => { 
+        return {
+            position_class_style: this.util.getPositionClassStyle,
+
+            show_class_style: this.util.getShowClassStyle,
+        };
+    };
 
     // Watchers
     getUIWatchers = () => { return { } };
@@ -85,4 +106,4 @@ class MenuListUIController {
     };
 }
 
-export default new MenuListUIController().getUIComponentDefinition();
+export default new ModalSidebarUIController().getUIComponentDefinition();
