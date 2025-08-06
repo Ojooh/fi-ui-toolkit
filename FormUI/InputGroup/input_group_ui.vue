@@ -1,6 +1,6 @@
 <template>
-    <div :class="['w-full my-4', input_group_class_style]">
-        <label :for="label_config?.for" :class="label_config?.class_style">
+    <div :class="[input_group_class_style, 'w-full my-4']">
+        <label v-if="label_config?.label_text" :for="label_config?.for" :class="label_config?.class_style">
             {{ label_config?.label_text }}:
             <span v-if="label_config?.required && label_config?.required_text " :class="['italic font-medium', label_config?.required_class_style]">
                 {{  label_config?.required_text   }}

@@ -1,4 +1,5 @@
 
+import SVGIcons from "../../../Resources/svg_icon_resource";
 import LoggerUtil from "../../../Logger/logger_util";
 
 class InputUIUtil {
@@ -53,6 +54,9 @@ class InputUIUtil {
         
         next_input_el?.focus(); 
     }
+
+    // Method to get search input  btn svg icon
+    getSearchBtnSvgIcon = () => { return SVGIcons.search_svg_icon; }
 
     
 

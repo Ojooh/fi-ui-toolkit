@@ -7,6 +7,7 @@ import TextInputUI from "../InputUI/text_input_ui.vue";
 import EmailInputUI from "../InputUI/email_input_ui.vue";
 import PasswordInputUI from "../InputUI/password_input_ui.vue";
 import OTPInputUI from "../InputUI/otp_input_ui.vue";
+import InlineSearchBoxInputUI from "../InputUI/inline_search_box_input_ui.vue";
 
 
 class InputGroupUIUtil {
@@ -27,7 +28,9 @@ class InputGroupUIUtil {
 
             password: markRaw(PasswordInputUI),
 
-            otp: markRaw(OTPInputUI)
+            otp: markRaw(OTPInputUI),
+
+            inline_search: markRaw(InlineSearchBoxInputUI),
         };
     }
 
