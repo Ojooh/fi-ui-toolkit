@@ -1,5 +1,5 @@
 <template>
-    <div @click="util?.toggleDropdownMenu?.($event)" :class="['relative', parent_class_style]">
+    <div @click="util?.toggleDropdownMenu?.($event, btn_id, menu_id)" :class="['relative', parent_class_style]">
         <button 
         :id="btn_id" 
         :class="['', btn_class_style]" 

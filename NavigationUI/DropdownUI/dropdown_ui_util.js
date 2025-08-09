@@ -8,7 +8,7 @@ class DropdownUIUtil {
         this.vm                 = null;
         this.content_manager    = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
-        this.dropdown_instance  = null
+        this.dropdown_instances = {};
     }
 
     // Method to set vue instance
@@ -18,47 +18,74 @@ class DropdownUIUtil {
     }
 
     // Method to get dropdown options
-    getDropdownOptions = () => {
+    getDropdownOptions = (menu_id) => {
         const placement                 = "bottom";
         const triggerType               = "click";
         const offsetSkidding            = -50;
         const offsetDistance            = 10;
         const delay                     = 300;
         const ignoreClickOutsideClass   = false
-        const onHide                    = () => { this.dropdown_instance.visible = true };
-        const onShow                    = () => { this.dropdown_instance.visible = false };
+        const onHide                    = () => {};
+        const onShow                    = () => {};
 
         return { placement, triggerType, offsetSkidding, offsetDistance, delay, ignoreClickOutsideClass, onHide, onShow };
     }
 
     // Method to instantiate dropdown
-    getDropdownInstance = () => {
-        const { btn_id, menu_id }   = this.vm?.props;
+    getDropdownInstance = ( btn_id, menu_id) => {
         const menu_el               = document.getElementById(menu_id);
-
-        if(this.dropdown_instance) { return menu_el }
-        
         const btn_el                = document.getElementById(btn_id);
-        const options               = this.getDropdownOptions();
-        const instance_options      = { id: menu_el, override: true };
 
-        this.dropdown_instance      = new Dropdown(menu_el, btn_el, options, instance_options);
-        return menu_el
+        if (!menu_el || !btn_el) {
+            this.logger.error(`Dropdown elements not found: menu_id=${menu_id}, btn_id=${btn_id}`);
+            return null;
+        }
+
+        // Return existing instance if already created
+        if (this.dropdown_instances[menu_id]) { return this.dropdown_instances[menu_id]; }
+
+        const options                       = this.getDropdownOptions(menu_id);
+        const instance_options              = { id: menu_el, override: false };
+        const instance                      = new Dropdown(menu_el, btn_el, options, instance_options);
+        this.dropdown_instances[menu_id]    = { instance, is_visible: false };
+
+        this.logger.info(`Dropdown ${menu_id} instance created`);
+        return instance;
+    }
+
+    // Hide dropdown programmatically
+    hideDropdownMenu = (menu_id) => {
+        const { instance, is_visible } = this.dropdown_instances[menu_id];
+
+        if (!instance) { return; }
+
+        if (is_visible) { instance.hide(); } 
+
+       return;
+    }
+
+    // Hide dropdown programmatically
+    showDropdownMenu = (menu_id) => {
+        const { instance, is_visible } = this.dropdown_instances[menu_id];
+
+        if (!instance) { return; }
+
+        if (!is_visible) { instance.show(); } 
+
+       return;
     }
 
     // Method to toggle dropdown menu
-    toggleDropdownMenu = (e) => {
-        const menu_el       = this.getDropdownInstance();
-        const is_visible    = this.dropdown_instance.visible;
-        console.log({ is_visible })
+    toggleDropdownMenu = (e,  btn_id, menu_id) => {
+        const { instance, is_visible } = this.getDropdownInstance( btn_id, menu_id);
 
-        if(is_visible) {
-            this.dropdown_instance.visible = false;
-            return this.dropdown_instance.hide()
-        }
+        if (!instance) { return; }
 
-        this.dropdown_instance.visible = true;
-        return this.dropdown_instance?.show();
+        if (is_visible) { instance.hide(); } 
+
+        else { instance.show(); }
+
+        return this.dropdown_instances[menu_id].is_visible = !this.dropdown_instances[menu_id].is_visible;
     }
 
 }
