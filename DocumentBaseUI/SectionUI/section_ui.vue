@@ -1,11 +1,15 @@
 <template>
     <section :id="section_id" :class="[wrapper_class_style, 'w-full']">
-        <component
+        <div 
             v-for="(component, index) in components"
+            :class="[component.component_wrapper_class_style]"
             :key="index"
-            :is="component.component"
-            v-bind="component.props"
+        >
+            <component :is="component.component" v-bind="component.props"
         />
+
+        </div>
+        
     </section>
 </template>
 

@@ -4,7 +4,7 @@
         @click="config?.handleOnClickEvent?.($event)" 
         type="button"
         :class="['inline-flex items-center p-2 rounded-lg', config?.hamburger_button_class_style]"
-        v-html="config?.btn_icon || icons?.hamburger_svg_icon"
+        v-html="config?.btn_icon || hamburger_svg_icon"
         >
         </button>
 

@@ -1,15 +1,15 @@
 
 
+
 import { getCurrentInstance } from "vue";
 
-import LoggerUtil                   from "../../Logger/logger_util";
-import RegisteredAppsViewUIConfig   from "../configs/action_button_ui_config";
+import LoggerUtil     from "../../Logger/logger_util.js";
+import TextUIConfig   from "../configs/text_ui_config.js";
 
-
-class ActionButtonUIController {
+class TextUIController {
     constructor() {
-        this.name       = "action_button_ui";
-        this.config     = new RegisteredAppsViewUIConfig();
+        this.name       = "text_ui_controller";
+        this.config     = new TextUIConfig();
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() }); 
     }
 
@@ -18,8 +18,10 @@ class ActionButtonUIController {
 
     // Method to reurn UI Props
     getUIProps = () => { 
-        return { 
-            config: { type: Object, required: true, default: {} }
+        return {
+            text_class_style: { type: String, default: "", required: false },
+
+            text_content: { type: String, default: "", required: false },
         } 
     }
 
@@ -35,15 +37,13 @@ class ActionButtonUIController {
     }
 
     // Method to get UI cmputed data
-    getUIComputedData = () => { 
-        return { hamburger_svg_icon: this.config.getHamburgerSVGIcon }; 
-    };
+    getUIComputedData = () => { return {} };
 
     // Method to get UI watchers
-    getUIWatchers = () => { return { } };
+    getUIWatchers = () => { return {} };
 
     // Lifecycle method to handle on ui create logic
-    handleOnCreatedLogic = () => {
+    handleOnCreatedLogic = async () => {
         try {
             this.logger.log(`[Created] Component ${this.name} has been created`);
         } catch (error) {
@@ -85,36 +85,4 @@ class ActionButtonUIController {
 
 }
 
-
-// class ActionButtonUIController extends BaseButtonUIController {
-//     constructor () {
-//         const config_default    = ActionButtonUIController.#getDefaultConfig();
-
-//         super(name, config_default);
-//     }
-
-//     // method to retrun text area default config
-//     static #getDefaultConfig = () => {
-//         return {
-//             btn_type: "button", class_style: null, btn_text: null, handleClickEvent: null
-//         }
-//     }
-
-//     // Get final Vue component definition
-//     getUIComponentDefinition = () => {
-//         return {
-//             components: this.getUIComponents(),
-//             props: this.getUIProps(),
-//             data: this.getUIStateData,
-//             computed: this.getUIComputedData(),
-//             watch: this.getUIWatchers(),
-//             created: this.handleOnCreatedLogic,
-//             mounted: this.handleOnMountedLogic,
-//             beforeUnmount: this.handleBeforeUnmountedLogic,
-//             methods: this.util?.getActionBtnUtilMethods()
-//         };
-//     };
-
-// }
-
-export default new ActionButtonUIController().getUIComponentDefinition();
+export default new TextUIController().getUIComponentDefinition();

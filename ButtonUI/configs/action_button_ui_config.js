@@ -1,6 +1,7 @@
 
 import LoggerUtil               from "../../Logger/logger_util";
 import ActionButtonUIUtil       from "../utils/action_button_ui_util";
+import SVGIcons                 from "../../Resources/svg_icon_resource";
 
 class ActionBtnUIConfig {
     constructor() {
@@ -23,6 +24,9 @@ class ActionBtnUIConfig {
 
         return { util };
     }
+
+    // Method to get computed variable
+    getHamburgerSVGIcon = () => { return SVGIcons.hamburger_svg_icon; }
 
 }
 
