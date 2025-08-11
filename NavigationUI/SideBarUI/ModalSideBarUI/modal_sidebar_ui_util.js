@@ -4,7 +4,7 @@ import LoggerUtil from "../../../Logger/logger_util";
 class ModalSidebarUIUtil {
     constructor () {
         this.name               = "modal_sidebar_ui_util"
-        this.vm                 = null;
+        this.vue_instance                 = null;
         this.content_manager    = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
         this.dropdown_instance  = null
@@ -12,8 +12,8 @@ class ModalSidebarUIUtil {
 
     // Method to set vue instance
     setVueInstance = (vm) => {
-        this.vm                 = vm;
-        this.content_manager    = this.vm?.proxy?.$content_manager || {};
+        this.vue_instance                 = vm;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
     }
 
     // Method to get position class style
@@ -30,7 +30,7 @@ class ModalSidebarUIUtil {
 
     // Mthod to handle close side bar
     handleCloseSidebar = (e) => {
-        const { close_sidebar, show } = this.vm?.props;
+        const { close_sidebar, show } = this.vue_instance?.props;
 
         if(close_sidebar && show) { close_sidebar(e); }
     }

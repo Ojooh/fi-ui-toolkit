@@ -5,7 +5,7 @@ import SVGIcons from "../../Resources/svg_icon_resource";
 class FeedbackToastUIUtil {
     constructor () {
         this.name               = "feedback_toast_ui_util"
-        this.vm                 = null;
+        this.vue_instance                 = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 

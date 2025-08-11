@@ -29,8 +29,8 @@ class MenuListUIController {
 
     // State data
     getUIStateData = () => { 
-        this.vm = getCurrentInstance();
-        this.util.setVueInstance(this.vm);
+        this.vue_instance = getCurrentInstance();
+        this.util.setVueInstance(this.vue_instance);
 
         const util = this.util;
 

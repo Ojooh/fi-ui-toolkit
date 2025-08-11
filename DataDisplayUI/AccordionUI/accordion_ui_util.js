@@ -3,7 +3,7 @@ import LoggerUtil from "../../Logger/logger_util";
 class AccordionUIUtil {
     constructor (name, vue_isnatnce) {
         this.name       = "accordion_ui_uitl";
-        this.vm         = vue_isnatnce;
+        this.vue_instance         = vue_isnatnce;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 
@@ -56,7 +56,7 @@ class AccordionUIUtil {
             id, group_id,
             accordion_head_class_style, accordion_head_show_class_style, 
             accordion_body_class_style, accordion_body_show_class_style 
-        }   = this.vm?.props;
+        }   = this.vue_instance?.props;
         const body_id               = head_id.replace("head", "body");
         const head_show_class       = accordion_head_show_class_style.split(" ");
         const head_hide_class       = accordion_head_class_style.split(" ");

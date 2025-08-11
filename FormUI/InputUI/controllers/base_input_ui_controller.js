@@ -7,7 +7,7 @@ class BaseInputUIController {
     constructor (name, input_default_config) {
         this.name                   = name;
         this.input_default_config   = input_default_config;
-        this.vm                     = null; 
+        this.vue_instance                     = null; 
         this.util                   = new InputUIUtil();;
         this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
@@ -24,9 +24,9 @@ class BaseInputUIController {
 
     // State data
     getUIStateData = () => {
-        this.vm = getCurrentInstance();
+        this.vue_instance = getCurrentInstance();
         
-        this.util.setVueInstance(this.vm);
+        this.util.setVueInstance(this.vue_instance);
 
         const util  = this.util;
 

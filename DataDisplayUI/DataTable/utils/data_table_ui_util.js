@@ -5,15 +5,15 @@ import SVGIcons from "../../../Resources/svg_icon_resource";
 class DataTableUIUtil {
     constructor () {
         this.name               = "data_table_ui_util"
-        this.vm                 = null;
+        this.vue_instance                 = null;
         this.content_manager    = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 
     // Method to set vue instance
     setVueInstance = (vm) => {
-        this.vm                 = vm;
-        this.content_manager    = this.vm?.proxy?.$content_manager || {};
+        this.vue_instance                 = vm;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
     }
 
     // Method to get section id
@@ -24,7 +24,7 @@ class DataTableUIUtil {
         const { 
             table_head_class_style, table_head_cell_class_style, action_col_text, index_col_text,
             column_headers, has_action_menu 
-        } = this.vm.props;
+        } = this.vue_instance.props;
 
         return { 
             table_head_class_style, table_head_cell_class_style, action_col_text, index_col_text,
@@ -42,7 +42,7 @@ class DataTableUIUtil {
     getTableBodyProps = () => {
         const { 
             table_body_class_style, table_body_row_class_style, table_body_cell_class_style, records, has_action_menu, column_renderers,
-        } = this.vm.props;
+        } = this.vue_instance.props;
 
         return { table_body_class_style, table_body_row_class_style, table_body_cell_class_style, records, has_action_menu, column_renderers }
     }

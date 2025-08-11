@@ -3,7 +3,7 @@ import LoggerUtil from "../../Logger/logger_util";
 class JSONViewerUIUtil {
     constructor (name, vue_isnatnce) {
         this.name       = "json_viewer_ui_util";
-        this.vm         = vue_isnatnce;
+        this.vue_instance         = vue_isnatnce;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 
@@ -12,8 +12,8 @@ class JSONViewerUIUtil {
 
     // Method to toggle the visibility of a JSON object
     toggle = (key) => {
-        if (this.isObject(this.vm?.props?.json_data[key])) {
-            this.vm.data.collapsed[key] = !this.vm?.data?.collapsed[key];
+        if (this.isObject(this.vue_instance?.props?.json_data[key])) {
+            this.vue_instance.data.collapsed[key] = !this.vue_instance?.data?.collapsed[key];
         }
     }
 

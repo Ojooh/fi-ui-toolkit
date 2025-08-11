@@ -1,35 +1,43 @@
 
+import { getCurrentInstance } from "vue";
+
 import LoggerUtil from "../../Logger/logger_util";
-import SVGIcons from "../../Resources/svg_icon_resource";
+import SectionUIUtil from "./section_ui_util";
 
 
-class HamburgerButtonUIController {
+class SectionUIController {
     constructor() {
-        this.name       = "hamburger_button_ui";
+        this.name       = "section_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.util       = new SectionUIUtil();
     }
 
     // Public method to expose components
-    getUIComponents = () => { return {  }; };
+    getUIComponents = () => { return { }; };
 
     // Method to get ui props
-    getUIProps = () => {
-        return {
-            hamburger_class_style: { type: String, default: "", required: false },
+    getUIProps = () => {        
+        return {    
+            wrapper_class_style: { type: String, default: "", required: false },
 
-            hamburger_button_class_style: { type: String, default: "", required: false },
+            section_id: { type: String, default: "", required: false },
 
-            logo_class_style: { type: String, default: "", required: false },
-
-            config: { type: Object, default: {}, required: false },
+            components: { type: Array, default: [], required: true },
         }
     }
 
     // State data
-    getUIStateData = () => {  return { icons: SVGIcons }  };
+    getUIStateData = () => { 
+        this.vue_instance = getCurrentInstance();
+        this.util.setVueInstance(this.vue_instance);
+
+        const util = this.util;
+
+        return { util }
+     };
 
     // Computed variables
-    getUIComputedData = () => { return { }; };
+    getUIComputedData = () => {  return {}; }
 
     // Watchers
     getUIWatchers = () => { return { } };
@@ -76,4 +84,4 @@ class HamburgerButtonUIController {
     };
 }
 
-export default new HamburgerButtonUIController().getUIComponentDefinition();
+export default new SectionUIController().getUIComponentDefinition();

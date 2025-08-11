@@ -4,15 +4,15 @@ import LoggerUtil from "../../Logger/logger_util";
 class NavLinkUIUtil {
     constructor () {
         this.name               = "nav_link_ui_util"
-        this.vm                 = null;
+        this.vue_instance                 = null;
         this.content_manager    = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 
     // Method to set vue instance
     setVueInstance = (vm) => {
-        this.vm                 = vm;
-        this.content_manager    = this.vm?.proxy?.$content_manager || {};
+        this.vue_instance                 = vm;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
     }
 
     // Method to check if link is router link
@@ -40,7 +40,7 @@ class NavLinkUIUtil {
 
     // Method to handle on click event
     handleOnClickEvent = (event) => {
-        const { link, on_click } = this.vm?.props;
+        const { link, on_click } = this.vue_instance?.props;
         
         if (!link && on_click) { this.on_click(event); }
     }

@@ -20,6 +20,8 @@ class TableHeaderUIController {
         return {    
             table_head_class_style: { type: String, default: "", required: false },
 
+            table_header_row_class_style: { type: String, default: "", required: false },
+
             table_head_cell_class_style: { type: String, default: "", required: false },
 
             action_col_text: { type: String, default: "Action", required: false },
@@ -34,8 +36,8 @@ class TableHeaderUIController {
 
     // State data
     getUIStateData = () => { 
-        this.vm = getCurrentInstance();
-        this.util.setVueInstance(this.vm);
+        this.vue_instance = getCurrentInstance();
+        this.util.setVueInstance(this.vue_instance);
 
         const util = this.util;
 

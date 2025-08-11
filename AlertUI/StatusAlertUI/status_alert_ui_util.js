@@ -5,7 +5,7 @@ import SVGIcons from "../../Resources/svg_icon_resource";
 class StatusAlertUIUtil {
     constructor () {
         this.name               = "status_alert_ui_util"
-        this.vm                 = null;
+        this.vue_instance                 = null;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 
@@ -70,14 +70,14 @@ class StatusAlertUIUtil {
 
     // Method to to handle on click of close alert button
     handleOnClickCloseAlertButton = (e) => {
-        const box = this.vm?.refs?.alertBox;
+        const box = this.vue_instance?.refs?.alertBox;
 
         if (box) {
             box.classList.remove("animate-slide-in");
             box.classList.add("animate-slide-out");
 
             // Wait for animation to finish before hiding
-            setTimeout(() => { this.vm.props.visible = false; }, 300);
+            setTimeout(() => { this.vue_instance.props.visible = false; }, 300);
         }
     }
 }

@@ -9,7 +9,7 @@ import SVGIcons from "../../Resources/svg_icon_resource";
 class AccordionUIController{
     constructor() {
         this.name       = "accordion_ui";
-        this.vm         = null; 
+        this.vue_instance         = null; 
         this.util       = null;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
@@ -50,8 +50,8 @@ class AccordionUIController{
 
     // State data
     getUIStateData = () => {
-        this.vm         = getCurrentInstance();
-        this.util       = new AccordionUIUtil(this.name, this.vm);
+        this.vue_instance         = getCurrentInstance();
+        this.util       = new AccordionUIUtil(this.name, this.vue_instance);
         return { util: this.util } 
     };
 

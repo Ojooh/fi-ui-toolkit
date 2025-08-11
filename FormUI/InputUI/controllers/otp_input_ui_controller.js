@@ -24,7 +24,7 @@ class OTPInputUIController extends BaseInputUIController {
     // Lifecycle: mounted
     handleOnMountedLogic = () => {
         try {
-            const first_input_id    = `${this.vm.props?.config?.id}_0`;
+            const first_input_id    = `${this.vue_instance.props?.config?.id}_0`;
             const first_input       = document.getElementById(first_input_id);
 
             first_input?.focus?.();

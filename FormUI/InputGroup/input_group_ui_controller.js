@@ -6,7 +6,7 @@ import InputGroupUIUtil from "./input_group_ui_util";
 class InputGroupUIController {
     constructor () {
         this.name                   = "input_group_ui";
-        this.vm                     = null; 
+        this.vue_instance                     = null; 
         this.util                   = null;
         this.logger                 = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
@@ -27,8 +27,8 @@ class InputGroupUIController {
 
     // State data
     getUIStateData = () => {
-        this.vm         = getCurrentInstance();
-        this.util       = new InputGroupUIUtil(this.name, this.vm);
+        this.vue_instance         = getCurrentInstance();
+        this.util       = new InputGroupUIUtil(this.name, this.vue_instance);
 
         return { util: this.util } 
     };

@@ -13,7 +13,7 @@ import InlineSearchBoxInputUI from "../InputUI/inline_search_box_input_ui.vue";
 class InputGroupUIUtil {
     constructor (name, vue_isnatnce) {
         this.name       = "input_group_ui_util"
-        this.vm         = vue_isnatnce
+        this.vue_instance         = vue_isnatnce
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
 

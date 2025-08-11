@@ -4,7 +4,7 @@ import LoggerUtil from "../../Logger/logger_util";
 class FooterCopyRightUIController{
     constructor() {
         this.name       = "footer_copy_right_ui";
-        this.vm         = null;
+        this.vue_instance         = null;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
     }
 

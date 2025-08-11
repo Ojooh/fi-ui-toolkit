@@ -7,7 +7,7 @@ import DataFiltersUIUtil from "./data_filters_ui_util";
 
 class DataFiltersUIController {
     constructor() {
-        this.name       = "breadcrumb_ui_controller";
+        this.name       = "data_filters_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
         this.util       = new DataFiltersUIUtil();
     }
@@ -26,8 +26,8 @@ class DataFiltersUIController {
 
     // State data
     getUIStateData = () => { 
-        this.vm = getCurrentInstance();
-        this.util.setVueInstance(this.vm);
+        this.vue_instance = getCurrentInstance();
+        this.util.setVueInstance(this.vue_instance);
 
         const util = this.util;
 

@@ -9,7 +9,7 @@ import SVGIcons from "../../Resources/svg_icon_resource";
 class JSONViewerUIController{
     constructor() {
         this.name       = "json_viewer_ui_controller";
-        this.vm         = null; 
+        this.vue_instance         = null; 
         this.util       = null;
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
     }
@@ -26,8 +26,8 @@ class JSONViewerUIController{
 
     // State data
     getUIStateData = () => {
-        this.vm         = getCurrentInstance();
-        this.util       = new JSONViewerUIUtil(this.name, this.vm);
+        this.vue_instance         = getCurrentInstance();
+        this.util       = new JSONViewerUIUtil(this.name, this.vue_instance);
         return { collapsed: {}, util: this.util } 
     };
 

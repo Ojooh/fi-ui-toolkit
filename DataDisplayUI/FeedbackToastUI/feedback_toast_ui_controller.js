@@ -26,8 +26,8 @@ class FeedbackToastController {
 
     // Method to get UI State data
     getUIStateData = () => { 
-        this.vm         = getCurrentInstance();
-        this.util.vm    = this.vm;
+        this.vue_instance         = getCurrentInstance();
+        this.util.vue_instance    = this.vue_instance;
 
         return {} 
     };
