@@ -2,22 +2,23 @@
 import { getCurrentInstance } from "vue";
 
 import LoggerUtil           from "../../../Logger/logger_util";
-import DataTableUIUtil      from "../utils/data_table_ui_util";
-import DropdownUI           from "@ui/NavigationUI/DropdownUI/dropdown_ui.vue";
+import DropdownUI           from "../../../NavigationUI/DropdownUI/dropdown_ui.vue";
+import TableBodyUIConfig    from "../configs/table_body_ui_config";
 
 
 class TableBodyUIController {
     constructor() {
         this.name       = "table_body_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new DataTableUIUtil();
+        this.config     = new TableBodyUIConfig();
     }
 
     // Public method to expose components
     getUIComponents = () => { return { DropdownUI }; };
 
     // Method to get ui props
-    getUIProps = () => {        
+    getUIProps = () => {   
+
         return {    
             table_body_class_style: { type: String, default: "", required: false },
 
@@ -29,27 +30,25 @@ class TableBodyUIController {
 
             has_action_menu: { type: Boolean, default: false },
 
-            column_renderers: { type: Array, required: true, validator: this.util.columnRendererValidator }
+            column_renderers: { type: Array, required: true, validator: this.config.getColumnRendererValidator },
+
+            action_menu_props: { type: Object, default: {}, required: false }
         }
     }
 
     // State data
     getUIStateData = () => { 
         this.vue_instance = getCurrentInstance();
-        this.util.setVueInstance(this.vue_instance);
+       
+        this.config.setVueInstance(this.vue_instance);
 
-        const util              = this.util;
-        const dropdown_ui_props = this.util.getDropdownMenuProps
+        const state_variables = this.config.getStateVariables();
 
-        return { util, dropdown_ui_props }
-     };
+        return { ...state_variables };
+    };
 
     // Computed variables
-    getUIComputedData = () => { 
-        return {
-            section_id: this.util.getSectionId
-        }; 
-    }
+    getUIComputedData = () => { return {}; }
 
     // Watchers
     getUIWatchers = () => { return { } };

@@ -2,14 +2,14 @@
 import { getCurrentInstance } from "vue";
 
 import LoggerUtil from "../../../Logger/logger_util";
-import DataTableUIUtil from "../utils/data_table_ui_util";
+import SortableHeaderCellUIConfig from "../configs/sortable_header_cell_ui_config";
 
 
 class SortableHeaderCellUIController {
     constructor() {
         this.name       = "sortable_header_cell_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new DataTableUIUtil();
+        this.config       = new SortableHeaderCellUIConfig();
     }
 
     // Public method to expose components
@@ -30,7 +30,7 @@ class SortableHeaderCellUIController {
 
             title_text: { type: String, required: true },
 
-            sort_order_value: { type: String, default: null }, // 'asc' | 'desc' | null
+            current_order_direction_value: { type: String, default: null }, // 'asc' | 'desc' | null
 
             toggleSort: { type: Function, required: true }
         }
@@ -39,19 +39,20 @@ class SortableHeaderCellUIController {
     // State data
     getUIStateData = () => { 
         this.vue_instance = getCurrentInstance();
-        this.util.setVueInstance(this.vue_instance);
+       
+        this.config.setVueInstance(this.vue_instance);
 
-        const util = this.util;
+        const state_variables = this.config.getStateVariables();
 
-        return { util }
-     };
+        return { ...state_variables };
+    };
 
     // Computed variables
     getUIComputedData = () => { 
         return {
-            caret_up_svg_icon: this.util.getCaretUpIcon,
+            caret_up_svg_icon: this.config.getCaretUpIcon,
 
-            caret_down_svg_icon: this.util.getCaretDownIcon,
+            caret_down_svg_icon: this.config.getCaretDownIcon,
         }; 
     }
 

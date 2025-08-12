@@ -6,12 +6,13 @@ import DataTableUIUtil from "../utils/data_table_ui_util";
 import TableHeaderUI from "../table_header_ui.vue";
 import TableBodyUI from "../table_body_ui.vue";
 
+import DataTableUIConfig from "../configs/data_table_ui_config";
 
 class DataTableUIController {
     constructor() {
-        this.name       = "data_table_ui_controller";
-        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new DataTableUIUtil();
+        this.name           = "data_table_ui_controller";
+        this.logger         = new LoggerUtil({ prefix: this.name.toUpperCase() });
+        this.config         = new DataTableUIConfig();
     }
 
     // Public method to expose components
@@ -20,33 +21,17 @@ class DataTableUIController {
     // Method to get ui props
     getUIProps = () => {        
         return {    
+            id: { type: String, default: "Table", required: true },
+
             section_class_style: { type: String, default: "", required: false },
 
             lg_table_wrapper_class_style: { type: String, default: "", required: false },
 
             table_class_style: { type: String, default: "", required: false },
 
-             table_head_class_style: { type: String, default: "", required: false },
+            header_props: { type: Object, default: {}, required: true },
 
-            table_head_cell_class_style: { type: String, default: "", required: false },
-
-            table_body_class_style: { type: String, default: "", required: false },
-
-            table_body_row_class_style: { type: String, default: "", required: false },
-
-            table_body_cell_class_style: { type: String, default: "", required: false },
-
-            id: { type: String, default: "DataTable", require: true },
-
-            column_headers: { type: Array, default: [], required: true },
-
-            action_col_text: { type: String, default: "Action", required: false },
-
-            index_col_text: { type: String, default: "#", required: false },
-
-            records: { type: Array, default: [], required: true },
-
-            column_renderers: { type: Array, required: true, validator: this.util.columnRendererValidator },
+            body_props: { type: Object, default: {}, required: true },
 
             has_action_menu: { type: Boolean, default: false }
         }
@@ -55,21 +40,17 @@ class DataTableUIController {
     // State data
     getUIStateData = () => { 
         this.vue_instance = getCurrentInstance();
-        this.util.setVueInstance(this.vue_instance);
 
-        const util = this.util;
+        this.config.setVueInstance(this.vue_instance);
 
-        const table_header_props    = this.util.getTableHeaderProps();
-        const table_body_props      = this.util.getTableBodyProps();
+        const state_variables = this.config.getStateVariables();
 
-        return { util, table_header_props, table_body_props }
-     };
+        return { ...state_variables };
+    };
 
     // Computed variables
     getUIComputedData = () => { 
-        return {
-            section_id: this.util.getSectionId
-        }; 
+        return { section_id: this.config.getSectionId }; 
     }
 
     // Watchers

@@ -42,7 +42,7 @@ class NavLinkUIUtil {
     handleOnClickEvent = (event) => {
         const { link, on_click } = this.vue_instance?.props;
         
-        if (!link && on_click) { this.on_click(event); }
+        if (!link && on_click) { on_click(event); }
     }
 
 }

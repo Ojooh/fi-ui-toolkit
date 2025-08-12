@@ -1,15 +1,15 @@
 
 import { getCurrentInstance } from "vue";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import DataTableUIUtil from "../utils/data_table_ui_util";
+import LoggerUtil from "../../../version_1/Logger/logger_util";
+import TableHeaderUIConfig from "../configs/table_header_ui_config";
 
 
 class TableHeaderUIController {
     constructor() {
         this.name       = "table_header_ui_controller";
         this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() });
-        this.util       = new DataTableUIUtil();
+        this.config     = new TableHeaderUIConfig();
     }
 
     // Public method to expose components
@@ -37,19 +37,16 @@ class TableHeaderUIController {
     // State data
     getUIStateData = () => { 
         this.vue_instance = getCurrentInstance();
-        this.util.setVueInstance(this.vue_instance);
+       
+        this.config.setVueInstance(this.vue_instance);
 
-        const util = this.util;
+        const state_variables = this.config.getStateVariables();
 
-        return { util }
-     };
+        return { ...state_variables };
+    };
 
     // Computed variables
-    getUIComputedData = () => { 
-        return {
-            section_id: this.util.getSectionId
-        }; 
-    }
+    getUIComputedData = () => {  return {}; }
 
     // Watchers
     getUIWatchers = () => { return { } };
