@@ -15,8 +15,8 @@
 
 <script>
 
-import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+import DataTableUIController from "./controllers/data_table_ui_controller";
 
-export default new BaseDataTableUIController("data_table_config").getUIComponentDefinition();
+export default DataTableUIController;
 
 </script>

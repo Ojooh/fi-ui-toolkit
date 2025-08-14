@@ -1,9 +1,9 @@
 
-import BaseController                   from "@ui/version_1/Base/base_controller.js";
+import BaseController                   from "../../Base/base_controller";
 import SortableHeaderCellUIConfig       from "../configs/sortable_header_cell_ui_config";
 import TableHeaderUIConfig              from "../configs/table_header_ui_config";
 import TableBodyUIConfig                from "../configs/table_body_ui_config";
-import DataTableUIConfig                from "../configs/data_table_ui_config";
+
 
 class BaseDataTableUIController extends BaseController { 
     // Static method to map type → config class
@@ -14,8 +14,6 @@ class BaseDataTableUIController extends BaseController {
             table_header_config: TableHeaderUIConfig,
 
             table_body_config: TableBodyUIConfig,
-
-            data_table_config: DataTableUIConfig
         };
         return config_map[type] || null;
     }

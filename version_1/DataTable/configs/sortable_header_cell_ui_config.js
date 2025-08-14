@@ -1,4 +1,4 @@
-import BaseConfig           from "../../../Base/base_config";
+import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 

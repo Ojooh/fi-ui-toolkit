@@ -1,4 +1,5 @@
-import BaseConfig           from "../../../Base/base_config";
+
+import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
 import TableHeaderUI        from "../table_header_ui.vue";
 import TableBodyUI          from "../table_body_ui.vue";
@@ -31,7 +32,12 @@ class DataTableUIConfig extends BaseConfig {
     }
 
     // Method to get ui components
-    getUIComponents() { return { TableHeaderUI, TableBodyUI }; }
+    getUIComponents() { 
+        // const TableHeaderUI = defineAsyncComponent(() => import("../table_header_ui.vue"));
+        // const TableBodyUI   = defineAsyncComponent(() => import("../table_body_ui.vue"));
+
+        return { TableHeaderUI, TableBodyUI }
+    }
 
     // Method to get ui props
     getUIProps() { 

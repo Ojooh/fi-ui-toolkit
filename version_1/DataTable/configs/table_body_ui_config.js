@@ -1,4 +1,4 @@
-import BaseConfig           from "../../../Base/base_config";
+import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
 import DropdownUI           from "../../NavigationUI/DropdownUI/dropdown_ui.vue";
 import SVGIcons             from "../../Resources/svg_icon_resource";
@@ -37,14 +37,17 @@ class TableBodyUIConfig extends BaseConfig {
             btn_id  = `table-row-${record_index}-action-btn`,
             menu_id  = `table-row-${record_index}-action-menu`,
             btn_content = `<span class='w-6 h-6 flex items-center'>${SVGIcons.vertical_elipsis_svg_icon}</span>`,
-            getMenuList = null
+            menu_list = []
         } = this.vue_instance.props?.action_menu_props || {};
 
-        const menu_list = getMenuList ? getMenuList(record, record_index) : [];
+        const formatted_menu_list = menu_list.map(item => ({
+            ...item,
+            on_click: item?.on_click ? item.on_click.bind(null, record, record_index) : null
+        }));
        
         return {
             parent_class_style, btn_class_style, menu_parent_class_style, 
-            menu_class_style, menu_list_class_style, btn_id, menu_id, btn_content, menu_list
+            menu_class_style, menu_list_class_style, btn_id, menu_id, btn_content, menu_list: formatted_menu_list
         }
     }
 
@@ -75,15 +78,6 @@ class TableBodyUIConfig extends BaseConfig {
 
             action_menu_props: { type: Object, default: {}, required: false }
         }
-    }
-
-    // Method to get ui computed data
-    getUIComputedData() { 
-        return {
-            caret_up_svg_icon: this.getCaretUpIcon,
-
-            caret_down_svg_icon: this.getCaretDownIcon,
-        }; 
     }
 
     // Method to get ui state data
