@@ -1,6 +1,5 @@
 
 import BaseConfig           from "../../Base/base_config";
-import BreadcrumbUIUtil    from "./breadcrumb_ui_util";
 
 class BreadcrumbUIConfig extends BaseConfig { 
     constructor() { super("breadcrumb_ui_config"); }
@@ -23,7 +22,6 @@ class BreadcrumbUIConfig extends BaseConfig {
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
         this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-        this.util               = new BreadcrumbUIUtil(vue_instance, this.content_manager)
     }
 
     // Method to get ui props
