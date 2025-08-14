@@ -7,7 +7,13 @@
             :class="[table_body_row_class_style]"
         >
             <!-- row counter -->
-            <td  :class="[table_body_cell_class_style]">{{ record_index + 1 }}</td>
+            <td v-if="!select_mode"  :class="[table_body_cell_class_style]">{{ record_index + 1 }}</td>
+
+            <td v-else :class="[table_body_cell_class_style]">
+                <div class="w-10 h-10 flex items-center justify-center">
+                    <CheckboxInputUI v-bind="select_checkbox_props(record, record_index)" />
+                </div>
+            </td>
 
             <td
                 v-for="(renderer, col_index) in column_renderers"

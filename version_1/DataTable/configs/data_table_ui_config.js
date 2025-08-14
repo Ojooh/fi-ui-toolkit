@@ -19,16 +19,16 @@ class DataTableUIConfig extends BaseConfig {
 
     // Method to get table header props
     getTableHeaderProps = () => { 
-        const { header_props, has_action_menu } = this.vue_instance.props; 
+        const { header_props, has_action_menu, select_mode } = this.vue_instance.props; 
 
-        return { ...header_props, has_action_menu };
+        return { ...header_props, has_action_menu, select_mode };
     }
 
     // Method to get table body props
     getTableBodyProps = () => { 
-        const { body_props, has_action_menu } = this.vue_instance.props; 
+        const { body_props, has_action_menu, select_mode  } = this.vue_instance.props; 
 
-        return { ...body_props, has_action_menu };
+        return { ...body_props, has_action_menu, select_mode };
     }
 
     // Method to get ui components
@@ -54,7 +54,9 @@ class DataTableUIConfig extends BaseConfig {
 
             body_props: { type: Object, default: {}, required: true },
 
-            has_action_menu: { type: Boolean, default: false }
+            has_action_menu: { type: Boolean, default: false },
+
+            select_mode: { type: Boolean, default: false },
         }
     }
 

@@ -1,6 +1,7 @@
 import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
 import DropdownUI           from "../../NavigationUI/DropdownUI/dropdown_ui.vue";
+import CheckboxInputUI      from "../../FormUI/InputUI/checkbox_inpit_ui.vue";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 
 class TableBodyUIConfig extends BaseConfig { 
@@ -51,6 +52,20 @@ class TableBodyUIConfig extends BaseConfig {
         }
     }
 
+    // Method to get select checkbox props
+    getSelectCheckboxProps = (record, record_index) => {
+        const { checkbox_id, onRecordRowSelected, is_selected } = this.vue_instance.props;
+
+        const id                        = `${checkbox_id}_${record_index}`;
+        const name                      = id;
+        const value                     = is_selected?.(record, record_index) || false;
+        const is_checked                = is_selected?.(record, record_index) || false;
+        const handleInputClickEvent     = () => { return onRecordRowSelected?.(record, record_index); }
+        const checkbox_props            = { id, name, value, is_checked, handleInputClickEvent };
+
+        return { config: checkbox_props }
+    }
+
     // Method to set vue instance
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
@@ -59,7 +74,7 @@ class TableBodyUIConfig extends BaseConfig {
     }
 
     // Method to get ui components
-    getUIComponents() { return { DropdownUI }; }
+    getUIComponents() { return { DropdownUI, CheckboxInputUI }; }
 
     // Method to get ui props
     getUIProps() { 
@@ -76,16 +91,25 @@ class TableBodyUIConfig extends BaseConfig {
 
             column_renderers: { type: Array, required: true, validator: this.getColumnRendererValidator },
 
-            action_menu_props: { type: Object, default: {}, required: false }
+            select_mode: { type: Boolean, default: false },
+
+            is_selected: { type: Function, default: () => { return false }, required: false },
+
+            checkbox_id: { type: String, default: "record_select", required: false },
+
+            action_menu_props: { type: Object, default: {}, required: false },
+
+            onRecordRowSelected: { type: Function, default: null, required: false }
         }
     }
 
     // Method to get ui state data
     getUIStateData() { 
         const util                  = this.util;
+        const select_checkbox_props = this.getSelectCheckboxProps;
         const get_dropdown_ui_props = this.getDropdownMenuProps;
 
-        return { util, get_dropdown_ui_props }; 
+        return { util, get_dropdown_ui_props, select_checkbox_props }; 
     }
 
 }
