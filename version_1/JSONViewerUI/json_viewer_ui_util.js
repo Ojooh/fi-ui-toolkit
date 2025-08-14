@@ -1,10 +1,11 @@
-import LoggerUtil from "../../Logger/logger_util";
+import LoggerUtil from "../Logger/logger_util";
 
 class JSONViewerUIUtil {
-    constructor (name, vue_isnatnce) {
-        this.name       = "json_viewer_ui_util";
-        this.vue_instance         = vue_isnatnce;
-        this.logger     = new LoggerUtil({ prefix: this.name.toUpperCase() })
+    constructor (vue_instance, content_manager = {}) {
+        this.name               = "json_viewer_ui_util"
+        this.vue_instance       = vue_instance;
+        this.content_manager    = content_manager;
+        this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 
     // Method to get the type of a value

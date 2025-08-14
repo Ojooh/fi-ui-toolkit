@@ -7,6 +7,7 @@ class BaseConfig {
         this.vue_instance       = null;
         this.content_manager    =  {};
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
+        this.util               = {};
     }
 
     // Method to set vue instance
