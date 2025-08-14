@@ -1,7 +1,7 @@
 
 import BaseConfig           from "../Base/base_config";
 import FeedbackToastUIUtil  from "./feedback_toast_ui_util";
-import SVGIcons             from "../../Resources/svg_icon_resource";
+import SVGIcons             from "../Resources/svg_icon_resource";
 
 class FeedbackToastConfig extends BaseConfig { 
     constructor() { super("feedback_toast_config"); }
