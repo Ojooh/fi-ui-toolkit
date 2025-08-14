@@ -1,7 +1,7 @@
 
 import BaseConfig           from "../../Base/base_config";
 import StatusAlertUIUtil    from "./status_alert_ui_util";
-import SVGIcons             from "../../../Resources/svg_icon_resource";
+import SVGIcons             from "../../Resources/svg_icon_resource";
 
 class StatusAlertUIConfig extends BaseConfig { 
     constructor() { super("status_alert_ui_config"); }
