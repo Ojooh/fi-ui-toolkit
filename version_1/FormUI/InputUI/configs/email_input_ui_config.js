@@ -1,7 +1,6 @@
 import BaseConfig           from "../../../Base/base_config";
 import InputUIUtil          from "../utils/input_ui_util";
 
-
 class EmailInputUIConfig extends BaseConfig { 
     constructor() { super("email_input_ui_config"); }
 
