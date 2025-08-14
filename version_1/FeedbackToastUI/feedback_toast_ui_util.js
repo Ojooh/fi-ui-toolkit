@@ -1,5 +1,5 @@
 
-import LoggerUtil from "../../Logger/logger_util";
+import LoggerUtil from "../Logger/logger_util";
 
 class FeedbackToastUIUtil {
     constructor (vue_instance, content_manager = {}) {
