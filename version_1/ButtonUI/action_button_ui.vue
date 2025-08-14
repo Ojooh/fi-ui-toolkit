@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import ActionButtonUIController from "./controllers/action_button_ui_controller";
+import BaseButtonUIController from "./controllers/base_button_ui_controller";
 
-export default ActionButtonUIController
+export default BaseButtonUIController("action_btn_type").getUIComponentDefinition();
 
 </script>
