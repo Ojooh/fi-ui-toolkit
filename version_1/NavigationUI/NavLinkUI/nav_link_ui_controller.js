@@ -2,11 +2,11 @@
 
 
 import BaseController from "../../Base/base_controller";
-import ModalSidebarUIConfig from "./modal_sidebar_ui_config";
+import NavLinkUIConfig from "./nav_link_ui_config";
 
 class NavLinkUIController extends BaseController { 
     constructor() {
-        super("dropdown_ui_controller", new ModalSidebarUIConfig());
+        super("nav_link_ui_controller", new NavLinkUIConfig());
     }
 }
 
