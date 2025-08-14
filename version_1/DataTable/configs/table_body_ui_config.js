@@ -1,22 +1,10 @@
+import BaseConfig           from "../../../Base/base_config";
+import DataTableUIUtil      from "../utils/data_table_ui_util";
+import DropdownUI           from "../../NavigationUI/DropdownUI/dropdown_ui.vue";
+import SVGIcons             from "../../Resources/svg_icon_resource";
 
-import LoggerUtil from "../../../Logger/logger_util";
-import DataTableUIUtil from "../utils/data_table_ui_util";
-import SVGIcons from "../../../Resources/svg_icon_resource";
-
-class TableBodyUIConfig {
-    constructor() {
-        this.name               = "table_body_ui_config"
-        this.vue_instance       = null;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-        this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
-    }
-
-    // Method to set vue instance
-    setVueInstance = (vm) => {
-        this.vue_instance       = vm;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-        this.util               = new DataTableUIUtil(this.vue_instance, this.content_manager);
-    }
+class TableBodyUIConfig extends BaseConfig { 
+    constructor() { super("table_body_ui_config"); }
 
     // Method to handle cloumn renderer props validator
     getColumnRendererValidator = (renderers) => {
@@ -38,10 +26,8 @@ class TableBodyUIConfig {
         });
     }
 
-
     // Method to get dropdown ui props
     getDropdownMenuProps = (record, record_index) => {
-        console.log({ record, record_index });
         const { 
             parent_class_style = "w-full h-full flex items-center justify-center",
             btn_class_style = "rounded-full p-2 cursor-pointer hover:bg-white hover:shadow-lg",
@@ -62,14 +48,50 @@ class TableBodyUIConfig {
         }
     }
 
+    // Method to set vue instance
+    setVueInstance(vue_instance) {
+        this.vue_instance       = vue_instance;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
+        this.util               = new DataTableUIUtil(vue_instance, this.content_manager);
+    }
 
-    // Method to get state variables
-    getStateVariables = () => {
-        const util = this.util;
+    // Method to get ui components
+    getUIComponents() { return { DropdownUI }; }
 
-        const dropdown_ui_props = this.getDropdownMenuProps
+    // Method to get ui props
+    getUIProps() { 
+        return {   
+            table_body_class_style: { type: String, default: "", required: false },
+            
+            table_body_row_class_style: { type: String, default: "", required: false },
 
-        return { util, dropdown_ui_props }
+            table_body_cell_class_style: { type: String, default: "", required: false },
+
+            records: { type: Array, default: [], required: true },
+
+            has_action_menu: { type: Boolean, default: false },
+
+            column_renderers: { type: Array, required: true, validator: this.getColumnRendererValidator },
+
+            action_menu_props: { type: Object, default: {}, required: false }
+        }
+    }
+
+    // Method to get ui computed data
+    getUIComputedData() { 
+        return {
+            caret_up_svg_icon: this.getCaretUpIcon,
+
+            caret_down_svg_icon: this.getCaretDownIcon,
+        }; 
+    }
+
+    // Method to get ui state data
+    getUIStateData() { 
+        const util                  = this.util;
+        const get_dropdown_ui_props = this.getDropdownMenuProps;
+
+        return { util, get_dropdown_ui_props }; 
     }
 
 }

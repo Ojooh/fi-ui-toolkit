@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import TableHeaderUIController from "./controllers/table_header_ui_controller";
 
-export default TableHeaderUIController
+import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+
+export default new BaseDataTableUIController("table_header_config").getUIComponentDefinition();
 
 </script>

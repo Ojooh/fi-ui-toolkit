@@ -25,7 +25,7 @@
             </td>
 
              <td v-if="has_action_menu"  :class="[table_body_cell_class_style]">
-                <DropdownUI v-bind="dropdown_ui_props(record, record_index)" />
+                <DropdownUI v-bind="get_dropdown_ui_props(record, record_index)" />
              </td>
 
         </tr>
@@ -33,8 +33,9 @@
 </template>
 
 <script>
-import TableBodyUIController from "./controllers/table_body_ui_controller";
 
-export default TableBodyUIController
+import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+
+export default new BaseDataTableUIController("table_body_config").getUIComponentDefinition();
 
 </script>
