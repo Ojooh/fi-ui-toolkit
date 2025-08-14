@@ -1,6 +1,6 @@
 // base_view_controller.js
 import { getCurrentInstance } from "vue";
-import LoggerUtil from "../../Logger/logger_util";
+import LoggerUtil from "../Logger/logger_util";
 
 class BaseController {
     constructor(name, config_instance) {

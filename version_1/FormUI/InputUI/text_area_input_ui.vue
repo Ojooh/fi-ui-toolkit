@@ -16,8 +16,8 @@
 
 <script>
 
-import TextAreaInputUIController from "./controllers/text_area_input_ui_controller";
+import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default TextAreaInputUIController
+export default BaseInputUIController("text_area_input_type").getUIComponentDefinition();
 
 </script>

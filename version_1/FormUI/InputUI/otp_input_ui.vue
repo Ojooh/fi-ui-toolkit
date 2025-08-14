@@ -21,9 +21,10 @@
 
 <script>
 
-import OTPInputUIController from "./controllers/otp_input_ui_controller";
+import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default OTPInputUIController
+export default BaseInputUIController("otp_input_type").getUIComponentDefinition();
+
 
 </script>
 

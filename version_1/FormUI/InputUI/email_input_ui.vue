@@ -1,6 +1,6 @@
 <template>
     <input 
-        type="password" 
+        type="email" 
         :class="['w-full py-2 px-1', config?.input_class_style]" 
         v-model="config.value"
         :placeholder="config.placeholder"
@@ -15,9 +15,9 @@
 
 <script>
 
-import PasswordInputUIController from "./controllers/password_input_ui_controller";
+import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default PasswordInputUIController
+export default BaseInputUIController("email_input_type").getUIComponentDefinition();
 
 </script>
 

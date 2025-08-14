@@ -1,4 +1,4 @@
-import BaseConfig           from "@ui/version_1/Base/base_config.js";
+import BaseConfig           from "../../Base/base_config";
 
 class XBarLoaderUIConfig extends BaseConfig { 
     constructor() { super("x_bar_loader_ui_config"); }

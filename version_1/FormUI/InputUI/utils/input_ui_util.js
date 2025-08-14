@@ -1,17 +1,14 @@
 
-import SVGIcons from "../../../Resources/svg_icon_resource";
+import InputUIUtil from "../../../../FormUI/InputUI/utils/input_ui_util";
 import LoggerUtil from "../../../Logger/logger_util";
 
 class InputUIUtil {
-    constructor () {
-        this.name           = "input_ui_util"
-        this.vue_instance             = null
-        this.logger         = new LoggerUtil({ prefix: this.name.toUpperCase() });
-    }
+    constructor (vue_instance, content_manager = {}) {
+        this.name               = "input_ui_util"
+        this.vue_instance       = vue_instance;
+        this.content_manager    = content_manager;
 
-    // Method to set vue instance
-    setVueInstance = (vm) => {
-        this.vue_instance  = vm;
+        this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
 
     // Method to handle on otp inpuut input event
@@ -54,12 +51,6 @@ class InputUIUtil {
         
         next_input_el?.focus(); 
     }
-
-    // Method to get search input  btn svg icon
-    getSearchBtnSvgIcon = () => { return SVGIcons.search_svg_icon; }
-
-    
-
 }
 
-export default InputUIUtil
+export default InputUIUtil;
