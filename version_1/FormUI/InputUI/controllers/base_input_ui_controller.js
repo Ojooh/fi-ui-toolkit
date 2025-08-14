@@ -33,4 +33,4 @@ class BaseInputUIController extends BaseController {
     handleOnMountedLogic() { return this.config?.handleOnMountedLogic?.(); }
 }
 
-export default new BaseInputUIController;
+export default BaseInputUIController;

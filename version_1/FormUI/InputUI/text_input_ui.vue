@@ -17,7 +17,7 @@
 
 import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default BaseInputUIController("text_input_type").getUIComponentDefinition();
+export default new BaseInputUIController("text_input_type").getUIComponentDefinition();
 
 
 </script>

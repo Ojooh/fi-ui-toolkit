@@ -11,6 +11,6 @@
 <script>
 import BaseButtonUIController from "./controllers/base_button_ui_controller";
 
-export default BaseButtonUIController("action_btn_type").getUIComponentDefinition();
+export default new BaseButtonUIController("action_btn_type").getUIComponentDefinition();
 
 </script>

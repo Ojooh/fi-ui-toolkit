@@ -23,7 +23,7 @@
 
 import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default BaseInputUIController("otp_input_type").getUIComponentDefinition();
+export default new BaseInputUIController("otp_input_type").getUIComponentDefinition();
 
 
 </script>

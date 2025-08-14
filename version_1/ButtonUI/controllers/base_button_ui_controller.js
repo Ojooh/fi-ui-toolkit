@@ -24,4 +24,4 @@ class BaseButtonUIController extends BaseController {
     handleOnMountedLogic() { return this.config?.handleOnMountedLogic?.(); }
 }
 
-export default new BaseButtonUIController;
+export default BaseButtonUIController;

@@ -26,7 +26,8 @@ class BaseConfig {
     // Method to get ui state data
     getUIStateData() { return {}; }
 
-    
+    // Method to get ui computed data
+    getUIComputedData() { return {}; }
 
     // Method to get ui watchers
     getUIWatchers() { return {}; }

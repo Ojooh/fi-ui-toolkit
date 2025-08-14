@@ -24,6 +24,6 @@
 
 import BaseInputUIController from "./controllers/base_input_ui_controller";
 
-export default BaseInputUIController("inline_search_box_input_type").getUIComponentDefinition();
+export default new BaseInputUIController("inline_search_box_input_type").getUIComponentDefinition();
 
 </script>

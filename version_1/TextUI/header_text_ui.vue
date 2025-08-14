@@ -5,6 +5,6 @@
 <script>
 import BaseTextUIController from "./controllers/base_text_ui_controller";
 
-export default BaseTextUIController("base_text_type").getUIComponentDefinition();
+export default new BaseTextUIController("base_text_type").getUIComponentDefinition();
 
 </script>

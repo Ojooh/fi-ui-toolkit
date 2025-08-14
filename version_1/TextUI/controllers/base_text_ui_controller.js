@@ -23,4 +23,4 @@ class BaseTextUIController extends BaseController {
     handleOnMountedLogic() { return this.config?.handleOnMountedLogic?.(); }
 }
 
-export default new BaseTextUIController;
+export default BaseTextUIController;
