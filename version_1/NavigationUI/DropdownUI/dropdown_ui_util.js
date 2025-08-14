@@ -1,20 +1,13 @@
 import { Dropdown } from 'flowbite';
-
-import LoggerUtil from "../../Logger/logger_util";
+import LoggerUtil   from "../../Logger/logger_util";
 
 class DropdownUIUtil {
-    constructor () {
+    constructor (vue_instance, content_manager) {
         this.name               = "dropdown_ui_util"
-        this.vue_instance                 = null;
-        this.content_manager    = null;
+        this.vue_instance       = vue_instance;
+        this.content_manager    = content_manager;
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
         this.dropdown_instances = {};
-    }
-
-    // Method to set vue instance
-    setVueInstance = (vm) => {
-        this.vue_instance                 = vm;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
     }
 
     // Method to get dropdown options

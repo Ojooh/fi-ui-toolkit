@@ -1,7 +1,4 @@
 
-
-
-
 import BaseController from "../../Base/base_controller";
 import MenuListUIConfig from "./menu_list_ui_config";
 
