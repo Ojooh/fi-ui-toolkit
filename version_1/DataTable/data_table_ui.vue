@@ -3,9 +3,10 @@
         <!-- large screen table -->
         <div :class="['lg:block hidden w-full relative', lg_table_wrapper_class_style]">
             <table :class="[table_class_style, 'w-full']">
-                <TableHeaderUI v-bind="table_header_props" :select_mode="select_mode" />
 
-                <TableBodyUI v-bind="table_body_props" :select_mode="select_mode"/>
+                <TableHeaderUI v-bind="header_props" :has_action_menu="has_action_menu" :select_mode="select_mode" />
+
+                <TableBodyUI v-bind="body_props" :has_action_menu="has_action_menu" :select_mode="select_mode" />
 
             </table>
         </div>

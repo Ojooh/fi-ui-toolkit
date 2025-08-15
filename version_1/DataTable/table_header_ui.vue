@@ -1,7 +1,13 @@
 <template>
     <thead :class="['w-full', table_head_class_style]">
         <tr :class="[table_header_row_class_style]">
-            <th scope="col"  :class="[table_head_cell_class_style]" v-html="index_col_text"></th>
+            <th v-if="!select_mode" scope="col"  :class="[table_head_cell_class_style]" v-html="index_col_text"></th>
+
+            <th v-else scope="col"  :class="[table_head_cell_class_style]">
+                <div class="w-10 h-10 flex items-center justify-center">
+                    <CheckboxInputUI v-bind="select_all_checkbox_props" />
+                </div>
+            </th>
 
             <th
                 v-for="(col_header, col_header_index) in column_headers" :key="col_header_index" 

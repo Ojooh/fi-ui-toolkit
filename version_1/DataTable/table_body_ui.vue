@@ -23,6 +23,9 @@
                 <!-- Render plain string -->
                 <span v-if="renderer.content === 'plain'">{{ record[renderer.field] }}</span>
 
+                <!-- Render plain string -->
+                <span v-if="renderer.content === 'formatted'">{{ renderer?.formatter?.(record[renderer.field]) }}</span>
+
                 <!-- Render dynamic component -->
                 <component 
                     v-else :is="renderer.content"
