@@ -5,6 +5,7 @@ import EmailInputUIConfig               from "../configs/email_input_ui_config";
 import InlineSearchBoxInputUIConfig     from "../configs/inline_search_box_input_ui_config";
 import OTPInputUIConfig                 from "../configs/otp_input_ui_config";
 import PasswordInputUIConfig            from "../configs/password_input_ui_config";
+import SwitchInputUIConfig              from "../configs/switch_input_ui_config";
 import TextAreaInputUIConfig            from "../configs/text_area_input_ui_config";
 import TextInputUIConfig                from "../configs/text_input_ui_config";
 
@@ -18,6 +19,7 @@ class BaseInputUIController extends BaseController {
             inline_search_box_input_type: InlineSearchBoxInputUIConfig,
             otp_input_type: OTPInputUIConfig,
             password_input_type: PasswordInputUIConfig,
+            switch_input_type: SwitchInputUIConfig,
             text_area_input_type: TextAreaInputUIConfig,
             text_input_type: TextInputUIConfig,
             

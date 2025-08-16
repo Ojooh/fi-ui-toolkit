@@ -6,7 +6,12 @@
 
                 <TableHeaderUI v-bind="header_props" :has_action_menu="has_action_menu" :select_mode="select_mode" />
 
-                <TableBodyUI v-bind="body_props" :has_action_menu="has_action_menu" :select_mode="select_mode" />
+                <TableBodyUI 
+                    :records="records"
+                    :has_action_menu="has_action_menu" 
+                    :select_mode="select_mode" 
+                    v-bind="body_props" 
+                />
 
             </table>
         </div>
