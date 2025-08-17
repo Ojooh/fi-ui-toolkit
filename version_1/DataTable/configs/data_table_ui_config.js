@@ -3,6 +3,8 @@ import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
 import TableHeaderUI        from "../table_header_ui.vue";
 import TableBodyUI          from "../table_body_ui.vue";
+import XBarLoaderUI         from "../../LoaderUI/ListLoaderUI/x_bar_loader_ui.vue";
+import HeaderTextUI         from "../../TextUI/header_text_ui.vue";
 
 class DataTableUIConfig extends BaseConfig { 
     constructor() { super("table_header_ui_config"); }
@@ -23,7 +25,7 @@ class DataTableUIConfig extends BaseConfig {
         // const TableHeaderUI = defineAsyncComponent(() => import("../table_header_ui.vue"));
         // const TableBodyUI   = defineAsyncComponent(() => import("../table_body_ui.vue"));
 
-        return { TableHeaderUI, TableBodyUI }
+        return { TableHeaderUI, TableBodyUI, XBarLoaderUI, HeaderTextUI }
     }
 
     // Method to get ui props
@@ -46,6 +48,10 @@ class DataTableUIConfig extends BaseConfig {
             has_action_menu: { type: Boolean, default: false },
 
             select_mode: { type: Boolean, default: false },
+
+            is_loading: { type: Boolean, default: false, required: false },
+
+            no_data_content: { type: String, default: "", required: false },
         }
     }
 
