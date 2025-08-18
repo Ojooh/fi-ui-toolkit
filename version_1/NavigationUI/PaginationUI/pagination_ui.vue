@@ -3,7 +3,7 @@
 
         <!-- Previous Button -->
         <button
-        :class="[button_class_style, current_page <= 1 ? disabled_class_style : '']"
+        :class="[prev_button_class_style, current_page <= 1 ? disabled_class_style : '']"
         :disabled="current_page <= 1"
         @click="util?.handlePrevBtnClick?.($event)"
         v-html="prev_btn_content"
@@ -12,6 +12,7 @@
         <!-- Page Select Dropdown -->
         <select
             :class="[select_class_style]"
+            name="pagination_page_options"
             v-model.number="selected_page"
             @change="util?.handleOnNewPageSelected?.($event)"
         >
@@ -25,7 +26,7 @@
 
         <!-- Next Button -->
         <button
-        :class="[button_class_style, current_page >= total_pages ? disabled_class_style : '']"
+        :class="[next_button_class_style, current_page >= total_pages ? disabled_class_style : '']"
         :disabled="current_page >= total_pages"
         @click="util?.handleNextBtnClick?.($event)"
         v-html="next_btn_content"

@@ -1,4 +1,4 @@
-import { def } from "@vue/shared";
+import LoggerUtil from "../../Logger/logger_util";
 
 class PaginationUIUtil {
     constructor (vue_instance, content_manager) {
@@ -13,7 +13,8 @@ class PaginationUIUtil {
         const { current_page, handleOnPrevBtnClicked } = this.vue_instance.props;
 
         if (current_page > 1 && handleOnPrevBtnClicked) {
-            handleOnPrevBtnClicked?.(current_page - 1);
+            this.vue_instance.data.selected_page =  (current_page - 1);
+            handleOnPrevBtnClicked?.(this.vue_instance.data.selected_page);
         }
     }
 
@@ -21,13 +22,14 @@ class PaginationUIUtil {
     handleNextBtnClick = (e) => {
         const { current_page, total_pages, handleOnNextBtnClicked } = this.vue_instance.props;
 
-        if (current_page < total_pages&& handleOnNextBtnClicked) {
-            handleOnNextBtnClicked?.(current_page + 1);
+        if (current_page < total_pages && handleOnNextBtnClicked) {
+            this.vue_instance.data.selected_page =  (current_page + 1)
+            handleOnNextBtnClicked?.(this.vue_instance.data.selected_page);
         }
     }
 
     // Method to handle on new page selected
-    handleSelectChange = () => {
+    handleOnNewPageSelected = () => {
         const { current_page, handleOnNewPageSelected } = this.vue_instance.props;
         const { selected_page } = this.vue_instance.data;
 

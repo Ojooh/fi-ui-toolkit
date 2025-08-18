@@ -1,5 +1,6 @@
 
 import BaseConfig           from "../../Base/base_config";
+import PaginationUIUtil     from "./pagination_ui_util";
 
 
 class PaginationUIConfig extends BaseConfig { 
@@ -9,16 +10,17 @@ class PaginationUIConfig extends BaseConfig {
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
         this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
+        this.util               = new PaginationUIUtil(vue_instance, this.content_manager);
     }
 
     // Method to get ui props
     getUIProps() { 
-        return {   
-            id: { type: String, default: "Table", required: true },
-            
+        return {               
             wrapper_class_style: { type: String, default: "", required: false },
 
-            button_class_style: { type: String, default: "", required: false },
+            prev_button_class_style: { type: String, default: "", required: false },
+
+            next_button_class_style: { type: String, default: "", required: false },
 
             disabled_class_style: { type: String, default: "", required: false }, 
 
@@ -42,12 +44,6 @@ class PaginationUIConfig extends BaseConfig {
         }
     }
 
-    // Method to get ui computed data
-    getUIComputedData() { 
-        return {
-            selected_page: this.vue_instance.data.current_page
-        }; 
-    }
 
     // Method to get ui watchers
     getUIWatchers() { 
@@ -55,16 +51,17 @@ class PaginationUIConfig extends BaseConfig {
             current_page: { 
                 immediate: true, 
                 deep: true, 
-                handler: (new_value, old_value) => { this.selected_page = new_value } 
+                handler: (new_value, old_value) => { this.vue_instance.data.selected_page = new_value } 
             },
         }; 
     }
 
     // Method to get ui state data
     getUIStateData() { 
-        const util = this.util;
+        const util          = this.util;
+        const selected_page = this.vue_instance?.props?.current_page;
 
-        return { util }
+        return { util, selected_page }
     }
 }
 
