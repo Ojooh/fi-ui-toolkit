@@ -7,6 +7,7 @@
         :required="config?.required"
         :id="config.id"
         :name="config?.name || config?.id"
+        :readonly="config?.read_only"
         @keyup="config?.handleInputKeyUpEvent?.($event)"
         @keydown="config?.handleInputKeyDownEvent?.($event)"
         @click="config?.handleInputClickEvent?.($event)"

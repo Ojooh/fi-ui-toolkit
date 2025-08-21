@@ -7,6 +7,7 @@
         :required="config?.required"
         :id="config.id"
         :name="config?.name || config?.id"
+        :readonly="config?.read_only"
         @keyup="config?.handleInputKeyUpEvent?.($event)"
         @keydown="config?.handleInputKeyDownEvent?.($event)"
         @click="config?.handleInputClickEvent?.($event)"
@@ -14,7 +15,6 @@
 </template>
 
 <script>
-
 import BaseInputUIController from "./controllers/base_input_ui_controller";
 
 export default new BaseInputUIController("email_input_type").getUIComponentDefinition();

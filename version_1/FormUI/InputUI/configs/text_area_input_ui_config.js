@@ -17,7 +17,7 @@ class TextAreaInputUIConfig extends BaseConfig {
         const input_ui_default_config = {
             id: "textarea_id", name: "textarea", rows: 4, value: null, placeholder: null, 
 
-            required: false, input_class_style: null, 
+            required: false, read_only: false, input_class_style: null, 
             
             handleInputKeyUpEvent: null, handleInputKeyDownEvent: null, handleInputClickEvent: null
         };

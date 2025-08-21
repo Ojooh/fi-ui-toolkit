@@ -7,6 +7,7 @@
         v-model="config.value"
         :placeholder="config?.placeholder"
         :required="config?.required"
+        :readonly="config?.read_only"
         @keyup="config?.handleInputKeyUpEvent?.($event)"
         @keydown="config?.handleInputKeyDownEvent?.($event)"
         @click="config?.handleInputClickEvent?.($event)"

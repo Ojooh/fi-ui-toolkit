@@ -14,7 +14,7 @@ class EmailInputUIConfig extends BaseConfig {
     // Method to get ui props
     getUIProps() { 
         const input_ui_default_config = {
-            id: "email_id", name: "email", value: null, placeholder: null, required: false, input_class_style: null, 
+            id: "email_id", name: "email", value: null, placeholder: null, required: false, read_only: false, input_class_style: null, 
             handleInputKeyUpEvent: null, handleInputKeyDownEvent: null, handleInputClickEvent: null
         };
 
