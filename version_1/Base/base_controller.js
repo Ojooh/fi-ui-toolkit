@@ -3,36 +3,40 @@ import { getCurrentInstance } from "vue";
 import LoggerUtil from "../Logger/logger_util";
 
 class BaseController {
-    constructor(name, config_instance) {
+    constructor(name, config_class = null) {
         this.name           = name;
-        this.config         = config_instance || null;
         this.vue_instance   = null;
+
+        this.config         = config_class ? new config_class() : null;
         this.logger         = new LoggerUtil({ prefix: name.toUpperCase() }); 
     }
 
     setVueInstance() { 
         this.vue_instance = getCurrentInstance(); 
-        this.config.setVueInstance(this.vue_instance);
+        this.config?.setVueInstance?.(this.vue_instance);
     }
 
     // Method to get ui components
-    getUIComponents() { return this.config?.getUIComponents?.() || {}; }
+    getUIComponents() { return  {}; }
 
     // Method to get ui props
-    getUIProps() { return this.config?.getUIProps?.() || {};
-    }
+    getUIProps() { return {}; }
 
     // Method to get ui state data
     getUIStateData() {
         this.setVueInstance();
-        return this.config?.getUIStateData?.() || {};
+
+        const util              = this.config.util;
+        const config_data       = this.config?.getUIStateData?.() || {};
+
+        return { util, ...config_data };
     }
 
     // Method to get computed data
-    getUIComputedData() { return this.config?.getUIComputedData?.() || {}; }
+    getUIComputedData() { return {}; }
 
     // Method to get ui watchers
-    getUIWatchers() { return this.config?.getUIWatchers?.(this.util) || {}; }
+    getUIWatchers() { return {}; }
 
     // Default lifecycle methods (can be overridden in child class)
     async handleOnCreatedLogic() {

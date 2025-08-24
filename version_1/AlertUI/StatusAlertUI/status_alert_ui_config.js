@@ -1,10 +1,14 @@
 
-import BaseConfig           from "../../Base/base_config";
+
 import StatusAlertUIUtil    from "./status_alert_ui_util";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 
-class StatusAlertUIConfig extends BaseConfig { 
-    constructor() { super("status_alert_ui_config"); }
+class StatusAlertUIConfig { 
+    constructor() { 
+        this.vue_instance       = null;
+        this.util               = {};
+        this.content_manager    = {}
+    }
 
     // Method to set vue instance
     setVueInstance(vue_instance) {
@@ -71,46 +75,6 @@ class StatusAlertUIConfig extends BaseConfig {
 
     // Method to get close button icon
     getCloseButtonIcon = () => { return SVGIcons?.x_circile_svg_icon; }
-
-    // Method to get ui props
-    getUIProps() { 
-        return {
-            visible: { type: Boolean, default: false, required: false },
-            
-            status_overlay_class_style: { type: String, default: "", required: false },
-
-            alert_status_class_style_obj: { type: Object, default: {}, required: false },
-
-            alert_status_icon_obj: { type: Object, default: {}, required: false },
-
-            alert_status_text_style_obj: { type: Object, default: {}, required: false },
-
-            alert_status: { type: String, required: false },
-
-            alert_message: { type: String, required: false }
-        }; 
-    }
-
-    // Method to get ui state data
-    getUIStateData() { 
-        const util = this.util;
-        return { util }; 
-    }
-
-    // Method to get ui computed data
-    getUIComputedData() { 
-        return {
-            bg_class: this.getStatusClassStyle,
-
-            animation_class: this.getAnimationClassStyle,
-
-            status_icon: this.getStatusIcon,
-
-            text_class_style: this.getTextClassStyle,
-
-            close_btn_icon: this.getCloseButtonIcon
-        }; 
-    }
 
 }
 
