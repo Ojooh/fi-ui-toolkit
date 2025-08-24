@@ -4,10 +4,10 @@ import LoggerUtil from "../Logger/logger_util";
 
 class BaseController {
     constructor(name, config_class = null) {
-        this.name           = name;
+        this.module_name    = `${name}_controller`;
         this.vue_instance   = null;
 
-        this.config         = config_class ? new config_class() : null;
+        this.config         = config_class ? new config_class(name) : null;
         this.logger         = new LoggerUtil({ prefix: name.toUpperCase() }); 
     }
 

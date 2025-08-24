@@ -1,14 +1,10 @@
 
-
+import BaseConfig           from "../../Base/base_config";
 import StatusAlertUIUtil    from "./status_alert_ui_util";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 
-class StatusAlertUIConfig { 
-    constructor() { 
-        this.vue_instance       = null;
-        this.util               = {};
-        this.content_manager    = {}
-    }
+class StatusAlertUIConfig extends BaseConfig { 
+    constructor(name) { super(name); }
 
     // Method to set vue instance
     setVueInstance(vue_instance) {

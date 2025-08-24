@@ -2,13 +2,14 @@
 import LoggerUtil from "../Logger/logger_util";
 
 class BaseConfig {
-    constructor(name) {
-        this.name               = name
-        this.vue_instance       = null;
-        this.content_manager    =  {};
-        this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
-        this.util               = {};
-    }
+    constructor(name) { 
+            this.module_name        = `${name}_config`;
+            this.vue_instance       = null;
+            this.util               = {};
+            this.content_manager    = {};
+            
+            this.logger             = new LoggerUtil({ prefix: name.toUpperCase() }); 
+        }
 
     // Method to set vue instance
     setVueInstance(vue_instance) {
@@ -16,21 +17,6 @@ class BaseConfig {
         this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
         this.util               = null
     }
-
-    // Method to get ui components
-    getUIComponents() { return {}; }
-
-    // Method to get ui props
-    getUIProps() { return {}; }
-
-    // Method to get ui state data
-    getUIStateData() { return {}; }
-
-    // Method to get ui computed data
-    getUIComputedData() { return {}; }
-
-    // Method to get ui watchers
-    getUIWatchers() { return {}; }
 
 }
 

@@ -4,7 +4,7 @@ import BaseModalUIUtil     from "./base_modal_ui_util";
 
 
 class BaseModalUIConfig extends BaseConfig { 
-    constructor() { super("base_modal_ui_config"); }
+    constructor(name) { super(name); }
 
     // Method to get position class style
     getModalPositionClassStyle = (isnatnce_variables) => {
@@ -43,56 +43,6 @@ class BaseModalUIConfig extends BaseConfig {
         this.vue_instance       = vue_instance;
         this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
         this.util               = new BaseModalUIUtil(vue_instance, this.content_manager);
-    }
-
-    // Method to get ui props
-    getUIProps() { 
-        return {   
-            overlay_class_style: { type: String, default: "" },
-
-            modal_box_class: { type: String, default: "" },
-
-            header_class_style: { type: String, default: "" },
-
-            body_class_style: { type: String, default: "" },
-
-            is_open: { type: Boolean, required: true },
-
-            // 'center' | 'left' | 'right'
-            position: { type: String, default: "center" }, 
-
-            width: { type: String, default: "w-[600px]" },
-
-            layer: { type: Number, default: 0 },
-
-            handleModalOnClose: { type: Function }, 
-            
-            header_component: { type: Object, required: false },
-
-            header_props: { type: Object, required: true },
-
-            body_component: { type: Object, required: true },
-
-            body_props: { type: Object, required: true }
-        }
-    }
-
-    // Method to get ui computed data
-    getUIComputedData() { 
-        return {
-            modal_position_class_style: this.getModalPositionClassStyle,
-
-            modal_size_class_style: this.getModalSizeClassStyle,
-
-            modal_transition_name: this.getModaltranstionName
-        }; 
-    }
-
-    // Method to get ui state data
-    getUIStateData() { 
-        const util = this.util;
-        
-        return { util }; 
     }
 
 }

@@ -4,7 +4,7 @@ import StatusAlertUIConfig from "./status_alert_ui_config";
 
 class StatusAlertUIController extends BaseController { 
     constructor() {
-        super("status_alert_ui_controller", new StatusAlertUIConfig());
+        super("status_alert_ui", StatusAlertUIConfig);
     }
 
     // Method to get ui props
