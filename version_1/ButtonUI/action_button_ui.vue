@@ -1,16 +1,16 @@
 <template>
     <button 
-    :type="config?.btn_type || 'button'" 
-    :class="['w-full cursor-pointer', config?.class_style]" 
-    @click="config?.handleClickEvent?.($event)"
-    v-html="config?.clicked && config?.show_loader ? config?.loader_text : config?.btn_text"
-    :disabled="config?.disabled || false">
+    :type="btn_type || 'button'" 
+    :class="['w-full cursor-pointer', class_style]" 
+    @click="handleClickEvent?.($event)"
+    v-html="clicked && show_loader ? loader_text : btn_text"
+    :disabled="disabled || false">
     </button>
 </template>
 
 <script>
-import BaseButtonUIController from "./controllers/base_button_ui_controller";
+import ActionBtnUIController from "./controllers/action_button_ui_controller";
 
-export default new BaseButtonUIController("action_btn_type").getUIComponentDefinition();
+export default ActionBtnUIController;
 
 </script>

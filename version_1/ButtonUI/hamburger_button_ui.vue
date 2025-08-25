@@ -1,34 +1,34 @@
 <template>
-    <div :class="['flex items-center w-full', config?.hamburger_class_style]">
+    <div :class="['flex items-center w-full', class_style]">
         <button 
-        @click="config?.handleOnClickEvent?.($event)" 
-        type="button"
-        :class="['inline-flex items-center p-2 rounded-lg', config?.hamburger_button_class_style]"
-        v-html="config?.btn_icon || hamburger_svg_icon"
+            @click="handleOnClickEvent?.($event)" 
+            type="button"
+            :class="['inline-flex items-center p-2 rounded-lg', button_class_style]"
+            v-html="btn_icon || hamburger_svg_icon"
         >
         </button>
 
         <!-- logo link -->
         <RouterLink 
-        v-if="config?.logo_link && config?.logo_link[0] === '/'"
-        :to="config?.logo_link" 
-        :class="['flex', config?.logo_class_style]"
-        v-html="config?.logo_content">
+            v-if="logo_link && logo_link[0] === '/'"
+            :to="logo_link" 
+            :class="['flex', logo_class_style]"
+            v-html="logo_content">
         </RouterLink>
 
         <!-- logo text -->
         <div 
-        v-else-if="config?.logo_content"
-        :class="['flex', config?.logo_class_style]"
-        v-html="config?.logo_content">
+            v-else-if="logo_content"
+            :class="['flex', logo_class_style]"
+            v-html="logo_content">
         </div>
     </div>
 </template>
 
 
 <script>
-import BaseButtonUIController from "./controllers/base_button_ui_controller";
+import HamburgerButtonUIController from "./controllers/hamburger_button_ui_controller";
 
-export default new BaseButtonUIController("hamburger_btn_type").getUIComponentDefinition();
+export default HamburgerButtonUIController
 
 </script>

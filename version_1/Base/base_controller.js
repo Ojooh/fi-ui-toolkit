@@ -40,15 +40,15 @@ class BaseController {
 
     // Default lifecycle methods (can be overridden in child class)
     async handleOnCreatedLogic() {
-        this.logger.log(`[Created] Component ${this.name} has been created`);
+        this.logger.log(`[Created] Component ${this.module_name} has been created`);
     }
 
     handleOnMountedLogic() {
-        this.logger.log(`[Mounted] Component ${this.name} has been mounted`);
+        this.logger.log(`[Mounted] Component ${this.module_name} has been mounted`);
     }
 
     handleBeforeUnmountedLogic() {
-        this.logger.log(`[BeforeUnmount] Component ${this.name} will unmount`);
+        this.logger.log(`[BeforeUnmount] Component ${this.module_name} will unmount`);
     }
 
     getUIComponentDefinition() {
