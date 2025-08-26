@@ -1,26 +1,18 @@
 
-import BaseController               from "@ui/version_1/Base/base_controller.js";
-import BaseTextUIConfig             from "../configs/base_text_ui_config";
+
+import BaseController           from "../Base/base_controller";
+import BaseTextUIConfig         from "../configs/base_text_ui_config";
 
 class BaseTextUIController extends BaseController { 
-    // Static method to map type → config class
-    static getConfigClass(type) {
-        const config_map = {
-            base_text_type: BaseTextUIConfig
-            
-        };
-        return config_map[type] || null;
+    constructor() { super("base_text_ui", BaseTextUIConfig); }
+
+    getUIProps() { 
+        return { 
+            text_class_style: { type: String, default: "", required: false },
+
+            text_content: { type: String, default: "", required: false },
+        }; 
     }
-
-    constructor(type, name = "base_text_ui_controller") {
-        const ConfigClass = BaseTextUIController.getConfigClass(type);
-
-        if (!ConfigClass) { throw new Error(`[${name}] Unknown base text type: ${type}`); }
-
-        super(`${type}_${name}`, new ConfigClass());
-    }
-
-    handleOnMountedLogic() { return this.config?.handleOnMountedLogic?.(); }
 }
 
-export default BaseTextUIController;
+export default new BaseTextUIController().getUIComponentDefinition();
