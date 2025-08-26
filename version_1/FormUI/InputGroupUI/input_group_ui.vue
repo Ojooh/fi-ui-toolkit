@@ -13,7 +13,7 @@
                 {{  label_config?.required_text   }}
             </span>
         </label>
-        <component  :is="input_component" :v-bind="input_config" />
+        <component  :is="input_component" v-bind="input_config" />
     </div>
 </template>
 

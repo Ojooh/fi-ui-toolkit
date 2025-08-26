@@ -7,7 +7,6 @@ class ImageTextUIConfig extends BaseConfig {
     // Method to set vue instance
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
     }
 }
 

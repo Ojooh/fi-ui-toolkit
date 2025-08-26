@@ -15,13 +15,12 @@ class inputGroupUIConfig extends BaseConfig {
     // Method to set vue instance
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
         this.util               = new InputGroupUIUtil(vue_instance, this.content_manager);
     }
     
     // Method to get input component
     getInputComponent = (instance_variables) => {
-        const input_type = instance_variables.proxy.$props?.input_config?.input_type;
+        const input_type = instance_variables.$props?.input_config?.input_type;
 
         return this.#inputTypesMap()?.[input_type] || null;
     }

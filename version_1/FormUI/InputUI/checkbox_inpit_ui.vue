@@ -2,7 +2,7 @@
     <input 
         type="checkbox" 
         :class="['w-full py-2 px-1', input_class_style]" 
-        v-model="value_proxy"
+        v-model="value_obj.input_value"
         :checked="is_checked"
         :required="required"
         :id="id"

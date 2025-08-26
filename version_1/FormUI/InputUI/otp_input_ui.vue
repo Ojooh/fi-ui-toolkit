@@ -8,7 +8,7 @@
             inputmode="numeric"
             maxlength="1"
             :class="['w-full py-2 px-1', input_class_style]" 
-            v-model="value_proxy[index]"
+            v-model="value_obj.input_value[index]"
             :required="required"
             :placeholder="placeholder?.[index] || ''"
             @keydown="util?.handleOTPInputKeyDownEvent?.($event, index)"

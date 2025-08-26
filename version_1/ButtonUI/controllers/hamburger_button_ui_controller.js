@@ -15,9 +15,9 @@ class HamburgerButtonUIController extends BaseController {
 
             logo_class_style: { type: String, default: "", required: false },
             
-            btn_icon: { type: String | null, default: null, required: false },
+            btn_icon: { type: String, default: "", required: false },
 
-            logo_link: { type: String | null, default: null, required: false },
+            logo_link: { type: String, default: "", required: false },
             
             logo_content: { type: String, default: "", required: false },
             

@@ -10,7 +10,7 @@
         </div>
 
         <!-- nav section 2 -->
-        <div class="md:w-6/12 w-full flex items-center overflow-hidden md:order-1 order-2 h-full">
+        <!-- <div class="md:w-6/12 w-full flex items-center overflow-hidden md:order-1 order-2 h-full">
             <component v-if="section_2_component" :is="section_2_component" v-bind="section_2_props" />
             <slot name="section_2" v-else />
         </div>
@@ -18,7 +18,7 @@
         <div class="md:w-3/12 w-6/12 flex items-center  md:order-2 order-1 h-full ">
             <component v-if="section_3_component" :is="section_3_component" v-bind="section_3_props" />
             <slot name="section_3" v-else />
-        </div>
+        </div> -->
     </nav>
 </template>
 

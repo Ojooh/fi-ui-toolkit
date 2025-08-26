@@ -11,8 +11,9 @@ class HamburgerButtonUIConfig extends BaseConfig {
     // Method to set vue instance
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
         this.util               = new ButtonUIUtil(vue_instance, this.content_manager);
+
+        console.log(this.vue_instance.props)
     }
 }
 

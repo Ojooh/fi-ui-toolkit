@@ -6,7 +6,7 @@
         <input 
             type="text" 
             :class="['w-full p-2.5 pl-10 ', input_class_style]" 
-            v-model="value_proxy"
+            v-model="value_obj.input_value"
             :placeholder="placeholder"
             :required="required"
             :id="id"

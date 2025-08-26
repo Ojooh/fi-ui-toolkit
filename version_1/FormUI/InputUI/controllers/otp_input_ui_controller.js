@@ -9,11 +9,11 @@ class OTPInputUIController extends BaseController {
         return {
             id: { type: String, default: "otp_id", required: true },
             
-            name: { type: String, default: "otp", required: true },
+            name: { type: String, default: "otp", required: false },
 
             otp_length: { type: Number, default: 6, required: true },
-            
-            modelValue: { type: Array, default: Array(6).fill(""), required: false },
+
+            value_obj: { type: Object, default: { input_value: Array(6).fill("")}, required: false },
 
             placeholder: { type: String, default: "", required: false },
             
@@ -29,7 +29,7 @@ class OTPInputUIController extends BaseController {
 
     // Method to get computed data
     getUIComputedData() { 
-        return { value_proxy:  this.config.getComputedValueProxy }; 
+        return { value_proxy:  this.config.getComputedValueProxy() }; 
     }
 
     // Lifecycle: mounted

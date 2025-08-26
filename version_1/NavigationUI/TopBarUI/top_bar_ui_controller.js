@@ -14,18 +14,30 @@ class TopBarUIController extends BaseController {
 
             config: { type: Object, default: config_default, required: false },
 
-            section_1_component: {type: Object, default: null, required: false },
+            section_1_component: { type: [Object, Function], default: null }, 
 
-            section_1_props: { type: Object, default: null, required: false },
+            section_1_props: { type: Object, default: () => ({}) , required: false },
 
-            section_2_component: {type: Object, default: null, required: false },
+            // section_2_component:  { type: [Object, Function], default: null }, 
 
-            section_2_props: { type: Object, default: null, required: false },
+            // section_2_props: { type: Object, default: () => ({}) , required: false },
 
-            section_3_component: {type: Object, default: null, required: false },
+            // section_3_component:  { type: [Object, Function], default: null }, 
 
-            section_3_props: { type: Object, default: null, required: false }
+            // section_3_props: { type: Object, default: () => ({}) , required: false }
         }
+    }
+
+    // Method to get ui state data
+    getUIStateData() {
+        this.setVueInstance();
+
+        const util              = this.config.util;
+        const config_data       = this.config?.getUIStateData?.() || {};
+
+        console.log(this.vue_instance.props)
+
+        return { util, ...config_data };
     }
 
 }

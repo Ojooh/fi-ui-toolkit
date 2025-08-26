@@ -4,7 +4,7 @@
         :id="id"
         :name="name || id"
         :rows="rows"
-        v-model="value_proxy"
+        v-model="value_obj.input_value"
         :placeholder="placeholder"
         :required="required"
         :readonly="read_only"

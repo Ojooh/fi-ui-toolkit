@@ -22,7 +22,7 @@
                 class="sr-only peer"
                 :id="id"
                 :name="name || id"
-                v-model="value_proxy"
+                v-model="value_obj.input_value"
                 :required="required"
                 :disabled="is_loading"
             />

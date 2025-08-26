@@ -9,9 +9,9 @@ class TextAreaInputUIController extends BaseController {
         return {
             id: { type: String, default: "text_area_id", required: true },
             
-            name: { type: String, default: "text_area", required: true },
+            name: { type: String, default: "text_area", required: false },
             
-            modelValue: { type: String, default: "", required: false },
+           value_obj: { type: Object, default: { input_value: ""}, required: false },
 
             rows: { type: Number, default: 4, required: false },
 
@@ -23,17 +23,17 @@ class TextAreaInputUIController extends BaseController {
             
             input_class_style: { type: String, default: "", required: false }, 
             
-            handleInputKeyUpEvent:  { type: Function | null, default: null, required: false },
+            handleInputKeyUpEvent:  { type: Function, default: null, required: false },
 
-            handleInputKeyDownEvent:  { type: Function | null, default: null, required: false },
+            handleInputKeyDownEvent:  { type: Function, default: null, required: false },
 
-            handleInputClickEvent:  { type: Function | null, default: null, required: false },
+            handleInputClickEvent:  { type: Function, default: null, required: false },
         }; 
     }
 
     // Method to get computed data
     getUIComputedData() { 
-        return { value_proxy:  this.config.getComputedValueProxy }; 
+        return { value_proxy:  this.config.getComputedValueProxy() }; 
     }
 
 

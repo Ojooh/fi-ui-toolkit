@@ -9,9 +9,9 @@ class InlineSearchBoxInputUIController extends BaseController {
         return {
             id: { type: String, default: "inline_search_id", required: true },
             
-            name: { type: String, default: "inline_search", required: true },
+            name: { type: String, default: "inline_search", required: false },
             
-            modelValue: { type: String, default: "", required: false },
+           value_obj: { type: Object, default: { input_value: ""}, required: false },
 
             placeholder: { type: String, default: "", required: false },
             
@@ -25,11 +25,11 @@ class InlineSearchBoxInputUIController extends BaseController {
 
             search_btn_class_style: { type: String, default: "", required: false },
             
-            handleInputKeyUpEvent:  { type: Function | null, default: null, required: false },
+            handleInputKeyUpEvent:  { type: Function, default: null, required: false },
 
-            handleInputKeyDownEvent:  { type: Function | null, default: null, required: false },
+            handleInputKeyDownEvent:  { type: Function, default: null, required: false },
 
-            handleInputClickEvent:  { type: Function | null, default: null, required: false },
+            handleInputClickEvent:  { type: Function, default: null, required: false },
         }; 
     }
 
