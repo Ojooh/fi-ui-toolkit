@@ -1,5 +1,5 @@
-import BaseController       from "../../Base/base_controller";
-import BaseInputUIConfig   from "../configs/base_input_ui_config";
+import BaseController       from "../../../Base/base_controller";
+import BaseInputUIConfig    from "../configs/base_input_ui_config";
 
 class InlineSearchBoxInputUIController extends BaseController { 
     constructor() { super("inline_search_box_input_ui", BaseInputUIConfig); }

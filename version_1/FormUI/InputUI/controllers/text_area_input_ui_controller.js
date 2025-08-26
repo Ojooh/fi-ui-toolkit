@@ -1,4 +1,4 @@
-import BaseController       from "../../Base/base_controller";
+import BaseController       from "../../../Base/base_controller";
 import BaseInputUIConfig    from "../configs/base_input_ui_config";
 
 class TextAreaInputUIController extends BaseController { 

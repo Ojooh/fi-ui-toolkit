@@ -1,5 +1,5 @@
-import BaseController       from "../../Base/base_controller";
-import BaseInputUIConfig   from "../configs/base_input_ui_config";
+import BaseController       from "../../../Base/base_controller";
+import BaseInputUIConfig    from "../configs/base_input_ui_config";
 
 class OTPInputUIController extends BaseController { 
     constructor() { super("otp_input_ui", BaseInputUIConfig); }

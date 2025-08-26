@@ -1,4 +1,4 @@
-import BaseController       from "../../Base/base_controller";
+import BaseController       from "../../../Base/base_controller";
 import CheckboxInputUIConfig  from "../configs/checkbox_input_ui_config";
 
 class CheckboxInputUIController extends BaseController { 
