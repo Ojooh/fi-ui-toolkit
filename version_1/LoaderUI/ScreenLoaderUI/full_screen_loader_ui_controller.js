@@ -1,13 +1,10 @@
-import BaseConfig           from "../../Base/base_config";
 
-class FullScreenLoaderUIConfig extends BaseConfig { 
-    constructor() { super("full_screen_loader_ui_config"); }
 
-    // Method to set vue instance
-    setVueInstance(vue_instance) {
-        this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-    }
+import BaseController               from "../../Base/base_controller";
+import FullScreenLoaderUIConfig     from "./full_screen_loader_ui_config";
+
+class FullScreenLoaderUIController extends BaseController { 
+    constructor() { super("full_screen_loader_ui", FullScreenLoaderUIConfig);}
 
     // Method to get ui props
     getUIProps() { 
@@ -30,4 +27,4 @@ class FullScreenLoaderUIConfig extends BaseConfig {
 
 }
 
-export default FullScreenLoaderUIConfig;
+export default new FullScreenLoaderUIController().getUIComponentDefinition();

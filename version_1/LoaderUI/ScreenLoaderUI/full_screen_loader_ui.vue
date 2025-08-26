@@ -21,8 +21,8 @@
 
 <script>
 import "../../Resources/global_styles.css";
-import FullScreenLoaderController from "./full_screen_loader_controller";
+import FullScreenLoaderUIController from "./full_screen_loader_ui_controller";
 
-export default FullScreenLoaderController
+export default FullScreenLoaderUIController
 
 </script>
