@@ -30,8 +30,8 @@
 
 <script>
 
-import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+import TableHeaderUIController from "./controllers/table_header_ui_controller";
 
-export default new BaseDataTableUIController("table_header_config").getUIComponentDefinition();
+export default TableHeaderUIController
 
 </script>

@@ -1,11 +1,24 @@
 import BaseConfig           from "../../Base/base_config";
 import DataTableUIUtil      from "../utils/data_table_ui_util";
-import DropdownUI           from "../../NavigationUI/DropdownUI/dropdown_ui.vue";
-import CheckboxInputUI      from "../../FormUI/InputUI/checkbox_inpit_ui.vue";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 
 class TableBodyUIConfig extends BaseConfig { 
-    constructor() { super("table_body_ui_config"); }
+    constructor(name) { super(name); }
+
+    // Method to set vue instance
+    setVueInstance(vue_instance) {
+        this.vue_instance       = vue_instance;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
+        this.util               = new DataTableUIUtil(vue_instance, this.content_manager);
+    }
+
+    // Method to get ui state data
+    getUIStateData() { 
+        const select_checkbox_props = this.getSelectCheckboxProps;
+        const get_dropdown_ui_props = this.getDropdownMenuProps;
+
+        return { get_dropdown_ui_props, select_checkbox_props }; 
+    }
 
     // Method to handle cloumn renderer props validator
     getColumnRendererValidator = (renderers) => {
@@ -64,52 +77,6 @@ class TableBodyUIConfig extends BaseConfig {
         const checkbox_props            = { id, name, value, is_checked, handleInputClickEvent };
 
         return { config: checkbox_props }
-    }
-
-    // Method to set vue instance
-    setVueInstance(vue_instance) {
-        this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-        this.util               = new DataTableUIUtil(vue_instance, this.content_manager);
-    }
-
-    // Method to get ui components
-    getUIComponents() { return { DropdownUI, CheckboxInputUI }; }
-
-    // Method to get ui props
-    getUIProps() { 
-        return {   
-            table_body_class_style: { type: String, default: "", required: false },
-            
-            table_body_row_class_style: { type: String, default: "", required: false },
-
-            table_body_cell_class_style: { type: String, default: "", required: false },
-
-            records: { type: Array, default: [], required: true },
-
-            has_action_menu: { type: Boolean, default: false },
-
-            column_renderers: { type: Array, required: true, validator: this.getColumnRendererValidator },
-
-            select_mode: { type: Boolean, default: false },
-
-            is_selected: { type: Function, default: () => { return false }, required: false },
-
-            checkbox_id: { type: String, default: "record_select", required: false },
-
-            action_menu_props: { type: Object, default: {}, required: false },
-
-            onRecordRowSelected: { type: Function, default: null, required: false }
-        }
-    }
-
-    // Method to get ui state data
-    getUIStateData() { 
-        const util                  = this.util;
-        const select_checkbox_props = this.getSelectCheckboxProps;
-        const get_dropdown_ui_props = this.getDropdownMenuProps;
-
-        return { util, get_dropdown_ui_props, select_checkbox_props }; 
     }
 
 }

@@ -43,8 +43,8 @@
 
 <script>
 
-import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+import TableBodyUIController from "./controllers/table_body_ui_controller";
 
-export default new BaseDataTableUIController("table_body_config").getUIComponentDefinition();
+export default TableBodyUIController;
 
 </script>

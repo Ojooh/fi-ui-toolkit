@@ -14,8 +14,8 @@
 
 <script>
 
-import BaseDataTableUIController from "./controllers/base_data_table_ui_controller";
+import SortableHeaderCellUIController from "./controllers/sortable_header_cell_ui_controller";
 
-export default new BaseDataTableUIController("sortable_header_cell_config").getUIComponentDefinition();
+export default SortableHeaderCellUIController;
 
 </script>

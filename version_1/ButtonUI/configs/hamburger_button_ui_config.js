@@ -1,5 +1,5 @@
 import BaseConfig           from "../../Base/base_config";
-import ButtonUIUtil          from "../utils/button_ui_util";
+import ButtonUIUtil         from "../utils/button_ui_util";
 import SVGIcons             from "../../Resources/svg_icon_resource";
 
 class HamburgerButtonUIConfig extends BaseConfig { 

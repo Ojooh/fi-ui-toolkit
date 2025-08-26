@@ -1,11 +1,9 @@
 
-import BaseController from "../../Base/base_controller";
-import StatusAlertUIConfig from "./status_alert_ui_config";
+import BaseController       from "../../Base/base_controller";
+import StatusAlertUIConfig  from "./status_alert_ui_config";
 
 class StatusAlertUIController extends BaseController { 
-    constructor() {
-        super("status_alert_ui", StatusAlertUIConfig);
-    }
+    constructor() { super("status_alert_ui", StatusAlertUIConfig); }
 
     // Method to get ui props
     getUIProps() { 
