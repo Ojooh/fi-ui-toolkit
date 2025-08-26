@@ -12,7 +12,7 @@ class ModalSidebarUIUtil {
 
     // Mthod to handle close side bar
     handleCloseSidebar = (e) => {
-        const { close_sidebar, show } = this.vue_instance?.props;
+        const { close_sidebar, show } = this.vue_instance?.proxy?.$props;
 
         if(close_sidebar && show) { close_sidebar(e); }
     }
