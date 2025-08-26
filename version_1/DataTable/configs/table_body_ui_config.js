@@ -52,7 +52,7 @@ class TableBodyUIConfig extends BaseConfig {
             menu_id  = `table-row-${record_index}-action-menu`,
             btn_content = `<span class='w-6 h-6 flex items-center'>${SVGIcons.vertical_elipsis_svg_icon}</span>`,
             menu_list = []
-        } = this.vue_instance.props?.action_menu_props || {};
+        } = this.vue_instance?.proxy?.$props?.action_menu_props || {};
 
         const formatted_menu_list = menu_list.map(item => ({
             ...item,
@@ -67,7 +67,7 @@ class TableBodyUIConfig extends BaseConfig {
 
     // Method to get select checkbox props
     getSelectCheckboxProps = (record, record_index) => {
-        const { checkbox_id, onRecordRowSelected, is_selected } = this.vue_instance.props;
+        const { checkbox_id, onRecordRowSelected, is_selected } = this.vue_instance.proxy.$props;
 
         const id                        = `${checkbox_id}_${record_index}`;
         const name                      = id;

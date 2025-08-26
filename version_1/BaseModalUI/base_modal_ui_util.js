@@ -9,9 +9,7 @@ class BaseModalUIUtil {
     }
 
     handleCloseModal = (e) =>  {
-        const { handleModalOnClose, layer }  = this.vue_instance.props;
-
-        console.log({ handleModalOnClose, layer })
+        const { handleModalOnClose, layer }  = this.vue_instance?.proxy?.$props;
 
         if (handleModalOnClose) { handleModalOnClose(layer); }
     }

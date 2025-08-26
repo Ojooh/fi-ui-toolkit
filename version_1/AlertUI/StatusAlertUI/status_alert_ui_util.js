@@ -20,7 +20,11 @@ class StatusAlertUIUtil {
             box.classList.add("animate-slide-out");
 
             // Wait for animation to finish before hiding
-            setTimeout(() => { this.vue_instance.props.visible = false; }, 300);
+            setTimeout(() => { 
+                let { visible } = this.vue_instance.proxy.$props;
+
+                visible = false; 
+            }, 300);
         }
     }
 }

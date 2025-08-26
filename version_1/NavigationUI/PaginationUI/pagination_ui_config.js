@@ -51,7 +51,10 @@ class PaginationUIConfig extends BaseConfig {
             current_page: { 
                 immediate: true, 
                 deep: true, 
-                handler: (new_value, old_value) => { this.vue_instance.data.selected_page = new_value } 
+                handler: (new_value, old_value) => { 
+                    let selected_page = this.vue_instance.proxy.$data;
+                    selected_page = new_value;
+                } 
             },
         }; 
     }

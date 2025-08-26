@@ -10,28 +10,36 @@ class PaginationUIUtil {
     
     // Method to handle Prev btn click
     handlePrevBtnClick = (e) => {
-        const { current_page, handleOnPrevBtnClicked } = this.vue_instance.props;
+        const { proxy }         = this.vue_instance;
+        const { $data, $props } = proxy;
+        let { selected_page } = $data
+        const { current_page, handleOnPrevBtnClicked } = $props;
+        
 
         if (current_page > 1 && handleOnPrevBtnClicked) {
-            this.vue_instance.data.selected_page =  (current_page - 1);
-            handleOnPrevBtnClicked?.(this.vue_instance.data.selected_page);
+            selected_page =  (current_page - 1);
+            handleOnPrevBtnClicked?.(selected_page);
         }
     }
 
     // Method to handle  Next btn click
     handleNextBtnClick = (e) => {
-        const { current_page, total_pages, handleOnNextBtnClicked } = this.vue_instance.props;
+        const { proxy }         = this.vue_instance;
+        const { $data, $props } = proxy;
+        let { selected_page }   = $data
+
+        const { current_page, total_pages, handleOnNextBtnClicked } = $props;
 
         if (current_page < total_pages && handleOnNextBtnClicked) {
-            this.vue_instance.data.selected_page =  (current_page + 1)
-            handleOnNextBtnClicked?.(this.vue_instance.data.selected_page);
+            selected_page =  (current_page + 1)
+            handleOnNextBtnClicked?.(selected_page);
         }
     }
 
     // Method to handle on new page selected
     handleOnNewPageSelected = () => {
-        const { current_page, handleOnNewPageSelected } = this.vue_instance.props;
-        const { selected_page } = this.vue_instance.data;
+        const { current_page, handleOnNewPageSelected } = this.vue_instance.proxy.$props;
+        const { selected_page } = this.vue_instance.proxy.$data;
 
         if (selected_page !== current_page) {
             handleOnNewPageSelected?.(selected_page);
