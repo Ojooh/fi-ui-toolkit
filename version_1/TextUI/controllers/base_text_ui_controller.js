@@ -1,6 +1,6 @@
 
 
-import BaseController           from "../Base/base_controller";
+import BaseController           from "../../Base/base_controller";
 import BaseTextUIConfig         from "../configs/base_text_ui_config";
 
 class BaseTextUIController extends BaseController { 
