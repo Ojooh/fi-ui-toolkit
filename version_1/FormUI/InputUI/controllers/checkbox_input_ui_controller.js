@@ -1,5 +1,5 @@
 import BaseController       from "../../../Base/base_controller";
-import CheckboxInputUIConfig  from "../configs/checkbox_input_ui_config";
+import CheckboxInputUIConfig  from "../configs/base_input_ui_config";
 
 class CheckboxInputUIController extends BaseController { 
     constructor() { super("checkbox_input_ui", CheckboxInputUIConfig); }
