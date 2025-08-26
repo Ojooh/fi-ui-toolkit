@@ -14,7 +14,7 @@ class JSONViewerUIUtil {
     // Method to toggle the visibility of a JSON object
     toggle = (key) => {
         let { collapsed } = this.vue_instance.proxy.$data;
-        if (this.isObject(this.vue_instance?.props?.json_data[key])) {
+        if (this.isObject(this.vue_instance?.proxy.$props?.json_data[key])) {
             collapsed[key] = !collapsed[key];
         }
     }

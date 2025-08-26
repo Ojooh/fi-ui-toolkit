@@ -11,7 +11,7 @@ class NavLinkUIUtil {
 
     // Method to handle on click event
     handleOnClickEvent = (event) => {
-        const { link, on_click } = this.vue_instance?.props;
+        const { link, on_click } = this.vue_instance?.proxy?.props;
         
         if (!link && on_click) { on_click(event); }
     }

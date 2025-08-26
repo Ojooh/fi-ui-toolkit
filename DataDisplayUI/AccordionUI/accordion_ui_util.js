@@ -56,7 +56,7 @@ class AccordionUIUtil {
             id, group_id,
             accordion_head_class_style, accordion_head_show_class_style, 
             accordion_body_class_style, accordion_body_show_class_style 
-        }   = this.vue_instance?.props;
+        }   = this.vue_instance?.proxy?.$props;
         const body_id               = head_id.replace("head", "body");
         const head_show_class       = accordion_head_show_class_style.split(" ");
         const head_hide_class       = accordion_head_class_style.split(" ");
