@@ -3,8 +3,15 @@ import BaseConfig           from "../Base/base_config";
 import FeedbackToastUIUtil  from "./feedback_toast_ui_util";
 import SVGIcons             from "../Resources/svg_icon_resource";
 
-class FeedbackToastConfig extends BaseConfig { 
-    constructor() { super("feedback_toast_config"); }
+class FeedbackToastUIConfig extends BaseConfig { 
+    constructor(name) { super(name); }
+
+    // Method to set vue instance
+    setVueInstance(vue_instance) {
+        this.vue_instance       = vue_instance;
+        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
+        this.util               = new FeedbackToastUIUtil(vue_instance, this.content_manager)
+    }
 
     // Method to get status class style
     getBorderStatusClassStyle = (instance_variables) => {
@@ -70,44 +77,6 @@ class FeedbackToastConfig extends BaseConfig {
                 return "text-sm font-semibold text-blue-900";
         }
     } 
-
-    // Method to set vue instance
-    setVueInstance(vue_instance) {
-        this.vue_instance       = vue_instance;
-        this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
-        this.util               = new FeedbackToastUIUtil(vue_instance, this.content_manager)
-    }
-
-    // Method to get ui props
-    getUIProps() { 
-        return {
-            status: { type: String, required: false },
-
-            message: { type: String, required: false },
-
-            toast_class_style: { type: String, default: "", required: false },
-        }
-    }
-
-    // Method to get ui computed data
-    getUIComputedData() {
-        return {
-            border_class_tyle: this.getBorderStatusClassStyle,
-
-            status_icon: this.getStatusIcon,
-
-            icon_class_style: this.getStatusIconClassStyle,
-
-            text_class_style: this.getStatusTextClassStyle,
-        }; 
-    }
-
-    // Method to get ui state data
-    getUIStateData() { 
-        const util = this.util;
-
-        return { util }; 
-    }
 }
 
-export default FeedbackToastConfig;
+export default FeedbackToastUIConfig;
