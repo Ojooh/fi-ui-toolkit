@@ -1,21 +1,21 @@
 <template>
     <input 
         type="checkbox" 
-        :class="['w-full py-2 px-1', config?.input_class_style]" 
-        v-model="config.value"
-        :checked="config?.is_checked"
-        :required="config?.required"
-        :id="config.id"
-        :name="config?.name || config?.id"
-        @click="config?.handleInputClickEvent?.($event)"
+        :class="['w-full py-2 px-1', input_class_style]" 
+        v-model="value_proxy"
+        :checked="is_checked"
+        :required="required"
+        :id="id"
+        :name="name || id"
+        @click="handleInputClickEvent?.($event)"
     />
 </template>
 
 <script>
 
-import BaseInputUIController from "./controllers/base_input_ui_controller";
+import CheckboxInputUIController from "./controllers/checkbox_input_ui_controller";
 
-export default new BaseInputUIController("checkbox_input_type").getUIComponentDefinition();
+export default CheckboxInputUIController;
 
 
 </script>
