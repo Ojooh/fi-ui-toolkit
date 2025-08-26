@@ -1,5 +1,13 @@
-import BaseConfig           from "../../Base/base_config";
-import InputGroupUIUtil     from "./input_group_ui_util";
+
+import { markRaw  }                     from "vue";
+import BaseConfig                       from "../../Base/base_config";
+import InputGroupUIUtil                 from "./input_group_ui_util";
+import EmailInputUI                     from "../InputUI/email_input_ui.vue";
+import InlineSearchBoxInputUI           from "../InputUI/inline_search_box_input_ui.vue";
+import OTPInputUI                       from "../InputUI/otp_input_ui.vue";
+import PasswordInputUI                  from "../InputUI/password_input_ui.vue";
+import TextAreaInputUI                  from "../InputUI/text_area_input_ui.vue";
+import TextInputUI                      from "../InputUI/text_input_ui.vue"
 
 class inputGroupUIConfig extends BaseConfig { 
     constructor() { super("input_group_ui_config"); }
@@ -10,24 +18,30 @@ class inputGroupUIConfig extends BaseConfig {
         this.content_manager    = this.vue_instance?.proxy?.$content_manager || {};
         this.util               = new InputGroupUIUtil(vue_instance, this.content_manager);
     }
+    
+    // Method to get input component
+    getInputComponent = (instance_variables) => {
+        const input_type = instance_variables.proxy.$props?.input_config?.input_type;
 
-    // Method to get ui props
-    getUIProps() { 
+        return this.#inputTypesMap()?.[input_type] || null;
+    }
+
+    // Method to store input types map
+    #inputTypesMap = () => {
         return {
-            input_group_class_style: { type: String, required: false, default: null },
+            textarea: markRaw(TextAreaInputUI),
 
-            label_config: { type: Object, required: true },
+            text: markRaw(TextInputUI),
 
-            input_config: { type: Object, required: true },
-        }; 
+            email: markRaw(EmailInputUI),
+
+            password: markRaw(PasswordInputUI),
+
+            otp: markRaw(OTPInputUI),
+
+            inline_search: markRaw(InlineSearchBoxInputUI),
+        };
     }
-
-    getUIStateData() { 
-        const util = this.util;
-
-        return { util }; 
-    }
-
 }
 
 export default inputGroupUIConfig;

@@ -1,13 +1,5 @@
-import { markRaw } from "vue";
 
-import LoggerUtil                       from "../../Logger/logger_util";
-import EmailInputUI                     from "../InputUI/email_input_ui.vue";
-import InlineSearchBoxInputUI           from "../InputUI/inline_search_box_input_ui.vue";
-import OTPInputUI                       from "../InputUI/otp_input_ui.vue";
-import PasswordInputUI                  from "../InputUI/password_input_ui.vue";
-import TextAreaInputUI                  from "../InputUI/text_area_input_ui.vue";
-import TextInputUI                      from "../InputUI/text_input_ui.vue"
-
+import LoggerUtil  from "../../Logger/logger_util";
 
 class InputGroupUIUtil {
     constructor (vue_instance, content_manager = {}) {
@@ -17,27 +9,6 @@ class InputGroupUIUtil {
 
         this.logger             = new LoggerUtil({ prefix: this.name?.toUpperCase() });
     }
-
-    // Method to store input types map
-    #inputTypesMap = () => {
-        return {
-            textarea: markRaw(TextAreaInputUI),
-
-            text: markRaw(TextInputUI),
-
-            email: markRaw(EmailInputUI),
-
-            password: markRaw(PasswordInputUI),
-
-            otp: markRaw(OTPInputUI),
-
-            inline_search: markRaw(InlineSearchBoxInputUI),
-        };
-    }
-
-    // Method to get input component
-    getInputComponent = (input_type) => { return this.#inputTypesMap()?.[input_type] || null; }
-
 }
 
 export default InputGroupUIUtil
