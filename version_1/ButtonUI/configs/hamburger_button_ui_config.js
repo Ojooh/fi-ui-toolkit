@@ -5,16 +5,16 @@ import SVGIcons             from "../../Resources/svg_icon_resource";
 class HamburgerButtonUIConfig extends BaseConfig { 
     constructor(name) { super(name); }
 
-    // Method to get computed variable
-    getHamburgerSVGIcon = () => { return SVGIcons.hamburger_svg_icon; }
-
-    // Method to set vue instance
+     // Method to set vue instance
     setVueInstance(vue_instance) {
         this.vue_instance       = vue_instance;
         this.util               = new ButtonUIUtil(vue_instance, this.content_manager);
-
-        console.log(this.vue_instance.props)
     }
+
+    // Method to get computed variable
+    getHamburgerSVGIcon = () => {  return SVGIcons.hamburger_svg_icon; }
+
+    
 }
 
 export default HamburgerButtonUIConfig;

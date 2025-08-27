@@ -29,7 +29,7 @@ class OTPInputUIController extends BaseController {
 
     // Method to get computed data
     getUIComputedData() { 
-        return { value_proxy:  this.config.getComputedValueProxy() }; 
+        return {}; 
     }
 
     // Lifecycle: mounted

@@ -44,11 +44,11 @@ class NavLinkUIController extends BaseController {
     // Method to get ui computed data
     getUIComputedData() { 
         return {
-            is_router_link: this?.isRouterLink,
+            is_router_link: this.config.isRouterLink,
 
-            is_anchor: this?.isAnchor,
+            is_anchor: this.config.isAnchor,
 
-            component_type: this?.componentType
+            component_type: this.config.componentType
         };
     }
 

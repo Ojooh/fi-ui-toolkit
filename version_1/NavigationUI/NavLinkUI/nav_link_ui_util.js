@@ -11,9 +11,11 @@ class NavLinkUIUtil {
 
     // Method to handle on click event
     handleOnClickEvent = (event) => {
-        const { link, on_click } = this.vue_instance?.proxy?.props;
+        const { link, on_click } = this.vue_instance?.proxy?.$props;
         
         if (!link && on_click) { on_click(event); }
+
+        else if(link) { this.vue_instance.proxy.$router.push(link)}
     }
 
 }

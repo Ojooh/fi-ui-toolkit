@@ -1,7 +1,7 @@
 <template>
     <div :class="['flex gap-2 justify-center', container_class_style]">
         <input
-       v-for="(_, index) in value_proxy"
+       v-for="(_, index) in otp_length"
             :id="`${id}_${index}`"
             :key="index"
             type="text"
