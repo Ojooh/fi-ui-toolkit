@@ -17,12 +17,12 @@ class TableHeaderUIConfig extends BaseConfig {
 
         const id                        = `${checkbox_id}`;
         const name                      = id;
-        const value                     = is_selected?.() || false;
         const is_checked                = is_selected?.() || false;
+        const value_obj                 = { input_value:  is_checked };
         const handleInputClickEvent     = onRecordRowsSelected ? onRecordRowsSelected : null;
-        const checkbox_props            = { id, name, value, is_checked, handleInputClickEvent };
+        const checkbox_props            = { id, name, value_obj, is_checked, handleInputClickEvent };
 
-        return { config: checkbox_props }
+        return checkbox_props
     }
 
 }

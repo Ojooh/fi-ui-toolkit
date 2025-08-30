@@ -11,6 +11,15 @@ class BaseInputUIConfig extends BaseConfig {
         this.util               = new InputUIUtil(vue_instance, this.content_manager);
     }
 
+    // Method to get ui state data
+    getUIStateData() { 
+        const { $props } = this.vue_instance.proxy;
+        const loading = $props?.is_loading || false;
+
+        return { loading };
+
+    }
+
     // Method to get value proxy
     getComputedValueProxy = () => {
         const get = (instance_variables) => { return instance_variables?.modelValue || ""  }

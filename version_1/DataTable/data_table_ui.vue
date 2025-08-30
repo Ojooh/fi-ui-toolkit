@@ -4,7 +4,7 @@
         <XBarLoaderUI v-if="is_loading" :number_of_bars="12" />
 
         <!-- large screen table -->
-        <div v-else-if="!is_loading && records.length" :class="['w-full relative', lg_table_wrapper_class_style]">
+        <div v-else-if="!is_loading && records.length" :class="['w-full relative min-h-[500px]', lg_table_wrapper_class_style]">
             <div class="w-full relative lg:block hidden">
                 <table :class="[table_class_style, 'w-full']">
 

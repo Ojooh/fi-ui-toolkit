@@ -63,6 +63,22 @@ class InputUIUtil {
         
         next_input_el?.focus(); 
     }
+
+    // Method to handle switch toggle
+    handleSwitchToggle = async (e) => {
+        const { $data, $props } = this.vue_instance.proxy;
+        const { handleSwitchToggle } = $props;
+
+        $data.loading = true;
+
+        const updated_state_sucessuflly = await handleSwitchToggle(e, $props);
+
+        if(updated_state_sucessuflly) {
+            $props.value_obj.input_value = !$props.value_obj?.input_value;
+        }
+
+        $data.loading = false; 
+    }
 }
 
 export default InputUIUtil;
