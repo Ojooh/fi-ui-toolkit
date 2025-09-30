@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "outDir": "./dist",
+        "rootDir": "./version_2",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "types": ["Node", "vite/client"],
+        "lib": ["ES6", "DOM"],
+        "declaration": true,
+        "baseUrl": ".",
+        "paths": {
+            "@v2/*": ["version_2/*"],
+        },
+        "experimentalDecorators": true
+    },
+    "include": [
+      "version_2/**/*.vue",
+      "version_2/**/*.ts",
+      "vite-env.d.ts"  
+    ],
+    "exclude": ["node_modules", "dist", "test"]
+}
