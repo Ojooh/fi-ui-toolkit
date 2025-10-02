@@ -1,6 +1,6 @@
-import GlobalVariableManager        from "@v2/utils/global_variable_manager_util";
-import LoggerUtil                   from "@v2/utils/logger_util";
-import { ContentObjectType }        from "@v2/types/util_type";
+import GlobalVariableManager        from "./global_variable_manager_util";
+import LoggerUtil                   from "./logger_util";
+import { ContentObjectType }        from "../types/util_type";
 
 class ContentManagerUtil {
     public readonly name = "content_manager_util";
@@ -12,7 +12,7 @@ class ContentManagerUtil {
     private merged_api_responses: ContentObjectType;
     private logger: LoggerUtil;
 
-    private constructor() {
+    constructor() {
         this.global_var_instance    = GlobalVariableManager.getInstance();
         this.content_data_key       = "CONTENT_DATA";
         this.content_data           = this.global_var_instance.getVariable(this.content_data_key) || {};

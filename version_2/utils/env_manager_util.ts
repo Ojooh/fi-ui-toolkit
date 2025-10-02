@@ -18,17 +18,19 @@ class ENVManagerUtil {
         this.global_vars                = GlobalVariableManagerUtil.getInstance();
         this.encryptor_decryptor_util   = new EncryptorDecryptorUtil();
         this.logger                     = new LoggerUtil({ prefix: this.name, show_timestamp: false });
+
+        this.loadEnv();
     }
 
     // Method to Load YAML env file from public/
-    public async loadEnv(): Promise<void> {
+    public loadEnv(): void {
         try {
             const env_data      = import.meta.env;
             const env_data_keys = Object.keys(env_data);
 
             for (const key of env_data_keys) {
                 const encrypted_value   = env_data[key];
-                const decrypted_value   = this.encryptor_decryptor_util.decryptV1(encrypted_value);
+                const decrypted_value   = this.encryptor_decryptor_util.decryptV2<string>(encrypted_value);
 
                 this.env_data[key]      = decrypted_value;
             }

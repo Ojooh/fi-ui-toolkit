@@ -1,24 +1,43 @@
-import fs                       from "fs";
-import path                     from "path";
-import readline                 from "readline/promises";
+import fs                           from "fs";
+import path                         from "path";
+import readline                     from "readline/promises";
 import { 
     stdin as input, 
-    stdout as output }          from "process";
-import EncryptorDecryptorUtil   from "@v2/utils/encryptor_decryptor_util";
-import LoggerUtil               from "@v2/utils/logger_util";
-import { ENVValue }             from "@v2/types/env_type";
+    stdout as output }              from "process";
+import EncryptorDecryptorUtil       from "../utils/encryptor_decryptor_util";
+import GlobalVariableManagerUtil    from "../utils/global_variable_manager_util";
+import LoggerUtil                   from "../utils/logger_util";
+import { ENVValue }                 from "../types/env_type";
+import {ENCRYPT_V1_SECRET_KEY}      from "../enums/constants.enum";
 
 class DevEnvManager {
-    public readonly name = "dev_env_manager"
+    public readonly name = "dev_env_manager";
     private rl = readline.createInterface({ input, output });
     private env_file_path: string = "";
     private env_data: Record<string, string> = {};
     private encryptor_decryptor_util: EncryptorDecryptorUtil;
     private logger: LoggerUtil;
+    private global_vars: GlobalVariableManagerUtil;
 
     constructor() {
+        this.global_vars                = GlobalVariableManagerUtil.getInstance();
         this.encryptor_decryptor_util   = new EncryptorDecryptorUtil();
         this.logger                     = new LoggerUtil({ prefix: this.name, show_timestamp: true });
+
+        this.setEncryptSecret();
+    }
+
+    // Method to set encrypt secret key
+    private setEncryptSecret(): void {
+        const secret_key        = this.global_vars.getVariable(ENCRYPT_V1_SECRET_KEY)
+        const encrypted_data    = this.encryptor_decryptor_util.encryptV2(secret_key)?.encrypted_data;
+
+        if(!encrypted_data) {
+            const msg = `Failed to encrypt value encryption secret key: `;
+            this.logger.error(msg,{ encrypted_data });
+            throw new Error(msg);
+        }
+        this.env_data[ENCRYPT_V1_SECRET_KEY]  =  encrypted_data;
     }
 
     // Method to read a .env file
@@ -86,9 +105,10 @@ class DevEnvManager {
         const keys          = keys_input.split(",").map(k => k.trim()).filter(Boolean);
 
         for (const key of keys) {
+            const formatted_key     = key.toUpperCase().startsWith("VITE_") ? key.toUpperCase() : `VITE_${key.toUpperCase()}`;
             const raw_value         = await this.rl.question(`💡 Enter value for "${key}": `);
             const value: ENVValue   = this.parseENVValue(raw_value);
-            const encrypted_value   = this.encryptor_decryptor_util.encryptV1(JSON.stringify(value));
+            const encrypted_value   = this.encryptor_decryptor_util.encryptV2(JSON.stringify(value))?.encrypted_data;
 
             if(!encrypted_value) {
                 this.logger.error(`Failed to encrypt value ${raw_value}: `, { encrypted_value })
@@ -104,13 +124,16 @@ class DevEnvManager {
         this.logger.log("🔑 Env data to store:");
         for (const key in this.env_data) {
             const encrypted_value = this.env_data[key];
-            const decrypted_value = this.encryptor_decryptor_util.decryptV1(encrypted_value);
+            const decrypted_value = this.encryptor_decryptor_util.decryptV2<string>(encrypted_value);
 
-            if(!decrypted_value) { this.logger.log(`${key}: [ENCRYPTED DATA, FAILED TO DECRYPT]`); }
+            if(!decrypted_value) { 
+                this.logger.log(`${key}: [ENCRYPTED DATA, FAILED TO DECRYPT]`); 
+                continue;
+            }
 
             const parse_decrypted_value = this.parseENVValue(decrypted_value);
             
-            this.logger.log(`${key}:`, decrypted_value);
+            this.logger.log(`${key}:`, parse_decrypted_value);
         }
         const confirm = await this.rl.question("✅ Confirm and save? (yes/no): ");
         return confirm.toLowerCase() === "yes";
@@ -140,7 +163,7 @@ class DevEnvManager {
         const keys_to_update    = keys[idx];
         const raw_value         = await this.rl.question(`💡 Enter new value for "${keys_to_update}": `);
         const value: ENVValue   = this.parseENVValue(raw_value);
-        const encrypted_value   = this.encryptor_decryptor_util.encryptV1(JSON.stringify(value));
+        const encrypted_value   = this.encryptor_decryptor_util.encryptV2(JSON.stringify(value))?.encrypted_data;
 
         if(!encrypted_value) {
             this.logger.error(`Failed to encrypt value ${raw_value}: `, { encrypted_value })

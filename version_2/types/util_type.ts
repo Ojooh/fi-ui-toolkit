@@ -7,3 +7,7 @@ export interface LoggerOptions {
   show_timestamp?: boolean;
 }
 
+export interface EncryptedV2Interface {
+  encrypted_data: string;
+}
+
