@@ -4,9 +4,7 @@ import LocalStorageManagerUtil      from "./local_storage_manager_util";
 import LoggerUtil                   from "./logger_util";
 import { MEMBER_DATA_KEYS_FIELD }   from "../enums/constants.enum";
 
-import { 
-    CurrentMemberInterface,
-    OtherMemberDataInterface }   from "../types/util_type";
+import {CurrentMemberInterface}     from "../types/util_type";
 
 
 class MemberAuthManagerUtil {
