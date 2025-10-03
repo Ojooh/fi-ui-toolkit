@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import "../../../resources/global_styles.css";
 import ScreenLoaderUIProps      from "./screen_loader_ui_props"
 import ScreenLoaderUIController from "./screen_loader_ui_controller";
 

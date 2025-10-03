@@ -1,6 +1,6 @@
 <template>
     <div v-if="props.visible" :class="props.wrapper_class_style">
-        <div :class="props.alert_box_class_style">
+        <div :id="props.alert_box_id" :class="props.alert_box_class_style">
 
             <button @click="event_handler.handleOnClick($event)" :class="props.close_btn_class_style">
                 <span v-html="props.close_btn_icon"></span>

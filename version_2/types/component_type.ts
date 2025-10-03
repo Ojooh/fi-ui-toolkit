@@ -18,12 +18,10 @@ export interface BaseControllerInterface {
 
     // Methods
     getComponentDefinition(): ComponentDefinitionInterface;
-    // protected getUIComponents(): Record<string, Component>;
-    // getUIComputedData(): Record<string, () => any>;
-    // getUIStateData(): Record<string, any>;
-    // getUIWatchers(): Record<string, (newVal: any, oldVal: any) => void>;
+}
 
-    // handleOnCreatedLogic(): Promise<void>;
-    // handleOnMountedLogic(): Promise<void>;
-    // handleBeforeUnmountedLogic(): Promise<void>;
+export interface BaseEventHandlerInterface {
+    name: string;
+    component_name: string;
+    [method: string]: any;
 }

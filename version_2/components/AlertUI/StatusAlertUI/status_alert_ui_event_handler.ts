@@ -12,7 +12,7 @@ class StatusAlertUIEventHanlder extends BaseEventHandler {
 
         if(!on_close) { return; }
 
-        on_close();
+        on_close(event);
     }
 }
 
