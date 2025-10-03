@@ -1,9 +1,9 @@
 
 
-import EncryptorDecryptorUtil       from "@v2/utils/encryptor_decryptor_util";
-import GlobalVariableManagerUtil    from "@v2/utils/global_variable_manager_util";
-import LoggerUtil                   from "@v2/utils/logger_util";
-import { ENVInterface }             from "@v2/types/env_type";
+import EncryptorDecryptorUtil       from "./encryptor_decryptor_util";
+import GlobalVariableManagerUtil    from "./global_variable_manager_util";
+import LoggerUtil                   from "./logger_util";
+import { ENVInterface }             from "../types/env_type";
 
 
 
@@ -29,7 +29,10 @@ class ENVManagerUtil {
             const env_data_keys = Object.keys(env_data);
 
             for (const key of env_data_keys) {
-                const encrypted_value   = env_data[key];
+                const encrypted_value   = (env_data[key])?.toString() ?? null;
+
+                if(!encrypted_value) { continue }
+
                 const decrypted_value   = this.encryptor_decryptor_util.decryptV2<string>(encrypted_value);
 
                 this.env_data[key]      = decrypted_value;

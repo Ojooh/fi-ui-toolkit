@@ -10,7 +10,6 @@ class EncryptorDecryptorUtil {
     private readonly encrypt_v1_algorithm: string;
     private readonly encrypt_v1_iv_length: number;
     private readonly global_vars: GlobalVariableManagerUtil;
-    private readonly encrypt_v1_secret_key: string;
     private logger: LoggerUtil;
     private data_shift_key: number
     private readonly corpus: string[]
@@ -19,7 +18,6 @@ class EncryptorDecryptorUtil {
         this.encrypt_v1_algorithm   = "aes-256-cbc";
         this.encrypt_v1_iv_length   = 16;
         this.global_vars            = GlobalVariableManagerUtil.getInstance();
-        this.encrypt_v1_secret_key  = this.getEncryptV1SecretKey();
 
         this.logger                 = new LoggerUtil({ prefix: this.name, show_timestamp: false });
         this.data_shift_key         = 14;
@@ -27,20 +25,6 @@ class EncryptorDecryptorUtil {
 
     }
 
-    // Method to get encryption secret key
-    private getEncryptV1SecretKey (): string {
-        const encryption_secret_key = this.global_vars.getVariable(ENCRYPT_V1_SECRET_KEY)
-
-        if(encryption_secret_key) { return encryption_secret_key } 
-
-        const get_from_env = import.meta?.env?.[ENCRYPT_V1_SECRET_KEY] ?? null;
-
-        const new_encrypt_secret_key = get_from_env ?? crypto.randomBytes(32).toString("base64");
-
-        this.global_vars.setVariable(ENCRYPT_V1_SECRET_KEY, new_encrypt_secret_key);
-
-        return new_encrypt_secret_key;
-    }
 
     // Methopd to get fixed corpus
     private getFixedCorpus(): string[] {
@@ -53,40 +37,6 @@ class EncryptorDecryptorUtil {
         ];
 
         return [...new Set(corpus)];
-    }
-
-
-    // Method to encrypt a text
-    public encryptV1(text: string): string | null {
-        try {
-            const iv            = crypto.randomBytes(this.encrypt_v1_iv_length);
-            const cipher        = crypto.createCipheriv(this.encrypt_v1_algorithm, Buffer.from(this.encrypt_v1_secret_key, "base64"), iv);
-            let encrypted       = cipher.update(text, "utf8", "hex");
-
-            encrypted += cipher.final("hex");
-            return iv.toString("hex") + ":" + encrypted;
-        }
-        catch(error: unknown) {
-            this.logger.error(`Failed to encrypt v1 string`, { error })
-            return null;
-        }
-    }
-
-    // Method to decrypt encryptV1 encryption
-    public decryptV1(text: string): string | null {
-        try {
-            const [iv_hex, encrypted]   = text.split(":");
-            const iv                    = Buffer.from(iv_hex, "hex");
-            const decipher              = crypto.createDecipheriv(this.encrypt_v1_algorithm, Buffer.from(this.encrypt_v1_secret_key, "base64"), iv);
-            let decrypted               = decipher.update(encrypted, "hex", "utf8");
-            decrypted                   += decipher.final("utf8");
-
-            return decrypted;
-        }
-        catch(error: unknown) {
-            this.logger.error(`Failed to decrypt v1 string`, { error })
-            return null;
-        }
     }
 
     // ==============================

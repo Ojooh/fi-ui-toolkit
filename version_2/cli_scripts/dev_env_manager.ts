@@ -62,7 +62,7 @@ class DevEnvManager {
 
     // Method Write YAML file
     private writeENVFile(): void {
-        const file_content = Object.entries(this.env_data).map(([key, value]) => `${key}=${value}`).join("\n");
+        const file_content = Object.entries(this.env_data).map(([key, value]) => `${key}="${value}"`).join("\n");
         fs.writeFileSync(this.env_file_path, file_content, { encoding: "utf-8" });
     }
 

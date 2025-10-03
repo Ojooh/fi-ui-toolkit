@@ -28,7 +28,8 @@
     "picocolors": "^1.1.1",
     "postcss": "^8.5.6",
     "source-map-js": "^1.2.1",
-    "vue": "^3.5.17"
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
