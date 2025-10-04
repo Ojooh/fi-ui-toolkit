@@ -31,5 +31,10 @@ export const ComponentClassStyles = {
     input_ui: {
         input_class_style: "w-full py-2 px-1",
 
+    },
+    input_group_ui: {
+        wrapper_class_style: "w-full my-4",
+        label_class_style: "text-sm font-bold",
+        label_required_class_style: "italic font-medium",
     }
 }
