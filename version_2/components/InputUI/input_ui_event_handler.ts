@@ -1,7 +1,7 @@
-import BaseEventHandler             from "../../../base_classes/base_event_handler";
-import { BaseControllerInterface }  from "../../../types/component_type";
+import BaseEventHandler             from "../../base_classes/base_event_handler";
+import { BaseControllerInterface }  from "../../types/component_type";
 
-class TextInputUIEventHandler extends BaseEventHandler {
+class InputUIEventHandler extends BaseEventHandler {
     constructor(controller: BaseControllerInterface) {
         super(controller, controller.component_name);
     }
@@ -41,9 +41,8 @@ class TextInputUIEventHandler extends BaseEventHandler {
 
         const new_value = this.controller.state_refs.input_value;
 
-
         on_change(event, new_value);
     }
 }
 
-export default TextInputUIEventHandler;
+export default InputUIEventHandler;

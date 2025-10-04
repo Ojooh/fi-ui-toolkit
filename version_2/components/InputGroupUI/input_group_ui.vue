@@ -10,13 +10,7 @@
             </span>
         </label>
         <!-- input -->
-        <CheckBoxInputUI v-if="props.input_config?.type === 'checkbox'" v-bind="props.input_config" />
-
-        <EmailInputUI v-else-if="props.input_config?.type === 'email'" v-bind="props.input_config" />
-
-        <PasswordInputUI v-else-if="props.input_config?.type === 'password'" v-bind="props.input_config" />
-
-        <TextInputUI v-else-if="props.input_config?.type === 'text'" v-bind="props.input_config" />
+        <InputUI v-if="props.input_config?.type" v-bind="props.input_config" />
 
     </div>
 </template>
@@ -25,14 +19,8 @@
 import InputGroupUIProps            from "./input_group_ui_props";
 import InputGroupUIController       from "./input_group_ui_controller";
 
-const props         = defineProps(InputGroupUIProps);
-const controller    = new InputGroupUIController(props);
-
-const { components } = controller.getComponentDefinition();
-const {
-    CheckBoxInputUI,
-    EmailInputUI,
-    PasswordInputUI,
-    TextInputUI
-} = components
+const props             = defineProps(InputGroupUIProps);
+const controller        = new InputGroupUIController(props);
+const { components }    = controller.getComponentDefinition();
+const { InputUI }       = components
 </script>
