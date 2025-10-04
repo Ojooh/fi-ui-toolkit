@@ -23,3 +23,13 @@ export interface OtherMemberDataInterface {
 	[key: string]: any
 }
 
+export interface RenderHtmlOptionsInterface {
+  element?: "span" | "strong" | "p" | "a";
+  text?: string;
+  icon?: string;
+  order?: "icon-first" | "text-first";
+  icon_class_style?: string,
+  class_style?: string;
+  href?: string;
+}
+

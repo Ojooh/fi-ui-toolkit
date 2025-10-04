@@ -25,7 +25,7 @@ export const ComponentClassStyles = {
         }
     },
     copy_right_ui: {
-        wrapper_class_style: "'w-full text-center py-4",
+        wrapper_class_style: "w-full text-center py-4",
         text_class_style: ""
     }
 }
