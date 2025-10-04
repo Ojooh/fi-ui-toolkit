@@ -1,4 +1,5 @@
 import SVGIcons from "../resources/svg_icon_resource";
+import axios, { AxiosResponse } from "axios";
 
 export type SVGIconName = keyof typeof SVGIcons;
 
@@ -40,5 +41,13 @@ export interface RenderHtmlOptionsInterface {
 export interface LoadingHtmlOptions {
 	class_style?: string;
 	icon_name?: SVGIconName;
+}
+
+
+export interface APIResponseInterface<T = any> {
+  status: string;
+  msg: string;
+  data?: T;
+  full_response?: AxiosResponse;
 }
 
