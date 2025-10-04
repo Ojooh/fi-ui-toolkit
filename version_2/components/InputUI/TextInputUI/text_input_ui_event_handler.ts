@@ -41,6 +41,7 @@ class TextInputUIEventHandler extends BaseEventHandler {
 
         const new_value = this.controller.state_refs.input_value;
 
+
         on_change(event, new_value);
     }
 }

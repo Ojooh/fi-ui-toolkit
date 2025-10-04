@@ -1,4 +1,5 @@
 <template>
+    {{  }}
     <input 
         type="text" 
         :class="['w-full py-2 px-1', input_class_style]" 

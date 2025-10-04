@@ -2,7 +2,7 @@
     <input 
         type="checkbox" 
         :class="props.input_class_style" 
-        v-model="state_refs.input_value"
+        v-model="input_value"
         :checked="state_refs.input_value === true"
         :required="props.required"
         :id="props.id"
@@ -20,5 +20,6 @@ const props         = defineProps(CheckBoxInputUiProps);
 const controller    = new CheckBoxUIController(props);
 const event_handler = controller.event_handler;
 
-const { state_refs } = controller.getComponentDefinition();
+const { state_refs }    = controller.getComponentDefinition();
+const { input_value }   = state_refs;
 </script>

@@ -14,7 +14,7 @@ class TextInputUIController extends BaseController {
     // Method to get ui state data
     protected getUIStateData(): Record<string, any> { 
         return {
-            input_value: ref(this.props.value ?? ""),
+            input_value: ref(""),
         } 
     }
 

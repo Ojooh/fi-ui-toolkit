@@ -6,7 +6,7 @@ const ui_class_styles  = ComponentClassStyles.input_ui;
 const EmailInputProps   = {
     id: { type: String, required: true },
             
-    value: { type: Object, default: null, required: false },
+    value: { type: String, default: "", required: false },
 
     placeholder: { type: String, default: "", required: false },
             
