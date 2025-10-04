@@ -2,6 +2,7 @@
 import { 
     defineProps,
     ref, 
+    isRef,
     computed, 
     watch, 
     onMounted, 
@@ -36,7 +37,7 @@ class BaseController {
     protected getUIComputedData(): Record<string, () => any> { return {}; }
 
     // Method to get ui watchers
-    protected getUIWatchers(): Record<string, (newVal: any, oldVal: any) => void> { return {}; }
+    protected getUIWatchers(): Record<string, (new_val: any, old_val: any) => void> { return {}; }
 
     // Method to get ui state data
     protected getUIStateData(): Record<string, any> { return {} }
@@ -79,7 +80,14 @@ class BaseController {
                 else if (key === "router") { source = useRouter(); }
             }
 
-            if (source) { watch(source, fn); }
+            if (source) { 
+                // Always wrap source in a getter so Vue tracks reactivity correctly
+                watch(
+                    () => isRef(source) ? source.value : source,
+                    fn,
+                    { deep: true }
+                );
+             }
         });
 
         async() => { await this.handleOnCreatedLogic(); }

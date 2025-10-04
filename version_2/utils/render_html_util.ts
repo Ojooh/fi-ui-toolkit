@@ -1,4 +1,10 @@
-import { RenderHtmlOptionsInterface } from "../types/util_type";
+
+import SVGIcons from "../resources/svg_icon_resource";
+
+import { 
+    RenderHtmlOptionsInterface,
+    LoadingHtmlOptions 
+} from "../types/util_type";
 
 class RenderHtmlUtil {
 
@@ -26,6 +32,13 @@ class RenderHtmlUtil {
         <${element} class="${class_style || ""}">
             ${order === "icon-first" ? `${icon_html}${text}` : `${text}${icon_html}`}
         </${element}>`;
+    }
+
+    public static renderLoaderHtml ({
+        icon_name = "loading_svg_icon",
+        class_style = "w-4 h-4 ml-2 flex items-center"
+    }: LoadingHtmlOptions): string {
+        return `<span class="${class_style}">${SVGIcons[icon_name]}</span>`
     }
 
 }

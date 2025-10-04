@@ -1,3 +1,7 @@
+import SVGIcons from "../resources/svg_icon_resource";
+
+export type SVGIconName = keyof typeof SVGIcons;
+
 export type LoggerType = 'log' | 'info' | 'warn' | 'error' | 'debug';
 
 export type ContentObjectType = Record<string, any>;
@@ -31,5 +35,10 @@ export interface RenderHtmlOptionsInterface {
   icon_class_style?: string,
   class_style?: string;
   href?: string;
+}
+
+export interface LoadingHtmlOptions {
+	class_style?: string;
+	icon_name?: SVGIconName;
 }
 

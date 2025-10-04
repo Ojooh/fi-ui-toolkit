@@ -6,7 +6,7 @@ class BaseEventHandler {
     public readonly name: string;
     public readonly component_name: string;
     protected controller: BaseControllerInterface;
-    private logger: LoggerUtil;
+    protected logger: LoggerUtil;
 
     constructor(controller: BaseControllerInterface, component_name: string) {
         this.controller     = controller;

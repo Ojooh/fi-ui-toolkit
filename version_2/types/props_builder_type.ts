@@ -1,6 +1,8 @@
 
 export type InputValueType = string | number | boolean | null;
 
+export type ButtonType = "button" | "submit" | "reset" | undefined;
+
 export interface InputGroupClassStyleInterface {
     wrapper_class_style?: string, 
     label_class_style?: string,
@@ -85,4 +87,24 @@ export interface ToastAlertPropsInterface {
     status: string;
     message?: string;
     on_close?: Function | null
+}
+
+export interface ButtonPropsInterface {
+    type: ButtonType,
+
+    id?: string,
+
+    btn_class_style?: string,
+
+    clicked?: boolean;
+    
+    show_loader?: boolean;
+
+    disabled?: boolean;
+
+    loader_content_text?: string,
+
+    content_text?: string,
+
+    on_click?: Function | null
 }
