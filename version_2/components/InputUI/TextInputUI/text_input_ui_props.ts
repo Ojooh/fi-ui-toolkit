@@ -3,7 +3,7 @@ import { ComponentClassStyles }     from "../../../enums/component_class_styles.
 
 const ui_class_styles  = ComponentClassStyles.input_ui;
 
-const EmailInputProps   = {
+const TextInputUIProps   = {
     id: { type: String, required: true },
             
     value: { type: Object, default: null, required: false },
@@ -25,4 +25,4 @@ const EmailInputProps   = {
     on_key_down:  { type: Function, default: null, required: false }
 }
 
-export default EmailInputProps;
+export default TextInputUIProps;

@@ -4,9 +4,7 @@ import { ComponentClassStyles }     from "../../../enums/component_class_styles.
 const ui_class_styles       = ComponentClassStyles.input_ui;
 
 const CheckBoxInputUiProps   = {
-    id: { type: String, default: "checkbox_id", required: true },
-            
-    name: { type: String, default: "checkbox", required: false },
+    id: { type: String, required: true },
     
     is_checked: { type: Boolean, default: false, required: true },
 
