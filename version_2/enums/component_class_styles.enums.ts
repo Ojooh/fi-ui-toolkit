@@ -22,6 +22,13 @@ export const ComponentClassStyles = {
             status_icon_class_style: "w-full font-bold",
             status_content_wrapper_class_style: "flex-1 w-10/12 h-full p-4",
             status_content_class_style: "text-sm font-medium"
+        },
+        toast_alert_ui: {
+            wrapper_class_style: "w-full flex items-stretch justify-start border-l-4",
+            icon_wrapper_class_style: "flex items-center justify-center w-1/12 p-1",
+            icon_class_style: "flex items-center justify-center w-6 h-6",
+            message_class_style: "flex-1 w-11/12 h-full p-2"
+
         }
     },
     copy_right_ui: {
