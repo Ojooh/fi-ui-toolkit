@@ -18,8 +18,6 @@ class BaseEventHandler {
     // Method to handle click event
     public handleOnClick(event: MouseEvent) { this.logger.log("Clicked!", event); }
 
-    // Method to handle key down event
-    public handleOnKeyDown(event: KeyboardEvent) { this.logger.log("Key pressed:", event.key); }
 }
 
 export default BaseEventHandler;

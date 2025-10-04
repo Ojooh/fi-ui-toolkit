@@ -27,5 +27,9 @@ export const ComponentClassStyles = {
     copy_right_ui: {
         wrapper_class_style: "w-full text-center py-4",
         text_class_style: ""
+    },
+    input_ui: {
+        input_class_style: "w-full py-2 px-1",
+
     }
 }
