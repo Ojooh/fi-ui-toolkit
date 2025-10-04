@@ -28,7 +28,6 @@ export const ComponentClassStyles = {
             icon_wrapper_class_style: "flex items-center justify-center w-1/12 p-1",
             icon_class_style: "flex items-center justify-center w-6 h-6",
             message_class_style: "flex-1 w-11/12 h-full p-2"
-
         }
     },
     copy_right_ui: {
