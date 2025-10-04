@@ -3,6 +3,7 @@
 <template>
     <input 
         v-if="['text', 'password', 'email'].includes(props.type || '')"
+        :type="props.type"
         :class="props.input_class_style"  
         v-model="input_value"
         :placeholder="props.placeholder"
