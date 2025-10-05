@@ -1,4 +1,6 @@
-import { Component } from "vue";
+import { Component }    from "vue";
+import BaseEventHandler from "../base_classes/base_event_handler";
+import BaseService      from "../base_classes/base_service";
 
 export interface ComponentDefinitionInterface {
     props: Record<string, any>;
@@ -15,6 +17,8 @@ export interface BaseControllerInterface {
     components: Record<string, Component>;
     computed_refs: Record<string, any>;
     state_refs: Record<string, any>;
+    event_handler?: BaseEventHandler;
+    [key: string]: any;
 
     // Methods
     getComponentDefinition(): ComponentDefinitionInterface;

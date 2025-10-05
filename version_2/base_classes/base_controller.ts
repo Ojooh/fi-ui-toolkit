@@ -1,7 +1,7 @@
 
 import { 
-    defineProps,
-    ref, 
+    reactive,
+    ref,
     isRef,
     computed, 
     watch, 
@@ -60,7 +60,21 @@ class BaseController {
         this.components = this.getUIComponents();
 
         // State
-        this.state_refs = this.getUIStateData();
+        // this.state_refs = this.getUIStateData();
+        const raw_state = this.getUIStateData();
+        this.state_refs = {} as Record<string, any>;
+
+        Object.entries(raw_state).forEach(([key, value]) => {
+            if (isRef(value)) {
+                this.state_refs[key] = value;
+            } 
+            else if (typeof value === "object" && value !== null) {
+                this.state_refs[key] = reactive(value);
+            } 
+            else {
+                this.state_refs[key] = ref(value);
+            }
+        });
 
         // Computed
         const computed_data = this.getUIComputedData();

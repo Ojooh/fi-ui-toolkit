@@ -5,6 +5,7 @@ import LoggerUtil                   from "../utils/logger_util";
 class BaseEventHandler {
     public readonly name: string;
     public readonly component_name: string;
+    public form_data: Record<string, any>;
     protected controller: BaseControllerInterface;
     protected logger: LoggerUtil;
 
@@ -13,6 +14,7 @@ class BaseEventHandler {
         this.component_name = component_name;
         this.name           = `${component_name}_event_handler`;
         this.logger         = new LoggerUtil({ prefix: this.name, show_timestamp: false });
+        this.form_data      = {};
     }
 
     // Method to handle click event

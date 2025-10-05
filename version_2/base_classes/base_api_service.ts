@@ -10,7 +10,7 @@ import { ENVInterface }             from "../types/env_type";
 import { APIResponseInterface }     from "../types/util_type";
 
 class BaseAPIService {
-    public readonly name = "base_api_service";
+    public readonly name: string;
     private api_base_url = "";
     private api_instance: AxiosInstance;
     private refresh_timer: ReturnType<typeof setInterval> | null = null;
@@ -24,7 +24,8 @@ class BaseAPIService {
     private local_storage_manager: LocalStorageManagerUtil;
     private device_util: DeviceFingerprintUtil;
 
-    constructor() {
+    constructor(name: string) {
+        this.name                   = name;
         this.global_vars            = GlobalVariableManagerUtil.getInstance();
         this.ENV                    = this.global_vars.getVariable("ENV");
         this.is_production          = this.ENV?.VITE_MODE === "production";
