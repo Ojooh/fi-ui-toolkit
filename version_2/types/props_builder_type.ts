@@ -1,5 +1,5 @@
 
-export type InputValueType = string | number | boolean | null;
+export type InputValueType = string | number | boolean | null | string[];
 
 export type ButtonType = "button" | "submit" | "reset" | undefined;
 
