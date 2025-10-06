@@ -36,6 +36,7 @@ export const ComponentClassStyles = {
     },
     input_ui: {
         input_class_style: "w-full py-2 px-1",
+        wrapper_class_style: "flex gap-2 justify-center"
 
     },
     input_group_ui: {

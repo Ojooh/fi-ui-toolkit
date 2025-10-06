@@ -1,6 +1,7 @@
 
 import { BaseControllerInterface }  from "../types/component_type";
 import LoggerUtil                   from "../utils/logger_util";
+import { InputEventMethodOptions }  from "../types/input_ui_type";
 
 class BaseEventHandler {
     public readonly name: string;
@@ -18,7 +19,7 @@ class BaseEventHandler {
     }
 
     // Method to handle click event
-    public handleOnClick(event: MouseEvent) { this.logger.log("Clicked!", event); }
+    public handleOnClick(event: MouseEvent, options?: InputEventMethodOptions) { this.logger.log("Clicked!", event); }
 
 }
 

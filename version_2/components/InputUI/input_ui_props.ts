@@ -20,6 +20,10 @@ const InputUIProps   = {
     
     input_class_style: { type: String, default: ui_class_styles.input_class_style, required: false },
 
+    wrapper_class_style: { type: String, default: ui_class_styles.wrapper_class_style, required: false },
+
+    length: { type: Number, default: 6, required: false },
+
     on_key_up:  { type: Function, default: null, required: false },
 
     on_key_down:  { type: Function, default: null, required: false },
