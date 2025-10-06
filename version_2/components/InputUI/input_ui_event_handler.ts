@@ -51,7 +51,7 @@ class InputUIEventHandler extends BaseEventHandler {
         const { on_change } = this.controller.props;
         const input_array   = this.controller.state_refs.input_value.value as string[];
         input_array[index]  = new_value;
-        on_change(event, input_array.join());
+        on_change(event, input_array.join(""));
     }
 
     public handleOTPOnInput(event: Event, index: number) {
@@ -104,7 +104,7 @@ class InputUIEventHandler extends BaseEventHandler {
 
         if(!on_change) { return; }
 
-        on_change(event, new_value.join());
+        on_change(event, new_value.join(""));
     }
 }
 

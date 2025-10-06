@@ -141,7 +141,14 @@ class BaseAPIService {
     public async queryAPI<T = any>(config: AxiosRequestConfig): Promise<APIResponseInterface<T>> {
         try {
             const response              = await this.api_instance.request<T>(config);
+            const status_code           = response?.status;
             const { status, msg, data } = response.data as any;
+
+            if (status_code == 401 || status_code == 429) { 
+                const { ACCESS_TOKEN_KEY } = this.getStorageKeys();
+                this.local_storage_manager.removeData(ACCESS_TOKEN_KEY);
+                return { status: "logout", msg } 
+            }
 
             // Check token refresh
             this.handleTokenFromResponse(data);
