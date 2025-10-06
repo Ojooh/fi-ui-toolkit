@@ -32,6 +32,10 @@ export interface InputConfigInterface {
             
     input_class_style?: string;
 
+     wrapper_class_style?: string;
+
+    length?: number;
+
     on_change?: Function | null;
 
     on_click?: Function | null;

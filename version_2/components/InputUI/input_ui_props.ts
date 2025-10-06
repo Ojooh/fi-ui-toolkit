@@ -14,7 +14,7 @@ const InputUIProps   = {
     
     is_checked: { type: Boolean, default: false, required: false },
 
-    value: { type: String, default: "", required: false },
+    value: { type: [String, Array], default: "", required: false },
 
     required: { type: Boolean, default: false, required: false },
     

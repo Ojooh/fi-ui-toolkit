@@ -39,7 +39,7 @@ class InputUIEventHandler extends BaseEventHandler {
     public handleOnChange (event: Event | InputEvent, options?: InputEventMethodOptions) {
         const { on_change } = this.controller.props;
 
-        const new_value = this.controller.state_refs.input_value;
+        const new_value = this.controller.state_refs.input_value.value;
 
         if(!on_change) { return; }
 
@@ -49,7 +49,7 @@ class InputUIEventHandler extends BaseEventHandler {
     // ---------- OTP-specific Helpers ----------
     private updateOTPModelValue(event: Event | KeyboardEvent, new_value: string, index: number) {
         const { on_change } = this.controller.props;
-        const input_array   = this.controller.state_refs.input_value as string[];
+        const input_array   = this.controller.state_refs.input_value.value as string[];
         input_array[index]  = new_value;
         on_change(event, input_array);
     }

@@ -15,12 +15,14 @@ class InputGroupPropsBuilder {
     public static buildInputProps( input_config_options: InputConfigInterface, input_class_style?: string ) {
         const { 
             id, value, type, placeholder, read_only, required, is_checked,
+            wrapper_class_style = "", length = 0,
             on_change = null, on_click = null, on_key_up = null, on_key_down = null 
         } = input_config_options;
 
         return reactive({
             id, value, type, placeholder, read_only, required, is_checked,
             on_change, on_click, on_key_up, on_key_down, input_class_style,
+            wrapper_class_style, length
         })
     }
 
