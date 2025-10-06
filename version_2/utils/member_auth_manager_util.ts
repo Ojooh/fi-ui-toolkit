@@ -106,6 +106,8 @@ class MemberAuthManagerUtil {
             this.logger.warn(`Failed to remove member data for key: ${member_key}`);
             success = false;
         }
+        const keys = this.local_storage_manager.getAllKeys();
+        console.log({ member_deleted, member_key, keys})
 
         const member_data_keys = this.local_storage_manager.getData<string[]>(MEMBER_DATA_KEYS_FIELD) || this.member_data_keys;
 

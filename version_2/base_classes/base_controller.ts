@@ -15,7 +15,7 @@ import { ComponentDefinitionInterface  }    from "../types/component_type";
 class BaseController {
     public readonly name: string;
     public component_name: string;
-    private logger: LoggerUtil;
+    protected logger: LoggerUtil;
 
     public props: Record<string, any> = {};
     public components: Record<string, any> = {};
