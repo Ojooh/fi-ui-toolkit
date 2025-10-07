@@ -53,6 +53,13 @@ export const ComponentClassStyles = {
             section_1_wrapper_class_style: "md:w-3/12 w-6/12 flex items-center overflow-hidde h-full",
             section_2_wrapper_class_style: "md:w-6/12 w-full flex items-center overflow-hidden md:order-1 order-2 h-full",
             section_3_wrapper_class_style: "md:w-3/12 w-6/12 flex items-center  md:order-2 order-1 h-full"
+        },
+        nav_link_ui: {
+            wrapper_class_style: "flex items-center cursor-pointer",
+            active_menu_class_style: "",
+            icon_img_wrapper_class_style: "flex items-center justify-center overflow-hidden",
+            icon_img_class_style: "w-full h-auto object-cover",
+            content_class_style: "flex items-center"
         }
     }
 }

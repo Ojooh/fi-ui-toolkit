@@ -112,3 +112,32 @@ export interface ButtonPropsInterface {
 
     on_click?: Function | null
 }
+
+export interface NavLinkUIPropsInterface {
+    wrapper_class_style?: string;
+
+    active_menu_class_style?: string;
+
+    icon_img_wrapper_class_style?: string;
+
+    icon_img_class_style?: string;
+
+    content_class_style?: string;
+
+    content?: string;
+
+    id: string;
+
+    link?: string | null;
+
+    icon?: string | null;
+
+    img_src?: string | null;
+
+    img_alt_text?: string | null;
+
+    on_click?: (event: MouseEvent) => void;
+
+    is_active?: (id: string) => boolean;
+}
+
