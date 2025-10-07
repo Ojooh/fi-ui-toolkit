@@ -3,7 +3,8 @@ import SVGIcons from "../resources/svg_icon_resource";
 
 import { 
     RenderHtmlOptionsInterface,
-    LoadingHtmlOptions 
+    LoadingHtmlOptions,
+    TitleAndSubTitleHTMLInterface
 } from "../types/util_type";
 
 class RenderHtmlUtil {
@@ -39,6 +40,21 @@ class RenderHtmlUtil {
         class_style = "w-4 h-4 ml-2 flex items-center"
     }: LoadingHtmlOptions): string {
         return `<span class="${class_style}">${SVGIcons[icon_name]}</span>`
+    }
+
+    public static renderTitleAndSubtitleHTML ({
+        title_text = "",
+        sub_title_text = "",
+        wrapper_class_style = "",
+        title_class_style = "",
+        sub_title_class_style = ""
+    }: TitleAndSubTitleHTMLInterface): string {
+        return `
+            <div class="${wrapper_class_style}">
+                <strong class="${title_class_style}">${title_text}</strong>
+                <span class="${sub_title_class_style}">${sub_title_text}</strong>
+            </div>
+        `
     }
 
 }

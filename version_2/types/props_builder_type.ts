@@ -141,3 +141,18 @@ export interface NavLinkUIPropsInterface {
     is_active?: (id: string) => boolean;
 }
 
+export interface ImgAvatarUIPropsInterface {
+    id: string;
+    img_src?: string | null;
+    img_alt_text?: string | null;
+    initials?: string | null;
+    right_slot_content?: string | null;
+    wrapper_class_style?: string;
+    avatar_circle_class_style?: string;
+    img_class_style?: string;
+    initials_class_style?: string;
+    right_slot_class_style?: string;
+    on_click?: (event: MouseEvent) => void | null;
+
+}
+

@@ -51,3 +51,10 @@ export interface APIResponseInterface<T = any> {
   full_response?: AxiosResponse;
 }
 
+export interface TitleAndSubTitleHTMLInterface {
+  title_text?: string;
+  sub_title_text?: string;
+  wrapper_class_style?: string;
+  title_class_style?: string;
+  sub_title_class_style?: string;
+}
