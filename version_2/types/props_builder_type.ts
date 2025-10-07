@@ -156,3 +156,12 @@ export interface ImgAvatarUIPropsInterface {
 
 }
 
+export interface MenuListUIPropsInterface {
+    id: string;
+    parent_id: string;
+    wrapper_class_style?: string;
+    list_class_style?: string;
+    list_item_class_style?: string;
+    menu_list?: NavLinkUIPropsInterface[];
+}
+

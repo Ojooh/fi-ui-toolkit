@@ -68,6 +68,11 @@ export const ComponentClassStyles = {
             icon_img_wrapper_class_style: "flex items-center justify-center overflow-hidden",
             icon_img_class_style: "w-full h-auto object-cover",
             content_class_style: "flex items-center"
+        },
+        menu_list_ui: {
+            wrapper_class_style: "hidden divide-y divide-gray-100",
+            list_class_style: "py-2",
+            list_item_class_style: ""
         }
     }
 }
