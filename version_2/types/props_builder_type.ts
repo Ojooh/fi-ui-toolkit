@@ -165,3 +165,12 @@ export interface MenuListUIPropsInterface {
     menu_list?: NavLinkUIPropsInterface[];
 }
 
+export interface ModalSidebarUIPropsInterface {
+    id: string;
+    visible: boolean;
+    wrapper_class_style?: string;
+    sidebar_class_style?: string;
+    section_1_wrapper_class_style?: string;
+    section_2_wrapper_class_style?: string;
+    on_click?: ((event?: MouseEvent) => void) | null;
+}

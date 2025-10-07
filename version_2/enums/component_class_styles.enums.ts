@@ -73,6 +73,12 @@ export const ComponentClassStyles = {
             wrapper_class_style: "hidden divide-y divide-gray-100",
             list_class_style: "py-2",
             list_item_class_style: ""
+        },
+        modal_sidebar_ui: {
+            wrapper_class_style: "fixed inset-0 z-[90]",
+            sidebar_class_style: "fixed top-0 h-screen transition-all duration-[2000s] ease-in-out",
+            section_1_wrapper_class_style: "h-[15%] flex items-center justify-center",
+            section_2_wrapper_class_style: "h-[85%] overflow-y-auto"
         }
     }
 }
