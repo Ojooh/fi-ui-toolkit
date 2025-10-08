@@ -30,7 +30,7 @@ class GlobalVariableManagerUtil {
     // Get a global variable by key
     getVariable(key: string): any | null {
         if (!this.variables.has(key)) {
-            console.error(`Variable ${key} not found.`);
+            // console.error(`Variable ${key} not found.`);
             return null;
         }
         return this.variables.get(key) as any;

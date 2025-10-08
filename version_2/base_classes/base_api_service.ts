@@ -5,6 +5,7 @@ import LocalStorageManagerUtil      from "../utils/local_storage_manager_util";
 import GlobalVariableManagerUtil    from "../utils/global_variable_manager_util";
 import LoggerUtil                   from "../utils/logger_util";
 import DeviceFingerprintUtil        from "../utils/device_fingerprint_util";
+import AuthTokenManagerUtil         from "../utils/auth_token_manager_util";
 
 import { ENVInterface }             from "../types/env_type";
 import { APIResponseInterface }     from "../types/util_type";
@@ -23,6 +24,7 @@ class BaseAPIService {
     private global_vars: GlobalVariableManagerUtil;
     private local_storage_manager: LocalStorageManagerUtil;
     private device_util: DeviceFingerprintUtil;
+    private auth_token_manager: AuthTokenManagerUtil;
 
     constructor(name: string) {
         this.name                   = name;
@@ -33,6 +35,7 @@ class BaseAPIService {
 
         this.local_storage_manager  = new LocalStorageManagerUtil();
         this.device_util            = new DeviceFingerprintUtil();
+        this.auth_token_manager     = AuthTokenManagerUtil.getInstance(this);
         this.logger                 = new LoggerUtil({ prefix: this.name, show_timestamp: false });
         this.api_instance           = this.createAxiosInstance();
 
@@ -41,10 +44,32 @@ class BaseAPIService {
 
     // Method to get local storage keys
     protected getStorageKeys() {
+        const ACCESS_TOKEN_KEY           = this.global_vars.getVariable("ACCESS_TOKEN_KEY");
+        const ACCESS_TOKEN_EXPIRES_AT    = this.global_vars.getVariable("ACCESS_TOKEN_EXPIRES_AT_KEY");
+        const DEVICE_ID_KEY              = this.global_vars.getVariable("DEVICE_ID_KEY");
+        const DEVICE_NAME_KEY            = this.global_vars.getVariable("DEVICE_NAME_KEY");
+
+        const missing_keys: string[] = [];
+
+        if (!ACCESS_TOKEN_KEY) { missing_keys.push("ACCESS_TOKEN_KEY"); }
+
+        if (!ACCESS_TOKEN_EXPIRES_AT) { missing_keys.push("ACCESS_TOKEN_EXPIRES_AT_KEY"); }
+
+        if (!DEVICE_ID_KEY) { missing_keys.push("DEVICE_ID_KEY"); }
+
+        if (!DEVICE_NAME_KEY) { missing_keys.push("DEVICE_NAME_KEY"); }
+
+
+        if (missing_keys.length > 0) {
+            const error_msg = `❌ Missing global variable(s): ${missing_keys.join(", ")}. Ensure they are initialized in GlobalVariableManagerUtil before using BaseAPIService.`;
+            throw new Error(error_msg);
+        }
+
         return {
-            ACCESS_TOKEN_KEY: "ACCESS_TOKEN",
-            DEVICE_ID_KEY: "DEVICE_ID",
-            DEVICE_NAME_KEY: "DEVICE_NAME"
+            ACCESS_TOKEN_KEY,
+            ACCESS_TOKEN_EXPIRES_AT,
+            DEVICE_ID_KEY,
+            DEVICE_NAME_KEY
         };
     }
 
@@ -83,11 +108,15 @@ class BaseAPIService {
 
     // Method to Attach Interceptors */
     private attachInterceptors(): void {
-        this.api_instance.interceptors.request.use((config: InternalAxiosRequestConfig) => this.setHeaders(config));
+        this.api_instance.interceptors.request.use(
+            async (config: InternalAxiosRequestConfig) => {
+                return await this.setHeaders(config)
+            }
+        );
     }
 
     // Method to Add headers (device ID, device name, token)
-    private setHeaders(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
+    private async setHeaders(config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
         try {
             config.headers = config.headers ?? {};
 
@@ -100,9 +129,9 @@ class BaseAPIService {
             }
 
             // Add auth token if available
-            const token = this.local_storage_manager.getData<string>(ACCESS_TOKEN_KEY);
+            const valid_token = await this.auth_token_manager.getValidAccessToken();
 
-            if (token) { config.headers["Authorization"] = `Bearer ${token}`; }
+            if (valid_token) { config.headers["Authorization"] = `Bearer ${valid_token}`; }
 
             return config;
         } 
@@ -114,27 +143,16 @@ class BaseAPIService {
 
     // Method to Extract and store access token if present */
     private handleTokenFromResponse(data: any): void {
-        const { ACCESS_TOKEN_KEY } = this.getStorageKeys();
+        const { ACCESS_TOKEN_KEY, ACCESS_TOKEN_EXPIRES_AT } = this.getStorageKeys();
 
-        if (data?.access_token) {
-            this.local_storage_manager.setData(ACCESS_TOKEN_KEY, data.access_token);
-            this.startTokenRefreshTimer();
+        if (data?.access_token && data?.expires_in_secs) {
+            this.auth_token_manager.setToken(
+                ACCESS_TOKEN_KEY, 
+                data.access_token, 
+                ACCESS_TOKEN_EXPIRES_AT,
+                data.expires_in_secs
+            );
         }
-    }
-
-    /** Auto-refresh access token every 4 minutes */
-    private startTokenRefreshTimer(): void {
-        if (this.refresh_timer) { clearInterval(this.refresh_timer); }
-
-        this.refresh_timer = setInterval(async () => {
-            try {
-                await this.queryAPI({ url: "/auth/refresh", method: "POST" });
-                this.logger.log("✅ Access token refreshed automatically");
-            } 
-            catch (error) {
-                this.logger.error("❌ Token refresh failed", { error });
-            }
-        }, 4 * 60 * 1000); // 4 minutes
     }
 
     // Method to Query API with standard error handling
@@ -145,8 +163,7 @@ class BaseAPIService {
             const { status, msg, data } = response.data as any;
 
             if (status_code == 401 || status_code == 429) { 
-                const { ACCESS_TOKEN_KEY } = this.getStorageKeys();
-                this.local_storage_manager.removeData(ACCESS_TOKEN_KEY);
+                this.auth_token_manager.clearToken();
                 return { status: "logout", msg } 
             }
 
