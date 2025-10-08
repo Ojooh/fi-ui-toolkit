@@ -1,4 +1,4 @@
-import type { PropType }            from 'vue'
+import type { PropType }            from "vue"
 import { ComponentClassStyles }     from "../../../enums/component_class_styles.enums";
 import { NavLinkUIPropsInterface }  from "../../../types/props_builder_type";
 
