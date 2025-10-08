@@ -4,7 +4,7 @@
         :to="computed_refs.route_link.value"
         :href="computed_refs.anchor_link.value"
         :target="computed_refs.anchor_target.value"
-        :class="[props.wrapper_class_style, props.is_active(props.id) ? props.active_menu_class_style : '']"
+        :class="[props.wrapper_class_style, computed_refs?.is_active_computed.value ? props.active_menu_class_style : '']"
         @click="event_handler?.handleOnClick?.($event)"
     >
         <div v-if="props.img_src || props.icon" :class="props.icon_img_wrapper_class_style">

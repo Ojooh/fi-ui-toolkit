@@ -9,7 +9,7 @@ const ui_class_styles       = ComponentClassStyles?.navigation_ui?.menu_list_ui;
 const MenuListUIProps   = {
     id: { type: String, required: true },
 
-    parent_id: { type: String, required: true },
+    parent_id: { type: String, default: null, required: false },
 
     wrapper_class_style: { type: String, default: ui_class_styles.wrapper_class_style, required: false },
 

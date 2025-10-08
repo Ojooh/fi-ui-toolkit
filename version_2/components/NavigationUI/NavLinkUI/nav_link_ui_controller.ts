@@ -1,4 +1,5 @@
 
+import { useRoute }                 from "vue-router";
 import BaseController               from "../../../base_classes/base_controller";
 import NavLinkUIEventHandler        from "./nav_link_ui_event_handler";
 
@@ -20,6 +21,7 @@ class NavLinkUIController extends BaseController {
     protected getUIComputedData(): Record<string, () => any> { 
         const isRouterLink = (link?: string) => !!link && link.startsWith("/");
         const isAnchor     = (link?: string) => !!link && /^https?:\/\//.test(link);
+        const route        = useRoute();
 
         return {
             component_type: () => {
@@ -44,7 +46,19 @@ class NavLinkUIController extends BaseController {
             anchor_target: () => {
                 const { link } = this.props;
                 return isAnchor(link) ? "_blank" :  undefined;
-            }
+            },
+
+            is_active_computed: () => {
+                try {
+                    const { id, is_active } = this.props;
+
+                    if(id === route.name) { return true }
+
+                    return is_active?.(this.props.id) ?? false;
+                } catch {
+                    return false;
+                }
+            },
         }; 
     }
 

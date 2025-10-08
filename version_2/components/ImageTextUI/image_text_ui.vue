@@ -8,7 +8,7 @@
                 :class="props.img_class_style"
             />
         </div>
-        <div :class="props.text_class_style" v-html="props.text_content"></div>
+        <div v-if="props?.text_content" :class="props.text_class_style" v-html="props.text_content"></div>
     </div>
 </template>
 

@@ -158,9 +158,19 @@ export interface ImgAvatarUIPropsInterface {
 
 }
 
+export interface ImageTextUIPropsInterface {
+    wrapper_class_style?: string;
+    img_wrapper_class_style?: string;
+    img_class_style?: string;
+    text_class_style?: string;
+    image_src?: string | null;
+    img_alt_text?: string | null;
+    text_content?: string | null;
+}
+
 export interface MenuListUIPropsInterface {
     id: string;
-    parent_id: string;
+    parent_id?: string;
     wrapper_class_style?: string;
     list_class_style?: string;
     list_item_class_style?: string;

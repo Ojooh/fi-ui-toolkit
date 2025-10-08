@@ -5,7 +5,7 @@
         <ul 
             v-if="props.menu_list && props.menu_list.length" 
             :class="props.list_class_style"  
-            :aria-labelledby="props.parent_id"
+            :aria-labelledby="props?.parent_id"
         >
             <li 
                 v-for="(menu, index) in props.menu_list"
