@@ -1,5 +1,6 @@
-
+import { PropType }                 from "vue";
 import { ComponentClassStyles }     from "../../../enums/component_class_styles.enums";
+import { NavLinkUIPropsInterface } from "../../../types/props_builder_type";
 
 const ui_class_styles       = ComponentClassStyles?.navigation_ui?.nav_link_ui;
 
@@ -29,6 +30,8 @@ const NavLinkUIProps   = {
     on_click: { type: Function, default: null, required: false },
 
     is_active: { type: Function, default: () => { return false }, required: false },
+
+    sub_menu_list: { type: Array as PropType<NavLinkUIPropsInterface[]>,  default: () => { return [] }, required: false },
 
 }
 

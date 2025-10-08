@@ -139,6 +139,8 @@ export interface NavLinkUIPropsInterface {
     on_click?: (event: MouseEvent) => void;
 
     is_active?: (id: string) => boolean;
+
+    sub_menu_list?: NavLinkUIPropsInterface[];
 }
 
 export interface ImgAvatarUIPropsInterface {

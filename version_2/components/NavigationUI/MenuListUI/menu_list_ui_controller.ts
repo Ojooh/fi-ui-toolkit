@@ -1,6 +1,8 @@
 
-import BaseController   from "../../../base_classes/base_controller";
-import NavLinkUI        from "../NavLinkUI/nav_link_ui.vue";
+import { defineAsyncComponent } from "vue";
+import BaseController           from "../../../base_classes/base_controller";
+import NavLinkUI                from "../NavLinkUI/nav_link_ui.vue";
+
 
 class MenuListUIController extends BaseController {
 
@@ -10,7 +12,8 @@ class MenuListUIController extends BaseController {
 
     // Method to get ui components
     protected getUIComponents(): Record<string, any> { 
-        return  { NavLinkUI }; 
+        const MenuListUI  = defineAsyncComponent(() => import("./menu_list_ui.vue"));
+        return  { NavLinkUI, MenuListUI }; 
     }
 
 }

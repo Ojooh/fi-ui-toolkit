@@ -1,5 +1,6 @@
-import type { PropType }        from 'vue'
+import type { PropType }            from 'vue'
 import { ComponentClassStyles }     from "../../../enums/component_class_styles.enums";
+import { NavLinkUIPropsInterface }  from "../../../types/props_builder_type";
 
 import NavLinkUIProps from "../NavLinkUI/nav_link_ui_props";
 
@@ -16,7 +17,7 @@ const MenuListUIProps   = {
 
     list_item_class_style: { type: String, default: ui_class_styles.list_item_class_style, required: false },
 
-    menu_list: { type: Array as PropType<Array<Partial<typeof NavLinkUIProps>>>,  default: () => [], required: true}
+    menu_list: { type: Array as PropType<NavLinkUIPropsInterface[]>,  default: () => [], required: true}
 }
 
 export default MenuListUIProps;
