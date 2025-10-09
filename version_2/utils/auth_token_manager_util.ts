@@ -45,10 +45,13 @@ class AuthTokenManagerUtil {
         if (typeof expires_in_key !== "string") return;
 
         const expires_at = this.local_storage_manager.getData<number>(expires_in_key);
+        // const expires_at = 100
+        this.logger.log("Token expires at:", expires_at);
 
         if (!expires_at) { return; }
 
         const delay = expires_at - Date.now() - this.REFRESH_MARGIN_MS;
+        this.logger.log(`Token refresh scheduled in ${(delay / 1000).toFixed(1)}s`);
 
         if (delay <= 0) {
             this.logger.log("Token already expired, refreshing immediately...");
@@ -56,8 +59,8 @@ class AuthTokenManagerUtil {
             return;
         }
 
-        this.refresh_timer = setTimeout(() => {
-            this.refreshAccessToken();
+        this.refresh_timer = setTimeout(async () => {
+            await this.refreshAccessToken();
         }, delay);
 
         this.logger.log(`🔄 Token refresh scheduled in ${(delay / 1000).toFixed(1)}s`);
@@ -97,16 +100,12 @@ class AuthTokenManagerUtil {
 
         if (!access_token || !expires_at) return null;
 
-        if (Date.now() >= expires_at - this.REFRESH_MARGIN_MS) {
-            this.logger.log("Token near expiry, refreshing...");
-            return this.refreshAccessToken();
-        }
-
         return access_token;
     }
 
     // Method to Refresh access token (singleton-safe)
     public async refreshAccessToken(): Promise<string | null> {
+        this.logger.debug("Attempting to refresh access token...");
         if (this.is_refreshing && this.refresh_promise) { return this.refresh_promise; }
 
         const access_token_key  = this.global_vars.getVariable(this.ACCESS_TOKEN_KEY);
@@ -122,7 +121,7 @@ class AuthTokenManagerUtil {
         this.is_refreshing = true;
         this.refresh_promise = (async () => {
             try {
-                const response = await this.api_service?.queryAPI({url: "/auth/refresh", method: "POST"});
+                const response = await this.api_service?.queryAPI.bind(this.api_service)({url: "/auth/refresh", method: "POST"});
 
                 if(!response) { return null }
 
@@ -131,7 +130,7 @@ class AuthTokenManagerUtil {
 
                 if (access_token && expires_in_secs) {
                     this.setToken(access_token_key, access_token, expires_in_key, expires_in_secs);
-                    this.logger.log("✅ Access token refreshed successfully");
+                    this.logger.debug("✅ Access token refreshed successfully");
                     return access_token;
                 } 
                 else { throw new Error("Invalid refresh response"); }
@@ -152,16 +151,16 @@ class AuthTokenManagerUtil {
 
     // Method to Clear stored token info 
     public clearToken(): void {
-        const access_token_key  = this.global_vars.getVariable(this.ACCESS_TOKEN_KEY);
-        const expires_in_key    = this.global_vars.getVariable(this.EXPIRES_AT_KEY);
+        // const access_token_key  = this.global_vars.getVariable(this.ACCESS_TOKEN_KEY);
+        // const expires_in_key    = this.global_vars.getVariable(this.EXPIRES_AT_KEY);
 
-        if(!access_token_key || !expires_in_key) { return; }
+        // if(!access_token_key || !expires_in_key) { return; }
 
-        this.local_storage_manager.removeData(access_token_key);
-        this.local_storage_manager.removeData(expires_in_key);
+        // this.local_storage_manager.removeData(access_token_key);
+        // this.local_storage_manager.removeData(expires_in_key);
 
-        this.global_vars.updateVariable(this.ACCESS_TOKEN_KEY, null);
-        this.global_vars.updateVariable(this.EXPIRES_AT_KEY, null);
+        // this.global_vars.updateVariable(this.ACCESS_TOKEN_KEY, null);
+        // this.global_vars.updateVariable(this.EXPIRES_AT_KEY, null);
 
         if (this.refresh_timer) { 
             clearTimeout(this.refresh_timer); 

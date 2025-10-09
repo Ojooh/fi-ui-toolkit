@@ -174,7 +174,7 @@ class BaseAPIService {
         } 
         catch (error: any) {
             const status_code   = error?.response?.status;
-            const error_msg     = error?.response?.data?.msg || error.message || "invalid_request";
+            const error_msg     = error?.response?.data?.msg || error?.message || "invalid_request";
 
             if (status_code === 401 || status_code === 429) {
                 return { status: "logout", msg: error_msg, full_response: error?.response };
