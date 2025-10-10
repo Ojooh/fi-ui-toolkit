@@ -29,8 +29,6 @@ class AuthTokenManagerUtil {
         this.local_storage_manager      = new LocalStorageManagerUtil();
         this.logger                     = new LoggerUtil({ prefix: this.name, show_timestamp: false });
         this.global_vars                = GlobalVariableManagerUtil.getInstance();
-
-        this.scheduleRefreshIfNeeded(); 
     }
 
     // Method to Schedule a refresh before token expires 
@@ -69,7 +67,11 @@ class AuthTokenManagerUtil {
     public static getInstance(api_service?: BaseAPIServiceInterface): AuthTokenManagerUtil {
         if (!this.instance) { this.instance = new AuthTokenManagerUtil(api_service); }
 
-        else if (api_service) { this.instance.api_service = api_service; }
+        else if (api_service) {
+            this.instance.api_service = api_service; 
+            // ✅ Only now schedule refresh safely
+            this.instance.scheduleRefreshIfNeeded();
+        }
 
         return this.instance;
     }

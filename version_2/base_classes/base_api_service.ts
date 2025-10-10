@@ -180,7 +180,7 @@ class BaseAPIService {
                 return { status: "logout", msg: error_msg, full_response: error?.response };
             }
 
-            this.logger.error("API Error", { error });
+            this.logger.error("API Error", { error: { status_code, error_msg } });
             return { status: "error", msg: error_msg, full_response: error?.response };
         }
     }
