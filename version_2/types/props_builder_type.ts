@@ -186,3 +186,25 @@ export interface ModalSidebarUIPropsInterface {
     section_2_wrapper_class_style?: string;
     on_click?: ((event?: MouseEvent) => void) | null;
 }
+
+export interface BreadCrumbUIPropsInterface {
+    wrapper_class_style?: string;
+
+    list_class_style?: string;
+
+    list_item_class_style?: string;
+
+    divider_class_style?: string;
+
+    divider_content?: string;
+
+    menu_list?: NavLinkUIPropsInterface[];
+}
+
+export interface BreadCrumgListInterface {
+  menu_text: string;
+
+  menu_svg_icon?: string;
+
+  menu_link?: string | null;
+}

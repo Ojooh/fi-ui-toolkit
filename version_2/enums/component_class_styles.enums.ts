@@ -86,6 +86,12 @@ export const ComponentClassStyles = {
             sidebar_class_style: "fixed top-0 h-screen transition-all duration-[2000s] ease-in-out",
             section_1_wrapper_class_style: "h-[15%] flex items-center justify-center",
             section_2_wrapper_class_style: "h-[85%] overflow-y-auto"
+        },
+        bread_crumb_ui: {
+            wrapper_class_style: "w-full flex",
+            list_class_style: "inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse w-full",
+            list_item_class_style: "inline-flex items-center",
+            divider_class_style: "px-2 text-gray-400",
         }
     }
 }
