@@ -62,6 +62,14 @@ export const ComponentClassStyles = {
         text_class_style: "text-md text-start font-bold",
 
     },
+    search_field_ui: {
+        wrapper_class_style: "w-full my-4",
+        label_class_style: "text-sm font-bold",
+        label_required_class_style: "italic font-medium",
+        search_wrapper_class_style: "",
+        btn_wrapper_class_style: "",
+        input_wrapper_class_style: ""
+    },
     navigation_ui: {
         top_bar_ui: {
             wrapper_class_style: "w-screen px-4 flex flex-wrap items-center justify-between relative h-full",

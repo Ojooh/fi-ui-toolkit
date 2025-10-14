@@ -4,10 +4,19 @@ export type InputValueType = string | number | boolean | null | string[];
 export type ButtonType = "button" | "submit" | "reset" | undefined;
 
 export interface InputGroupClassStyleInterface {
-    wrapper_class_style?: string, 
-    label_class_style?: string,
-    label_required_class_style?: string,
-    input_class_style?: string,
+    wrapper_class_style?: string;
+    label_class_style?: string;
+    label_required_class_style?: string;
+    input_class_style?: string;
+}
+
+export interface SearchFieldClassStyleInterface {
+    wrapper_class_style?: string;
+    label_class_style?: string;
+    label_required_class_style?: string;
+    search_wrapper_class_style?: string;
+    btn_wrapper_class_style?: string;
+    input_wrapper_class_style?: string;
 }
 
 export interface LabelConfigInterface {
@@ -15,7 +24,7 @@ export interface LabelConfigInterface {
     label_required_text?: string,
 }
 
-export interface InputConfigInterface {
+export interface InputUIPropsInterface {
     id: string,
             
     value: InputValueType,
@@ -32,7 +41,7 @@ export interface InputConfigInterface {
             
     input_class_style?: string;
 
-     wrapper_class_style?: string;
+    wrapper_class_style?: string;
 
     length?: number;
 
@@ -56,7 +65,7 @@ export interface InputGroupPropsInterface {
 
     label_required_text?: string;
 
-    input_config: InputConfigInterface
+    input_config: InputUIPropsInterface
 }
 
 export interface AlertBorderClassStyleInterface {
@@ -93,7 +102,7 @@ export interface ToastAlertPropsInterface {
     on_close?: Function | null
 }
 
-export interface ButtonPropsInterface {
+export interface ButtonUIPropsInterface {
     type: ButtonType,
 
     id?: string,
@@ -207,4 +216,17 @@ export interface BreadCrumgListInterface {
   menu_svg_icon?: string;
 
   menu_link?: string | null;
+}
+
+export interface SearchFieldUIPropsInterface {
+  wrapper_class_style?: string;
+  label_class_style?: string;
+  label_required_class_style?: string;
+  search_wrapper_class_style?: string;
+  btn_wrapper_class_style?: string;
+  input_wrapper_class_style?: string;
+  label_text?: string;
+  label_required_text?: string;
+  input_config: InputUIPropsInterface;
+  btn_config: ButtonUIPropsInterface;
 }

@@ -30,5 +30,5 @@ const props         = defineProps(NavLinkUIProps);
 const controller    = new NavLinkUIController(props);
 const event_handler = controller.event_handler
 
-const { state_refs, computed_refs }    = controller.getComponentDefinition();
+const { computed_refs }    = controller.getComponentDefinition();
 </script>

@@ -4,7 +4,7 @@ import { ButtonType }           from "@v2/types/props_builder_type";
 
 const ui_class_styles       = ComponentClassStyles.button_ui;
 
-const InputUIProps   = {
+const ButtonUIProps   = {
     type: { type: String as () => ButtonType, default: "button", required: false },
 
     id: { type: String, required: false },
@@ -22,4 +22,4 @@ const InputUIProps   = {
     on_click:  { type: Function, default: null, required: false },
 }
 
-export default InputUIProps;
+export default ButtonUIProps;

@@ -3,16 +3,16 @@ import { reactive }    from "vue";
 import {
     InputGroupClassStyleInterface,
     LabelConfigInterface,
-    InputConfigInterface,
+    InputUIPropsInterface,
     InputGroupPropsInterface,
 } from "../types/props_builder_type";
 
 
-class InputGroupPropsBuilder {
-    public static readonly name = "input_group_props_builder";
+class InputGroupUIPropsBuilder {
+    public static readonly name = "input_group_ui_props_builder";
 
     // Method to build input props
-    public static buildInputProps( input_config_options: InputConfigInterface, input_class_style?: string ) {
+    public static buildInputProps( input_config_options: InputUIPropsInterface, input_class_style?: string ) {
         const { 
             id, value, type, placeholder, read_only, required, is_checked,
             wrapper_class_style = "", length = 0,
@@ -30,7 +30,7 @@ class InputGroupPropsBuilder {
     public static buildInputGroupProps(
         class_styles: InputGroupClassStyleInterface, 
         label_config_options: LabelConfigInterface,
-        input_config_options: InputConfigInterface
+        input_config_options: InputUIPropsInterface
     ): InputGroupPropsInterface {
         const { 
             wrapper_class_style, label_class_style, 
@@ -53,4 +53,4 @@ class InputGroupPropsBuilder {
     }
 }
 
-export default InputGroupPropsBuilder;
+export default InputGroupUIPropsBuilder;
