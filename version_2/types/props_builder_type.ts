@@ -234,17 +234,17 @@ export interface SearchFieldUIPropsInterface {
 }
 
 export interface SortableHeaderCellUIPropsInterface {
-  id?: string;
   label_content: string;
+  field_key: string;
   sortable?: boolean;
   sort_direction?: SortDirectionType;
   wrapper_class_style?: string;
+  content_wrapper_class_style?:string;
   icon_class_style?: string;
   on_sort?: (event:MouseEvent, direction: SortDirectionType) => void;
 }
 
 export interface TableColumnInterface extends Partial<SortableHeaderCellUIPropsInterface> {
-    key: string;
     sortable?: boolean;
     content_type: "plain" | "formatted" | "component";
     field_key: string;

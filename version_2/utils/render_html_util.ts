@@ -24,7 +24,7 @@ class RenderHtmlUtil {
 
         if (element === "a") {
             return `
-            <a href="${href}" class="${class_style || ""}">
+            <a href="${href}" target="_blank" rel="noopener noreferrer"  class="${class_style || ""}">
                 ${order === "icon-first" ? `${icon_html}${text}` : `${text}${icon_html}`}
             </a>`;
         }

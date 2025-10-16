@@ -32,7 +32,7 @@
 
                     <component 
                         v-else :is="col.component"
-                        v-bind="controller.computeComponentRecordProps(record)"
+                        v-bind="controller.computeComponentRecordProps(col, record)"
                     />
                 
                 </td>

@@ -1,6 +1,7 @@
 
 import { ref }                              from "vue";
 import BaseController                       from "../../../base_classes/base_controller";
+import { TableColumnInterface }             from "../../../types/props_builder_type";
 
 class TableBodyUIController extends BaseController {
 
@@ -8,8 +9,8 @@ class TableBodyUIController extends BaseController {
         super("table_body_ui", props);
     }
 
-    public computeComponentRecordProps (record: Record<string, any>): Record<string, any>  {
-        const { component_props } = this.props;
+    public computeComponentRecordProps (col: TableColumnInterface, record: Record<string, any>): Record<string, any>  {
+        const { component_props } = col;
 
         if(!component_props || typeof component_props !== "function") { return {} }
 

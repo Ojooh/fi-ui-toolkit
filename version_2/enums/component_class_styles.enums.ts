@@ -3,7 +3,7 @@ export const ComponentClassStyles = {
     loader_ui: {
         list_loader_ui: {
             wrapper_class_style: "w-full flex flex-col items-center justify-center animate-pulse py-4 px-0",
-            bar_class_style: "w-full h-12 my-4 bg-gray-200 rounded-lg dark:bg-gray-700 shadow"
+            bar_class_style: "w-full h-12 my-4 bg-gray-300 rounded-lg shadow"
         },
         screen_loader_ui: {
             wrapper_class_style: "fixed inset-0 flex items-center justify-center overflow-hidden",
@@ -105,7 +105,8 @@ export const ComponentClassStyles = {
     table_ui: {
         sortable_header_cell_ui: {
             wrapper_class_style: "flex items-center gap-2",
-            icon_class_style: "w-3 h-3 cursor-pointer"
+            icon_class_style: "w-3 h-3 cursor-pointer",
+            content_wrapper_class_style: "flex space-x-2 items-center justify-center"
         },
         table_header_ui: {
             wrapper_class_style: "bg-gray-100 text-left",
@@ -113,9 +114,9 @@ export const ComponentClassStyles = {
             header_cell_class_style: "",
         },
         table_body_ui: {
-            wrapper_class_style: "divide-y divide-gray-200",
-            body_row_class_style: "",
-            body_cell_class_style: ""
+            wrapper_class_style: "group/body divide-y divide-border border-black",
+            body_row_class_style: "group/row text-sm",
+            body_cell_class_style: "px-4 py-3 whitespace-nowrap border-b border-black text-sm"
         },
         data_table_ui: {
             wrapper_class_style: "w-full h-full min-h-[400px] block",

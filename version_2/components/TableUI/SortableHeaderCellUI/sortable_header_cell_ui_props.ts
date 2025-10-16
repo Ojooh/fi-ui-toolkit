@@ -11,6 +11,8 @@ const SortableHeaderCellUIProps = {
 
     label_content: { type: String, required: true },
 
+    field_key: { type: String, required: true },
+
     sortable: { type: Boolean, default: false },
 
     sort_direction: { type: String as PropType<SortDirectionType>, default: "none" },
@@ -18,6 +20,8 @@ const SortableHeaderCellUIProps = {
     on_sort: { type: Function as PropType<(event:MouseEvent, dir: SortDirectionType) => void>, default: null },
 
     wrapper_class_style: { type: String, default: ui_class_styles.wrapper_class_style },
+
+    content_wrapper_class_style: { type: String, default: ui_class_styles.content_wrapper_class_style },
 
     icon_class_style: { type: String, default: ui_class_styles.icon_class_style },
  

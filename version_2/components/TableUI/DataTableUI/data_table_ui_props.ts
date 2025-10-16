@@ -25,7 +25,7 @@ const DataTableUIProps = {
 
     table_class_style: { type: String, default: ui_class_styles.table_class_style, required: false },
 
-    lg_table_wrapper_class_style: { type: String, default: ui_class_styles.lg_table_wrapper_class_style, required: false},
+    lg_table_wrapper_class_style: { type: String, default: ui_class_styles.lg_table_wrapper_class_style, required: false },
 };
 
 export default DataTableUIProps;
