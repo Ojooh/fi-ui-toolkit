@@ -274,3 +274,9 @@ export interface TableBodyUIPropsInterface {
     body_cell_class_style?: string;
 }
 
+export interface DataTableUIPropsInterface {
+    header_props: TableHeaderUIPropsInterface;
+    body_props: TableBodyUIPropsInterface;
+    table_class_style?: string;
+}
+
