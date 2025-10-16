@@ -109,6 +109,13 @@ export const ComponentClassStyles = {
         },
         table_header_ui: {
             wrapper_class_style: "bg-gray-100 text-left",
+            header_row_class_style: "",
+            header_cell_class_style: "",
+        },
+        table_body_ui: {
+            wrapper_class_style: "divide-y divide-gray-200",
+            body_row_class_style: "",
+            body_cell_class_style: ""
         }
     }
 }

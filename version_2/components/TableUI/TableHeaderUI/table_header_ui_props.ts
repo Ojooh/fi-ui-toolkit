@@ -15,6 +15,10 @@ const TableHeaderUIProps = {
     actions_text: { type: String, default: "Actions" },
     
     wrapper_class_style: { type: String, default: ui_class_styles.wrapper_class_style },
+
+    header_row_class_style: { type: String, default: ui_class_styles.header_row_class_style },
+
+    header_cell_class_style: { type: String, default: ui_class_styles.header_cell_class_style },
 }
 
 export default TableHeaderUIProps;

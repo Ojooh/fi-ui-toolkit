@@ -244,8 +244,14 @@ export interface SortableHeaderCellUIPropsInterface {
 }
 
 export interface TableColumnInterface extends Partial<SortableHeaderCellUIPropsInterface> {
-  key: string;
-  sortable?: boolean;
+    key: string;
+    sortable?: boolean;
+    content_type: "plain" | "formatted" | "component";
+    field_key: string;
+    col_class_style?: string;
+    formatter?: (value: any, record?: Record<string, any>) => string;
+    component?: any;
+    component_props?: (record: Record<string, any>) => Record<string, any>;
 }
 
 export interface TableHeaderUIPropsInterface {
@@ -253,4 +259,18 @@ export interface TableHeaderUIPropsInterface {
   sn_text?: string | null;
   actions_text?: string | null;
   wrapper_class_style?: string;
+  header_row_class_style?: string;
+  header_cell_class_style?: string;
 }
+
+export interface TableBodyUIPropsInterface {
+    records: Record<string, any>[];
+    columns: TableColumnInterface[];
+    sn_text?: string | null;
+    actions_text?: string | null;
+    empty_text?: string;
+    wrapper_class_style?: string;
+    body_row_class_style?: string;
+    body_cell_class_style?: string;
+}
+
