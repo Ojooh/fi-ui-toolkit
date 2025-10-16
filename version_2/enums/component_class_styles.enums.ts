@@ -106,6 +106,9 @@ export const ComponentClassStyles = {
         sortable_header_cell_ui: {
             wrapper_class_style: "flex items-center gap-2",
             icon_class_style: "w-3 h-3 cursor-pointer"
+        },
+        table_header_ui: {
+            wrapper_class_style: "bg-gray-100 text-left",
         }
     }
 }
