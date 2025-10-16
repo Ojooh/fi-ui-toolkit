@@ -3,6 +3,8 @@ export type InputValueType = string | number | boolean | null | string[];
 
 export type ButtonType = "button" | "submit" | "reset" | undefined;
 
+export type SortDirectionType = "asc" | "desc" | "none";
+
 export interface InputGroupClassStyleInterface {
     wrapper_class_style?: string;
     label_class_style?: string;
@@ -229,4 +231,14 @@ export interface SearchFieldUIPropsInterface {
   label_required_text?: string;
   input_config: InputUIPropsInterface;
   btn_config: ButtonUIPropsInterface;
+}
+
+export interface SortableHeaderCellUIPropsInterface {
+  id?: string;
+  label: string;
+  sortable?: boolean;
+  sort_direction?: SortDirectionType;
+  wrapper_class_style?: string;
+  icon_class_style?: string;
+  on_sort?: (event:MouseEvent, direction: SortDirectionType) => void;
 }

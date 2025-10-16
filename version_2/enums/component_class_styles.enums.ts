@@ -101,5 +101,11 @@ export const ComponentClassStyles = {
             list_item_class_style: "inline-flex items-center",
             divider_class_style: "px-2 text-gray-400",
         }
+    },
+    table_ui: {
+        sortable_header_cell_ui: {
+            wrapper_class_style: "flex items-center gap-2",
+            icon_class_style: "w-3 h-3 cursor-pointer"
+        }
     }
 }
