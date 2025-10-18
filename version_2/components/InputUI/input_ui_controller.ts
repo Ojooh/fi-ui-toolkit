@@ -18,6 +18,8 @@ class InputUIController extends BaseController {
 
         return {
             input_value: ref(existing_value),
+
+            is_loading: ref(false),
         } 
     }
 

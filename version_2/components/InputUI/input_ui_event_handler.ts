@@ -46,6 +46,36 @@ class InputUIEventHandler extends BaseEventHandler {
         on_change(event, new_value);
     }
 
+    // Method to handle switch toggle
+    public async handleSwitchToggle (event: MouseEvent, options?: InputEventMethodOptions) {
+        try {
+            const { on_click }              = this.controller.props;
+            const current_active_value_ref  = this.controller.state_refs.input_value
+            const is_loading_ref            = this.controller.state_refs.is_loading;
+            is_loading_ref.value            = true;
+
+            if (!on_click) { return; }
+
+            let result = on_click(event);
+
+            if (result instanceof Promise) { result = await result; }
+
+            console.log({ result })
+
+            const boolean_result = result ? !current_active_value_ref.value : current_active_value_ref.value;
+
+            console.log({ boolean_result, current_state:current_active_value_ref.value  })
+
+            this.controller.state_refs.input_value.value = boolean_result;
+        } 
+        catch (error) {
+            console.error(`[${this.controller.name}] handleOnClick error:`, error);
+        } 
+        finally {
+            this.controller.state_refs.is_loading.value = false;
+        }
+    }
+
     // ---------- OTP-specific Helpers ----------
     private updateOTPModelValue(event: Event | KeyboardEvent, new_value: string, index: number) {
         const { on_change } = this.controller.props;

@@ -51,6 +51,45 @@
             @paste="event_handler?.handleOTPOnPaste?.($event, index)"
         />
     </div>
+
+    <div
+        v-else-if="['switch'].includes(props.type || '')"
+        :class="props.wrapper_class_style"
+    >
+        <!-- Loader -->
+        <div v-if="state_refs.is_loading.value" :class="props.loader_class_style" v-html="props.loader_content"></div>
+
+        <!-- Switch -->
+        <button 
+            v-else 
+            :for="id" 
+            role="switch"
+            type="button"
+            :class="[ props.switch_btn_class_style,
+                input_value ? props.active_class_style : props.inactive_class_style
+            ]"
+            @click="event_handler?.handleSwitchToggle?.($event)"
+        >
+
+            <input 
+                type="checkbox" 
+                class="sr-only peer"
+                v-model="input_value"
+                :checked="state_refs.input_value === true"
+                :required="props.required"
+                :id="props.id"
+                :name="props.id"
+                :disabled="props.is_loading"
+                @change="event_handler?.handleOnChange?.($event)"
+            />
+
+            <span :class="[knob_class_style, input_value ? 'translate-x-6' : 'translate-x-1']"></span>
+
+            <span v-if="props.label_text" :class="props.label_text_class_style" v-html="props.label_text"></span>
+
+        </button>
+    </div>
+
 </template>
 
 <script setup lang="ts">

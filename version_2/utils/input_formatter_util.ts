@@ -167,7 +167,7 @@ class InputTransformerUtil {
     public static formatURLToAnchorHtml (
         url_text: string | null, 
         url_link: string,
-        class_style: string = "flex items-center space-x-2 justify-center text-sm text-blue-900 underline cursor-pointer hover:text-blue-400",
+        class_style: string = "w-full flex items-center space-x-2 truncate justify-center text-sm text-blue-900 underline cursor-pointer hover:text-blue-400",
         icon_class_style: string = "mx-2w-4 h-4 flex items-center"
     ): string {
         if (!url_link) { return "—"; }

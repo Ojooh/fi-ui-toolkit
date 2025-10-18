@@ -38,7 +38,7 @@
                 </td>
 
                 <td v-if="props.actions_text" :class="props.body_cell_class_style" >
-                    <slot name="actions" :record="record" />
+                    <slot name="actions" :record="record" :record_index="index" />
                 </td>
         </tr>
     </tbody>

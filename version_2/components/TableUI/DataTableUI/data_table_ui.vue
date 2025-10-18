@@ -9,8 +9,8 @@
                 <TableHeaderUI v-bind="props.header_props" />
 
                 <TableBodyUI v-bind="props.body_props">
-                    <template #actions="{ record }">
-                        <slot name="actions" :record="record" />
+                    <template #actions="{ record, record_index }">
+                        <slot name="actions" :record="record" :record_index="record_index" />
                     </template>
                 </TableBodyUI>
             </table>

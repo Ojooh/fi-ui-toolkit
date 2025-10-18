@@ -27,23 +27,25 @@ export interface LabelConfigInterface {
 }
 
 export interface InputUIPropsInterface {
-    id: string,
+    id: string;
             
-    value: InputValueType,
+    value: InputValueType;
 
-    type?: string,
+    type?: string;
 
-    placeholder?: string,
+    placeholder?: string;
+
+    label_text?: string;
+
+    loader_content?: string;
+
+    is_loading?: boolean;
             
     read_only?: boolean;
 
     required?: boolean;
 
     is_checked?: boolean;
-            
-    input_class_style?: string;
-
-    wrapper_class_style?: string;
 
     length?: number;
 
@@ -54,6 +56,24 @@ export interface InputUIPropsInterface {
     on_key_up?: Function | null;
 
     on_key_down?: Function | null;
+            
+    input_class_style?: string;
+
+    wrapper_class_style?: string;
+
+    loader_class_style?: string;
+
+    switch_btn_class_style?: string;
+
+    label_text_class_style?: string;
+
+    knob_class_style?: string;
+
+    active_class_style?: string;
+
+    inactive_class_style?: string;
+
+    
 }
 
 export interface InputGroupPropsInterface {

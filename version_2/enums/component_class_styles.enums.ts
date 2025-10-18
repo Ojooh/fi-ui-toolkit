@@ -36,8 +36,13 @@ export const ComponentClassStyles = {
     },
     input_ui: {
         input_class_style: "w-full py-2 px-1",
-        wrapper_class_style: "flex gap-2 justify-center"
-
+        wrapper_class_style: "flex gap-2 justify-center",
+        loader_class_style: "",
+        switch_btn_class_style: "group inline-flex h-6 w-11 transition",
+        knob_class_style: "size-4 rounded-full transition transform",
+        label_text_class_style: "ms-3",
+        active_class_style: "bg-blue-300",
+        inactive_class_style: "bg-gray-900"
     },
     input_group_ui: {
         wrapper_class_style: "w-full my-4",
