@@ -17,7 +17,18 @@
             :key="index"
             :class="props.body_row_class_style"
         >
-                <td v-if="props.sn_text" :class="props.body_cell_class_style" >{{ index + 1 }}</td>
+                <td v-if="props.sn_text" :class="props.body_cell_class_style">
+                    <input
+                        v-if="selected_records.length"
+                        type="checkbox"
+                        :checked="event_handler?.isRecordSelected?.(record) ?? false"
+                        @change="event_handler?.handleOnRecordSelect?.($event, record)"
+                        :class="props.selected_checkbox_class_style"
+                    />
+                    <span v-else>{{ index + 1 }}</span>
+                </td>
+
+                <!-- <td v-if="props.sn_text" :class="props.body_cell_class_style" >{{ index + 1 }}</td> -->
 
                 <td
                     v-for="(col, col_index) in props.columns"
@@ -48,8 +59,9 @@
 import TableBodyUIProps         from "./table_body_ui_props";
 import TableBodyUIController    from "./table_body_ui_controller";
 
-const props         = defineProps(TableBodyUIProps);
-const controller    = new TableBodyUIController(props);
+const props             = defineProps(TableBodyUIProps);
+const controller        = new TableBodyUIController(props);
+const event_handler     = controller.event_handler;
 
 controller.getComponentDefinition();
 </script>

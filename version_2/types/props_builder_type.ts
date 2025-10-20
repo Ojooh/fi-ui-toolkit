@@ -277,12 +277,16 @@ export interface TableColumnInterface extends Partial<SortableHeaderCellUIPropsI
 }
 
 export interface TableHeaderUIPropsInterface {
-  columns: TableColumnInterface[];
-  sn_text?: string | null;
-  actions_text?: string | null;
-  wrapper_class_style?: string;
-  header_row_class_style?: string;
-  header_cell_class_style?: string;
+    columns: TableColumnInterface[];
+    sn_text?: string | null;
+    actions_text?: string | null;
+    wrapper_class_style?: string;
+    header_row_class_style?: string;
+    header_cell_class_style?: string;
+    selected_checkbox_class_style?: string;
+    all_selected?: boolean;
+    some_selected?: boolean;
+    on_toggle_all?: (event: Event | InputEvent, checked: boolean) => void;
 }
 
 export interface TableBodyUIPropsInterface {
@@ -294,6 +298,10 @@ export interface TableBodyUIPropsInterface {
     wrapper_class_style?: string;
     body_row_class_style?: string;
     body_cell_class_style?: string;
+    selected_checkbox_class_style?: string;
+    selected_records?: (string | number | Record<string, any>)[];
+    record_id_key?: string;
+    on_row_select?: (event: Event | InputEvent, record: Record<string, any>, checked: boolean) => void;
 }
 
 export interface DataTableUIPropsInterface {

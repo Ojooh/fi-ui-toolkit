@@ -23,6 +23,17 @@ const TableBodyUIProps = {
     body_row_class_style: { type: String, default: ui_class_styles.body_row_class_style },
 
     body_cell_class_style: { type: String, default: ui_class_styles.body_cell_class_style },
+
+    selected_checkbox_class_style: { type: String, default: ui_class_styles.selected_checkbox_class_style },
+
+    selected_records: { type: Array as PropType<(string | number | Record<string, any>)[]>, default: () => [] },
+    
+    record_id_key: { type: String, default: "id" },
+    
+    on_row_select: { 
+        type: Function as PropType<(event: Event | InputEvent, record: Record<string, any>, checked: boolean) => void>,
+        default: null,
+    },
 }
 
 export default TableBodyUIProps;
