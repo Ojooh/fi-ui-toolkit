@@ -19,6 +19,14 @@ const TableHeaderUIProps = {
     header_row_class_style: { type: String, default: ui_class_styles.header_row_class_style },
 
     header_cell_class_style: { type: String, default: ui_class_styles.header_cell_class_style },
+
+    selected_checkbox_class_style: { type: String, default: ui_class_styles.selected_checkbox_class_style },
+
+    all_selected: { type: Boolean, default: false },
+    
+    some_selected: { type: Boolean, default: false },
+
+    on_toggle_all: { type: Function as PropType<(event: Event | InputEvent, checked: boolean) => void>, default: null },
 }
 
 export default TableHeaderUIProps;
