@@ -6,6 +6,8 @@ const ui_class_styles       = ComponentClassStyles.input_ui;
 const InputUIProps   = {
     id: { type: String, required: true },
 
+    swicth_btn_id: { type: String, required: false },
+
     type: { type: String, required: true },
 
     placeholder: { type: String, default: "", required: false },
@@ -20,7 +22,7 @@ const InputUIProps   = {
     
     is_checked: { type: Boolean, default: false, required: false },
 
-    value: { type: [String, Array, Boolean], default: "", required: false },
+    value: { type: [String, Array, Boolean, Number], default: "", required: false },
 
     required: { type: Boolean, default: false, required: false },
 

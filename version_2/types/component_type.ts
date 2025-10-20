@@ -1,6 +1,7 @@
 import { Component }    from "vue";
 import BaseEventHandler from "../base_classes/base_event_handler";
 import BaseService      from "../base_classes/base_service";
+import { SortDirectionType } from "./props_builder_type";
 
 export interface ComponentDefinitionInterface {
     props: Record<string, any>;
@@ -22,6 +23,18 @@ export interface BaseControllerInterface {
 
     // Methods
     getComponentDefinition(): ComponentDefinitionInterface;
+}
+
+export interface ListControllerAttributesInterface {
+    current_page?: number,
+    total_pages?: number;
+    total_items?: number;
+    size?: number;
+    order_by?: string;
+    order_direction?: SortDirectionType;
+    keyword?: string;
+    records?: Record<string, any>[];
+    selected_record? :Record<string, any>
 }
 
 export interface BaseEventHandlerInterface {

@@ -60,11 +60,7 @@ class InputUIEventHandler extends BaseEventHandler {
 
             if (result instanceof Promise) { result = await result; }
 
-            console.log({ result })
-
             const boolean_result = result ? !current_active_value_ref.value : current_active_value_ref.value;
-
-            console.log({ boolean_result, current_state:current_active_value_ref.value  })
 
             this.controller.state_refs.input_value.value = boolean_result;
         } 

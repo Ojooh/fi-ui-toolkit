@@ -5,8 +5,8 @@
         :type="props.type" 
         :class="props.btn_class_style" 
         @click="event_handler?.handleOnClick?.($event)"
-        v-html="props.content_text"
-        :disabled="props.disabled"
+        v-html="state_refs.btn_content.value"
+        :disabled="props.disabled || state_refs.clicked.value"
     >
     </button>
 </template>

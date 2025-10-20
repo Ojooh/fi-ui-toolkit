@@ -62,6 +62,7 @@
         <!-- Switch -->
         <button 
             v-else 
+            :id="props.swicth_btn_id"
             :for="id" 
             role="switch"
             type="button"

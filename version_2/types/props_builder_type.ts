@@ -28,6 +28,8 @@ export interface LabelConfigInterface {
 
 export interface InputUIPropsInterface {
     id: string;
+
+    swicth_btn_id?: string;
             
     value: InputValueType;
 
@@ -298,5 +300,24 @@ export interface DataTableUIPropsInterface {
     header_props: TableHeaderUIPropsInterface;
     body_props: TableBodyUIPropsInterface;
     table_class_style?: string;
+}
+
+export interface PaginationUIPropsInterface {
+  wrapper_class_style?: string;
+  prev_button_class_style?: string;
+  next_button_class_style?: string;
+  disabled_class_style?: string;
+  select_class_style?: string;
+  prev_btn_content?: string;
+  next_btn_content?: string;
+  render_page_content?: (page: number) => string | number | HTMLElement;
+  total_pages?: number;
+  current_page?: number;
+  select_id?: string;
+  show_loader: boolean;
+  loader_content_text?: string,
+  on_prev_clicked?: () => void;
+  on_next_clicked?: () => void;
+  on_new_page_clicked?: (page: number) => void;
 }
 

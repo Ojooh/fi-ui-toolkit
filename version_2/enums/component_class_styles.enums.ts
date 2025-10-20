@@ -105,6 +105,13 @@ export const ComponentClassStyles = {
             list_class_style: "inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse w-full",
             list_item_class_style: "inline-flex items-center",
             divider_class_style: "px-2 text-gray-400",
+        },
+        pagination_ui: {
+            wrapper_class_style: "flex items-center space-x-2 w-full",
+            prev_button_class_style: "",
+            next_button_class_style: "",
+            disabled_class_style: "disabled:to-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed border-1",
+            select_class_style: "border h-[38px] w-[150px] m-0 bg-gray-100 text-center"
         }
     },
     table_ui: {
