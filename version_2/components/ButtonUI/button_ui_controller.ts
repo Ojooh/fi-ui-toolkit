@@ -13,10 +13,9 @@ class ButtonUIController extends BaseController {
 
     // Method to get ui state data
     protected getUIStateData(): Record<string, any> { 
-        const btn_content = this.props.content_text;
         return {
             clicked: ref(false),
-            btn_content: ref(btn_content)
+            btn_content: ref(null)
         } 
     }
 
@@ -27,11 +26,11 @@ class ButtonUIController extends BaseController {
                 const { loader_content_text, show_loader, content_text } = this.props;
 
                 const should_show_loading   = new_val === true && show_loader && loader_content_text;
-                const new_btn_content       = should_show_loading ? loader_content_text:  content_text;
+                const new_btn_content       = should_show_loading ? loader_content_text :  null;
                 
                 this.state_refs.btn_content.value = new_btn_content;
                 return;
-            }
+            },
         }; 
     }
 }

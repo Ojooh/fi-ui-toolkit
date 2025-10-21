@@ -5,7 +5,7 @@
         :type="props.type" 
         :class="props.btn_class_style" 
         @click="event_handler?.handleOnClick?.($event)"
-        v-html="state_refs.btn_content.value"
+        v-html="btn_content ?? props.content_text"
         :disabled="props.disabled || state_refs.clicked.value"
     >
     </button>
@@ -19,4 +19,5 @@ const props             = defineProps(ButtonUIProps);
 const controller        = new ButtonUIController(props);
 const event_handler     = controller.event_handler;
 const { state_refs }    = controller.getComponentDefinition();
+const { btn_content }   = state_refs
 </script>

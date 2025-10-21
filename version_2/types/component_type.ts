@@ -35,6 +35,7 @@ export interface ListControllerAttributesInterface {
     keyword?: string;
     records?: Record<string, any>[];
     selected_record? :Record<string, any>
+    selected_records?: string[] | number [];
 }
 
 export interface BaseEventHandlerInterface {

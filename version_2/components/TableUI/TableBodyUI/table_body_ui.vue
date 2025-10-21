@@ -20,6 +20,7 @@
                 <td v-if="props.sn_text" :class="props.body_cell_class_style">
                     <input
                         v-if="selected_records.length"
+                        :id="`sn-select-${index}`"
                         type="checkbox"
                         :checked="event_handler?.isRecordSelected?.(record) ?? false"
                         @change="event_handler?.handleOnRecordSelect?.($event, record)"

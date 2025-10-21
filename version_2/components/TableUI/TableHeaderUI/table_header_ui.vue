@@ -4,6 +4,7 @@
             <th v-if="props.sn_text"  :class="props.header_cell_class_style">
                 <template v-if="props.some_selected || props.all_selected">
                     <input
+                        :id="`sn-select-all`"
                         type="checkbox"
                         :checked="props.all_selected"
                         :indeterminate="props.some_selected && !props.all_selected"
