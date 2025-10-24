@@ -185,6 +185,94 @@ class InputTransformerUtil {
         })
 
     }
+
+    public static extractInputBaseAndIndexFieldKey (value: string): { base: string; index: number | null } {
+        const regex = /^(.*?)(?:_(\d+))?$/;
+        const match = value.match(regex);
+        return {
+            base: match?.[1] ?? value,
+            index: match?.[2] ? parseInt(match[2]) : null
+        };
+    }
+
+    // Temporary storage for building paired object key/value mappings
+    private static _temp_object_map: Record<string, Record<number, { key: string; value: string }>> = {};
+
+    // ✅ Method to build form data
+    public static buildFormDataRecord(
+        input_id: string,
+        input_value: string,
+        form_data: Record<string, any> = {}
+    ): Record<string, any> {
+        // 🔹 Extract the base name (e.g. "social_links_key") and optional index (e.g. 0)
+        const { base, index } = this.extractInputBaseAndIndexFieldKey(input_id);
+
+        // 🟩 CASE 1: Simple field (no index) → e.g. "name", "email"
+        if (index === null) {
+            form_data[base] = input_value;
+            return form_data;
+        }
+
+        // 🟦 CASE 2: Object-type field → e.g. "social_links_key_0" or "social_links_value_0"
+        if (base.endsWith("_key") || base.endsWith("_value")) {
+            // 🔹 Extract the object name, e.g. "social_links"
+            const object_name = base.replace(/_(key|value)$/, "");
+
+            // Ensure the object exists inside form_data
+            if (!form_data[object_name]) {
+                form_data[object_name] = {};
+            }
+
+            // Get existing keys from the object (used to match by index)
+            const object_keys   = Object.keys(form_data[object_name]);
+            const total_keys    = object_keys.length;
+
+            // ✅ Check if a record exists at this index
+            const record_exists = index >= 0 && index < total_keys;
+
+            if (record_exists) {
+                // Extract the existing key/value at this index
+                const existing_key      = object_keys[index];
+                const existing_value    = existing_key ? form_data?.[object_name]?.[existing_key] : "";
+
+                // 🔄 If we're changing the key name: delete old key and reassign value under the new key
+                if (base.endsWith("_key")) {
+                    delete form_data[object_name][existing_key];
+                    form_data[object_name][input_value] = existing_value;
+                } 
+                // 🧩 Otherwise we're updating the value for an existing key
+                else { form_data[object_name][existing_key] = input_value; }
+            }
+            else {
+                // 🆕 No existing record at this index — create a new one
+                // Add a new key placeholder
+                if (base.endsWith("_key")) { form_data[object_name][input_value] = ""; }
+                else {
+                    // Add a temporary key name (until user enters the real key)
+                    const temp_key = `Key_${index}`;
+                    form_data[object_name][temp_key] = input_value;
+                }
+            }
+
+            return form_data;
+        }
+
+        // 🟨 CASE 3: Array-type field → e.g. "tags_0", "tags_1", etc.
+        if (!form_data[base]) {
+            form_data[base] = [];
+        }
+
+        // 🔹 Assign the value at the specified index
+        form_data[base][index] = input_value;
+
+        return form_data;
+    }
+
+    // Optional helper to reset temp storage (useful on form reset)
+    public static resetTempObjectMap(): void {
+        this._temp_object_map = {};
+    }
+
 }
 
 export default InputTransformerUtil;

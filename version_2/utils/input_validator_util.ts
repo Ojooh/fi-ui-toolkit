@@ -18,7 +18,7 @@ class InputValidatorUtil {
     private static email_regex_reg_exp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     private static tel_regex_reg_exp = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
     private static pass_regex_reg_exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){6,}.+$/;
-    private static url_regex_reg_exp = /^(https?:\/\/)?((localhost|[a-zA-Z0-9-_.]+)(:[0-9]{1,5})?)(\/[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*)?$/;
+    private static url_regex_reg_exp          = /^(https?:\/\/)?((localhost|[a-zA-Z0-9-_.]+)(:[0-9]{1,5})?)(\/[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*)?$/;
     private static text_arear_regex_reg_exp = /^(?=.*[a-zA-Z])[\w\s.,!?'\-()&@$#%*+=:;"<>]*$/;
     private static uuid_regex_reg_exp = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     private static custom_uuid_regex_reg_exp = /^[A-Z0-9]{12}-[A-Z0-9]{12}-[A-Z0-9]{12}-[A-Z0-9]{12}$/;
@@ -50,9 +50,17 @@ class InputValidatorUtil {
     public static isDigit(value: any): boolean { return !isNaN(value); }
     public static isValidInteger(value: number): boolean { return Number.isInteger(value) && value > 0; }
     public static isValidFloat(value: number): boolean { return !isNaN(value) && value > 0; }
-    public static isValidURL(url: string): boolean { return this.url_regex_reg_exp.test(url); }
     public static isBoolean(value: any): boolean { return typeof value === "boolean" || ["1","0"].includes(String(value)); }
     public static isValidLongText(text: string): boolean { return this.text_arear_regex_reg_exp.test(text); }
+    public static isValidURLY(url: string): boolean {
+        try { 
+            new URL(url);
+            return true;
+        } 
+        catch (_) { return false; }
+    }
+
+    public static isValidURL(url: string): boolean { return this.url_regex_reg_exp.test(url) && this.isValidURLY(url); }
 
     // File validations
     public static isValidImage(file: FileLike): boolean { return file?.mimetype.startsWith("image/"); }
@@ -89,8 +97,27 @@ class InputValidatorUtil {
     }
 
     // Detect changes in object keys
-    public static hasInputChanged<T extends Record<string, any>>(new_input: T, existing_data: T, keys_to_check: (keyof T)[]): boolean {
-        return keys_to_check.some(key => JSON.stringify(new_input[key]) !== JSON.stringify(existing_data[key]));
+    public static hasInputChanged( new_input: Record<string, any>, existing_data: Record<string, any>, keys_to_check: string[] ): boolean {
+        const normalize = (val: any): any => {
+            if (typeof val === "boolean") return val;
+            if (val === 1 || val === "1") return true;
+            if (val === 0 || val === "0") return false;
+            return val;
+        };
+
+        for (const key of keys_to_check) {
+            if (!(key in new_input)) { continue; } 
+            
+            const a = normalize(new_input[key]);
+            const b = normalize(existing_data[key]);
+
+            if (typeof a === "object" || typeof b === "object") {
+                if (JSON.stringify(a) !== JSON.stringify(b)) { return true; }
+            } 
+            else if (a !== b) { return true; }
+        }
+
+        return false;
     }
 }
 

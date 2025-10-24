@@ -5,7 +5,7 @@
             <img v-if="props.img_src" :src="props.img_src" :alt="props.img_alt_text" :class="props.img_class_style" />
 
             <span v-else-if="props.initials"  :class="props.initials_class_style">
-                {{ props.initials_class_style }}
+                {{ props.initials }}
             </span>
         </div>
         <!-- Avatar Circle End -->

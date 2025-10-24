@@ -28,6 +28,8 @@ const InputUIProps   = {
 
     length: { type: Number, default: 6, required: false },
 
+    rows: { type: Number, default: 4, required: false },
+
     on_key_up:  { type: Function, default: null, required: false },
 
     on_key_down:  { type: Function, default: null, required: false },

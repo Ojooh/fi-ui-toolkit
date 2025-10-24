@@ -1,6 +1,7 @@
 
 
 <template>
+    <!-- text, password, email -->
     <input 
         v-if="['text', 'password', 'email'].includes(props.type || '')"
         :type="props.type"
@@ -16,7 +17,7 @@
         @keydown="event_handler?.handleOnKeyDown?.($event)"
         @click="event_handler?.handleOnClick?.($event)"
     />
-
+    <!-- checkbox -->
     <input 
         v-else-if="['checkbox'].includes(props.type || '')"
         type="checkbox" 
@@ -29,7 +30,7 @@
         @change="event_handler?.handleOnChange?.($event)"
         @click="event_handler?.handleOnClick?.($event)"
     />
-
+    <!-- otp -->
     <div
         v-else-if="['otp'].includes(props.type || '')"
         :class="props.wrapper_class_style">
@@ -51,7 +52,7 @@
             @paste="event_handler?.handleOTPOnPaste?.($event, index)"
         />
     </div>
-
+    <!-- switch -->
     <div
         v-else-if="['switch'].includes(props.type || '')"
         :class="props.wrapper_class_style"
@@ -90,6 +91,23 @@
 
         </button>
     </div>
+    <!-- textarea -->
+    <textarea 
+        v-if="['text_area', 'textarea'].includes(props.type || '')"
+        :class="props.input_class_style"  
+        v-model="input_value"
+        :placeholder="props.placeholder"
+        :required="props.required"
+        :id="props.id"
+        :name="props.id"
+        :readonly="props.read_only"
+        :rows="props.rows"
+        @input="event_handler?.handleOnChange?.($event)"
+        @keyup="event_handler?.handleOnKeyUp?.($event)"
+        @keydown="event_handler?.handleOnKeyDown?.($event)"
+        @click="event_handler?.handleOnClick?.($event)"
+    >
+    </textarea>
 
 </template>
 

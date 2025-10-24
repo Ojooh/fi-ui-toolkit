@@ -1,3 +1,4 @@
+import { Component, PropType } from "vue";
 
 export type InputValueType = string | number | boolean | null | string[];
 
@@ -50,6 +51,8 @@ export interface InputUIPropsInterface {
     is_checked?: boolean;
 
     length?: number;
+
+    rows?: number;
 
     on_change?: Function | null;
 
@@ -328,4 +331,48 @@ export interface PaginationUIPropsInterface {
   on_next_clicked?: () => void;
   on_new_page_clicked?: (page: number) => void;
 }
+
+
+export interface ModalUIPropsInterface {
+  is_open: boolean;
+
+  layer?: number;
+
+  position?: string;
+
+  width?: string;
+
+  title_content?: string;
+
+  close_btn_content?: string;
+
+  loader_content_text?: string;
+
+  body_component?: Component | null;
+
+  body_props?: Record<string, any>;
+
+  overlay_class_style?: string;
+
+  modal_position_class_style?: string;
+
+  modal_size_class_style?: string;
+
+  modal_box_class_style?: string;
+
+  header_wrapper_class_style?: string;
+
+  header_title_content_class_style?: string;
+
+  header_title_class_style?: string;
+
+  header_close_btn_content_class_style?: string;
+
+  close_btn_class_style?: string;
+
+  body_class_style?: string;
+
+  on_modal_close?: (event: MouseEvent, layer: number) => boolean;
+}
+
 
