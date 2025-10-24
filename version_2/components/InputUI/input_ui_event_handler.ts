@@ -56,7 +56,7 @@ class InputUIEventHandler extends BaseEventHandler {
 
             if (!on_click) { return; }
 
-            let result = on_click(event);
+            let result = on_click(event, !current_active_value_ref.value);
 
             if (result instanceof Promise) { result = await result; }
 
