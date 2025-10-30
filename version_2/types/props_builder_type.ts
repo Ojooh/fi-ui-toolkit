@@ -30,7 +30,7 @@ export interface LabelConfigInterface {
 export interface InputUIPropsInterface {
     id: string;
 
-    swicth_btn_id?: string;
+    switch_btn_id?: string;
             
     value: InputValueType;
 

@@ -1,4 +1,4 @@
-
+import { PropType }                 from "vue";
 import { ComponentClassStyles }     from "../../enums/component_class_styles.enums";
 
 const ui_class_styles       = ComponentClassStyles.input_ui;
@@ -6,7 +6,7 @@ const ui_class_styles       = ComponentClassStyles.input_ui;
 const InputUIProps   = {
     id: { type: String, required: true },
 
-    swicth_btn_id: { type: String, required: false },
+    switch_btn_id: { type: String, required: false },
 
     type: { type: String, required: true },
 
@@ -24,11 +24,17 @@ const InputUIProps   = {
 
     value: { type: [String, Array, Boolean, Number], default: "", required: false },
 
+    options: { type: Array as PropType<Array<{ value: string | number; label_text: string }>>, default: () => [], required: false },
+
     required: { type: Boolean, default: false, required: false },
 
     length: { type: Number, default: 6, required: false },
 
     rows: { type: Number, default: 4, required: false },
+
+    min: { type: Number, default: 0, required: false },
+
+    max: { type: Number, default: 100, required: false },
 
     on_key_up:  { type: Function, default: null, required: false },
 

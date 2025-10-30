@@ -1,4 +1,6 @@
 // src/utils/debounce_util.ts
+export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export function debounceMethod<T extends (...args: any[]) => any>(
     func: T,
     delay = 300
