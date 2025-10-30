@@ -14,6 +14,10 @@ const InputUIProps   = {
 
     loader_content: { type: String, default: "", required: false }, 
 
+    caret_content: { type: String, default: "", required: false }, 
+
+    no_options_content: { type: String, default: "No results found", required: false }, 
+
     label_text: { type: String, default: "", required: false }, 
 
     is_loading: { type: Boolean, default: false, required: false },
@@ -27,6 +31,8 @@ const InputUIProps   = {
     options: { type: Array as PropType<Array<{ value: string | number; label_text: string }>>, default: () => [], required: false },
 
     required: { type: Boolean, default: false, required: false },
+
+    cache_enabled: { type: Boolean, default: true, required: false },
 
     length: { type: Number, default: 6, required: false },
 
@@ -43,6 +49,14 @@ const InputUIProps   = {
     on_change:  { type: Function, default: null, required: false },
 
     on_click:  { type: Function, default: null, required: false },
+
+    render_option_label:  { type: Function, default: null, required: false },
+
+    get_option_value:  { type: Function, default: null, required: false },
+
+    fetch_method: { type: Function, default: null, required: false },
+
+    additional_parms: { type: Object, default: () => { return {}}, required: false },
     
     input_class_style: { type: String, default: ui_class_styles.input_class_style, required: false },
 
@@ -59,6 +73,16 @@ const InputUIProps   = {
     active_class_style: { type: String, default: ui_class_styles.active_class_style, required: false }, 
 
     inactive_class_style: { type: String, default: ui_class_styles.inactive_class_style, required: false }, 
+
+    caret_icon_class: { type: String, default: ui_class_styles.caret_icon_class, required: false }, 
+
+    dropdown_wrapper_class_style: { type: String, default: ui_class_styles.dropdown_wrapper_class_style, required: false }, 
+
+    options_wrapper_class_style: { type: String, default: ui_class_styles.options_wrapper_class_style, required: false }, 
+
+    option_class_style: { type: String, default: ui_class_styles.option_class_style, required: false }, 
+
+    option_content_class_style: { type: String, default: ui_class_styles.option_content_class_style, required: false }, 
 
     
 }
