@@ -7,19 +7,19 @@
         :required="props_obj.required"
         :id="props_obj.id"
         :name="props_obj.id"
-        @change="onChange?.($event)"
-        @click="onClick?.($event)"
+        @change="handleOnChange?.($event)"
+        @click="handleOnClick?.($event)"
     />
 </template>
 
 <script setup lang="ts">
-    const { props_obj, state_refs, onChange, onClick } = defineProps<{
+    const { props_obj, state_refs, handleOnChange, handleOnClick } = defineProps<{
         props_obj: Record<string, any>;
         state_refs: Record<string, any>;
-        onChange?: (e: Event) => void;
-        onClick?: (e: Event) => void;
-        onKeyup?: (e: KeyboardEvent) => void;
-        onKeydown?: (e: KeyboardEvent) => void;
+        handleOnChange?: (e: Event) => void;
+        handleOnClick?: (e: Event) => void;
+        handleOnKeyup?: (e: KeyboardEvent) => void;
+        handleOnKeydown?: (e: KeyboardEvent) => void;
     }>();
 
     const { input_value } = state_refs;

@@ -27,21 +27,7 @@ export interface LabelConfigInterface {
     label_required_text?: string,
 }
 
-export interface InputUIPropsInterface {
-    id: string;
-
-    switch_btn_id?: string;
-            
-    value: InputValueType;
-
-    type?: string;
-
-    placeholder?: string;
-
-    label_text?: string;
-
-    loader_content?: string;
-
+export interface InputUIBooleanPropsInterface {
     is_loading?: boolean;
             
     read_only?: boolean;
@@ -50,18 +36,52 @@ export interface InputUIPropsInterface {
 
     is_checked?: boolean;
 
+    cache_enabled?: boolean;
+}
+
+export interface InputUIContentPropsInterface {
+    switch_btn_id?: string;
+
+    label_text?: string;
+
+    loader_content?: string;
+
+    caret_content?: string;
+
+    no_options_content?: string;
+
+    options?: Array<{ value: string | number; label_text: string }>;
+
+    additional_parms?: Record<string, any>;
+}
+
+export interface InputUINumberPropsInterface {
     length?: number;
 
     rows?: number;
 
-    on_change?: Function | null;
+    min?: number;
 
-    on_click?: Function | null;
-            
-    on_key_up?: Function | null;
+    max?: number;
+}
 
-    on_key_down?: Function | null;
-            
+export interface InputUIEventMethodsPropsInterface {
+    on_change?: ((event: Event, value?: any) => void) | null;
+
+    on_click?: ((event: MouseEvent, value?: any) => void) | null;
+
+    on_key_up?: ((event: KeyboardEvent) => void) | null;
+
+    on_key_down?: ((event: KeyboardEvent) => void) | null;
+
+    render_option_label?: ((option: Record<string, any>) => string) | null;
+
+    get_option_value?: ((option: Record<string, any>) => any) | null;
+
+    fetch_method?: ((params: Record<string, any>) => Promise<any>) | null;
+}
+
+export interface InputUIClassStylesPropsInterface {
     input_class_style?: string;
 
     wrapper_class_style?: string;
@@ -78,7 +98,98 @@ export interface InputUIPropsInterface {
 
     inactive_class_style?: string;
 
+    caret_icon_class?: string;
+
+    dropdown_wrapper_class_style?: string;
+
+    options_wrapper_class_style?: string;
+
+    option_class_style?: string;
     
+    option_content_class_style?: string;
+}
+
+export interface InputUIPropsInterface {
+    id: string;
+
+    switch_btn_id?: string;
+
+    type?: string;
+
+    placeholder?: string;
+
+    label_text?: string;
+
+    loader_content?: string;
+
+    caret_content?: string;
+
+    no_options_content?: string;
+
+    is_loading?: boolean;
+            
+    read_only?: boolean;
+
+    required?: boolean;
+
+    is_checked?: boolean;
+
+    cache_enabled?: boolean;
+
+    value: InputValueType;
+
+    /** Select/Dropdown options */
+    options?: Array<{ value: string | number; label_text: string }>;
+
+    length?: number;
+
+    rows?: number;
+
+    min?: number;
+
+    max?: number;
+
+    additional_parms?: Record<string, any>;
+
+    on_change?: ((event: Event, value?: any) => void) | null;
+
+    on_click?: ((event: MouseEvent, value?: any) => void) | null;
+
+    on_key_up?: ((event: KeyboardEvent) => void) | null;
+
+    on_key_down?: ((event: KeyboardEvent) => void) | null;
+
+    render_option_label?: ((option: Record<string, any>) => string) | null;
+
+    get_option_value?: ((option: Record<string, any>) => any) | null;
+
+    fetch_method?: ((params: Record<string, any>) => Promise<any>) | null;
+           
+    input_class_style?: string;
+
+    wrapper_class_style?: string;
+
+    loader_class_style?: string;
+
+    switch_btn_class_style?: string;
+
+    label_text_class_style?: string;
+
+    knob_class_style?: string;
+
+    active_class_style?: string;
+
+    inactive_class_style?: string;
+
+    caret_icon_class?: string;
+
+    dropdown_wrapper_class_style?: string;
+
+    options_wrapper_class_style?: string;
+
+    option_class_style?: string;
+    
+    option_content_class_style?: string;
 }
 
 export interface InputGroupPropsInterface {

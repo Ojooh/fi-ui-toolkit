@@ -10,6 +10,7 @@ import TextareaInput                from "./variants/textarea_input.vue";
 import SelectInput                  from "./variants/select_input.vue";
 import NumberInput                  from "./variants/number_input.vue";
 import FileInput                    from "./variants/file_input.vue";
+import SelectSearchInput            from "./variants/select_search_input.vue";
 
 class InputUIController extends BaseController {
     public event_handler: InputUIEventHandler;
@@ -53,6 +54,8 @@ class InputUIController extends BaseController {
                 return NumberInput;
             case "file":
                 return FileInput;
+            case "select_search":
+                return SelectSearchInput;
             default:
                 return TextInput;
         }

@@ -5,10 +5,10 @@
         :id="props_obj.id"
         :name="props_obj.id"
         :disabled="props_obj.read_only"
-        @change="onChange?.($event)"
-        @keyup="onKeyup?.($event)"
-        @keydown="onKeydown?.($event)"
-        @click="onClick?.($event)"
+        @change="handleOnChange?.($event)"
+        @keyup="handleOnKeyup?.($event)"
+        @keydown="handleOnKeydown?.($event)"
+        @click="handleOnClick?.($event)"
     >
         <option v-if="props_obj.placeholder" disabled value="">{{ props_obj.placeholder }}</option>
         <option v-for="option in props_obj.options" :key="option.value" :value="option.value">
@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-    const { props_obj, state_refs, onChange, onClick, onKeyup, onKeydown } = defineProps<{
+    const { props_obj, state_refs, handleOnChange, handleOnClick, handleOnKeyup, handleOnKeydown } = defineProps<{
         props_obj: Record<string, any>;
         state_refs: Record<string, any>;
-        onChange?: (e: Event) => void;
-        onClick?: (e: Event) => void;
-        onKeyup?: (e: KeyboardEvent) => void;
-        onKeydown?: (e: KeyboardEvent) => void;
+        handleOnChange?: (e: Event) => void;
+        handleOnClick?: (e: Event) => void;
+        handleOnKeyup?: (e: KeyboardEvent) => void;
+        handleOnKeydown?: (e: KeyboardEvent) => void;
     }>();
 
     const { input_value } = state_refs;

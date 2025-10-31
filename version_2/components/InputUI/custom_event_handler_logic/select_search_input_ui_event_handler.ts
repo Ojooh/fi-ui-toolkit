@@ -53,24 +53,50 @@ class SelectSearchInputUIEventhandler extends BaseEventHandler {
         return true
     }
 
+    // Method to Detect clicks outside the select-search input container.
+    private handleOutsideClick = (event: MouseEvent) => {
+        const { id } = this.controller?.props;
+
+        const dropdown_id       = `${id.toLowerCase()}_select_search_dropdown`
+        const drodpdown_el      = document.getElementById(dropdown_id);
+        const dropdown_wrapper  = drodpdown_el?.closest(".relative");
+
+        // If clicked outside the component → close dropdown
+        if (dropdown_wrapper && !dropdown_wrapper.contains(event.target as Node)) {
+            this.updateControllerAttributes({ is_open: false });
+            document.removeEventListener("click", this.handleOutsideClick);
+        }
+    };
+
     // Method to handle on search input update
     public onSearchInput (event: Event) {
         const target_el                     = (event.target as HTMLInputElement);
-        const updated_search_selected_text  = target_el?.value || null;
+        const updated_search_selected_text  = target_el?.value || "";
 
-        this.updateControllerAttributes({ search_selected_text: updated_search_selected_text  })
+        this.updateControllerAttributes({ search_selected_text: updated_search_selected_text  });
+
+        this.fetchRecordOptions(updated_search_selected_text);
         return;
     }
 
     // Method to handle on option selected
-    public onOptionSelected(event: Event, option: Record<string, any>): any {
-        const { props }                     = this.controller;
-        const value                         = props?.get_option_value(option) ?? "";
-        const updated_search_selected_text  = props.render_option_label(option);
+    public async onOptionSelected(event: Event, option: Record<string, any>): Promise<void> {
+        const { on_change, get_option_value, render_option_label, id } = this.controller.props;
+
+        const new_value                     = get_option_value?.(option) ?? "";
+        const updated_search_selected_text  = render_option_label?.(option);
 
         this.updateControllerAttributes({ is_open: false, search_selected_text: updated_search_selected_text })
 
-        return value;
+        if(!on_change) { return; }
+
+        const custom_target = { ...(event.target as HTMLElement), id, name: id, value: new_value };
+        const custom_event = Object.assign({}, event, { target: custom_target });
+        let result = on_change(custom_event, new_value);
+
+        if (result instanceof Promise) { result = await result; }
+
+        return;
     }
 
     // Methos to handle on drodpwn scroll
@@ -93,9 +119,12 @@ class SelectSearchInputUIEventhandler extends BaseEventHandler {
 
         this.updateControllerAttributes({ is_open: value})
 
-        if (value && !record_options.length) {
-            this.fetchRecordOptions(search_selected_text);
-        }
+        if (value) {
+            document.addEventListener("click", this.handleOutsideClick);
+            
+            if (!record_options.length) { this.fetchRecordOptions(search_selected_text); }
+        } 
+        else { document.removeEventListener("click", this.handleOutsideClick); }
     }
 
     // Method to fetch record option(s)

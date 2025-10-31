@@ -22,7 +22,7 @@ class SelectSearchInputUIController extends BaseController {
         this.event_handler          = new SelectSearchInputUIEventhandler(this);
         this.is_open                = false;
         this.is_loading_records     = false;
-        this.search_selected_text   = "";
+        this.search_selected_text   = this.props.label_text ?? "";;
         this.record_options         = [];
         this.current_page           = 1;
         this.total_pages            = 0;
@@ -46,8 +46,6 @@ class SelectSearchInputUIController extends BaseController {
             total_pages: ref(this.total_pages),
 
             size: ref(this.size)
-
-
         } 
     }
 

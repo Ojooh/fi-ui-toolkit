@@ -9,7 +9,7 @@
             role="switch"
             type="button"
             :class="[props_obj.switch_btn_class_style, input_value ? props_obj.active_class_style : props_obj.inactive_class_style]"
-            @click="onSwitchToggle?.($event)"
+            @click="handleOnSwitchToggle?.($event)"
         >
             <input
                 type="checkbox"
@@ -19,7 +19,7 @@
                 :id="props_obj.id"
                 :name="props_obj.id"
                 :disabled="props_obj.is_loading"
-                @change="onChange?.($event)"
+                @change="handleOnChange?.($event)"
             />
             <span :class="[props_obj.knob_class_style, input_value ? 'translate-x-6' : 'translate-x-1']"></span>
             <span v-if="props_obj.label_text" :class="props_obj.label_text_class_style" v-html="props_obj.label_text"></span>
@@ -28,14 +28,14 @@
 </template>
 
 <script setup lang="ts">
-    const { props_obj, state_refs, onSwitchToggle, onChange, onClick, onKeyup, onKeydown } = defineProps<{
+    const { props_obj, state_refs, handleOnSwitchToggle, handleOnChange, handleOnClick, handleOnKeyup, handleOnKeydown } = defineProps<{
         props_obj: Record<string, any>;
         state_refs: Record<string, any>;
-        onSwitchToggle?: (e: MouseEvent) => void;
-        onChange?: (e: Event) => void;
-        onClick?: (e: Event) => void;
-        onKeyup?: (e: KeyboardEvent) => void;
-        onKeydown?: (e: KeyboardEvent) => void;
+        handleOnSwitchToggle?: (e: MouseEvent) => void;
+        handleOnChange?: (e: Event) => void;
+        handleOnClick?: (e: Event) => void;
+        handleOnKeyup?: (e: KeyboardEvent) => void;
+        handleOnKeydown?: (e: KeyboardEvent) => void;
     }>();
 
     const { input_value } = state_refs;

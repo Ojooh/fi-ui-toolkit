@@ -5,14 +5,14 @@
         :is="controller.getInputComponent(props.type)"
         :props_obj="props" 
         :state_refs="state_refs"
-        :on-change="event_handler?.handleOnChange.bind(event_handler)"
-        :on-click="event_handler?.handleOnClick.bind(event_handler)"
-        :on-keyup="event_handler?.handleOnKeyUp.bind(event_handler)"
-        :on-keydown="event_handler?.handleOnKeyDown.bind(event_handler)"
-        :on-switch-toggle="event_handler?.handleSwitchToggle.bind(event_handler)"
-        :on-otp-input="event_handler?.handleOTPOnInput.bind(event_handler)"
-        :on-otp-keydown="event_handler?.handleOTPOnKeyDown.bind(event_handler)"
-        :on-otp-paste="event_handler?.handleOTPOnPaste.bind(event_handler)"
+        :handleOnChange="event_handler?.handleOnChange.bind(event_handler)"
+        :handleOnClick="event_handler?.handleOnClick.bind(event_handler)"
+        :handleOnKeyup="event_handler?.handleOnKeyUp.bind(event_handler)"
+        :handleOnKeydown="event_handler?.handleOnKeyDown.bind(event_handler)"
+        :handleOnSwitchToggle="event_handler?.handleSwitchToggle.bind(event_handler)"
+        :handleOnOTPInput="event_handler?.handleOTPOnInput.bind(event_handler)"
+        :handleOnOTPKeydown="event_handler?.handleOTPOnKeyDown.bind(event_handler)"
+        :handleOnOTPPaste="event_handler?.handleOTPOnPaste.bind(event_handler)"
     />
 </template>
 

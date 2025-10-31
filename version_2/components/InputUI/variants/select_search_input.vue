@@ -15,7 +15,7 @@
             <span 
                 :class="props_obj.caret_icon_class" 
                 v-html="props_obj.caret_content" 
-                @click="event_handler?.toggleDropdown(true)"
+                @click="event_handler?.toggleDropdown(!is_open)"
             ></span>
         </div>
 
@@ -24,6 +24,7 @@
             v-if="is_open"
             :class="props_obj.dropdown_wrapper_class_style"
             @scroll="event_handler?.handleScroll?.($event)"
+            :id="`${props_obj?.id?.toLowerCase()}_select_search_dropdown`"
         >
             <!-- Options -->
             <ul 
@@ -66,27 +67,28 @@
 </template>
 
 <script setup lang="ts">
-const { props_obj, state_refs, onChange, onClick, onKeyup, onKeydown } = defineProps<{
+const { props_obj, state_refs, handleOnChange, handleOnClick, handleOnKeyup, handleOnKeydown } = defineProps<{
     props_obj: Record<string, any>;
     state_refs: Record<string, any>;
-    onChange?: (e: Event) => void;
-    onClick?: (e: Event) => void;
-    onKeyup?: (e: KeyboardEvent) => void;
-    onKeydown?: (e: KeyboardEvent) => void;
+    handleOnChange?: (e: Event) => void;
+    handleOnClick?: (e: Event) => void;
+    handleOnKeyup?: (e: KeyboardEvent) => void;
+    handleOnKeydown?: (e: KeyboardEvent) => void;
 }>();
 
 const { input_value }   = state_refs;
     
 import SelectSearchInputUIController    from "../custom_controller_logic/select_search_input_ui_controller";
 
-const controller                = new SelectSearchInputUIController(props_obj);
-const event_handler             = controller.event_handler;
-const handleOptionSelected      = (e: Event, option: Record<string, any>) => { 
+const controller                        = new SelectSearchInputUIController(props_obj);
+const event_handler                     = controller.event_handler;
+const { state_refs: custom_state_refs } = controller.getComponentDefinition();
+
+const handleOptionSelected  = (e: Event, option: Record<string, any>) => { 
     const computed_value    = event_handler?.onOptionSelected?.(e, option);
     input_value.value       = computed_value;
 }
 
-const {  state_refs: custom_state_refs } = controller;
 
 const {
     search_selected_text,

@@ -15,20 +15,21 @@
             v-model="input_value[index]"
             :placeholder="props_obj.placeholder?.[index]"
             :readonly="props_obj.read_only"
-            @input="onOtpInput?.($event, index)"
-            @keydown="onOtpKeydown?.($event, index)"
-            @paste="onOtpPaste?.($event, index)"
+            @input="handleOnOTPInput?.($event, index)"
+            @keydown="handleOnOTPKeydown?.($event, index)"
+            @paste="handleOnOTPPaste?.($event, index)"
         />
     </div>
 </template>
 
 <script setup lang="ts">
-const { props_obj, state_refs, onOtpInput, onOtpKeydown, onOtpPaste } = defineProps<{
+
+const { props_obj, state_refs, handleOnOTPInput, handleOnOTPKeydown, handleOnOTPPaste } = defineProps<{
     props_obj: Record<string, any>;
     state_refs: Record<string, any>;
-    onOtpInput?: (e: Event, index: number) => void;
-    onOtpKeydown?: (e: KeyboardEvent, index: number) => void;
-    onOtpPaste?: (e: ClipboardEvent, index: number) => void;
+    handleOnOTPInput?: (e: Event, index: number) => void;
+    handleOnOTPKeydown?: (e: KeyboardEvent, index: number) => void;
+    handleOnOTPPaste?: (e: ClipboardEvent, index: number) => void;
 }>();
 
 const { input_value } = state_refs;
