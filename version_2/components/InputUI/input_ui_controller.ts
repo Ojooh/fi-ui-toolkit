@@ -22,10 +22,22 @@ class InputUIController extends BaseController {
 
     // Method to get ui state data
     protected getUIStateData(): Record<string, any> { 
-        const { value, is_checked } = this.props;
-        const existing_value        = value ?? is_checked ?? "";
+        const { value, is_checked, id } = this.props;
+        let existing_value: string | number | boolean | string[];
+
+        // Normalize the value to ensure consistent type handling
+        if (Array.isArray(value)) { 
+            existing_value = [...value]; 
+        } 
+
+        else if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") { 
+            existing_value = value; 
+        } 
+        else { existing_value = ""; }
 
         return {
+            existing_value,
+
             input_value: ref(existing_value),
 
             is_loading: ref(false),

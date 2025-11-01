@@ -63,6 +63,7 @@ class InputUIEventHandler extends BaseEventHandler {
             const boolean_result = result ? !current_active_value_ref.value : current_active_value_ref.value;
 
             this.controller.state_refs.input_value.value = boolean_result;
+            // this.controller.props.value = boolean_result
         } 
         catch (error) {
             console.error(`[${this.controller.name}] handleOnClick error:`, error);

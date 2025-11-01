@@ -8,20 +8,20 @@
             :id="props_obj.switch_btn_id"
             role="switch"
             type="button"
-            :class="[props_obj.switch_btn_class_style, input_value ? props_obj.active_class_style : props_obj.inactive_class_style]"
+            :class="[props_obj.switch_btn_class_style, props_obj?.value ? props_obj.active_class_style : props_obj.inactive_class_style]"
             @click="handleOnSwitchToggle?.($event)"
         >
             <input
                 type="checkbox"
                 class="sr-only peer"
                 v-model="input_value"
-                :checked="input_value === true"
+                :checked="props_obj?.value === true"
                 :id="props_obj.id"
                 :name="props_obj.id"
                 :disabled="props_obj.is_loading"
                 @change="handleOnChange?.($event)"
             />
-            <span :class="[props_obj.knob_class_style, input_value ? 'translate-x-6' : 'translate-x-1']"></span>
+            <span :class="[props_obj.knob_class_style, props_obj?.value ? 'translate-x-6' : 'translate-x-1']"></span>
             <span v-if="props_obj.label_text" :class="props_obj.label_text_class_style" v-html="props_obj.label_text"></span>
         </button>
     </div>
