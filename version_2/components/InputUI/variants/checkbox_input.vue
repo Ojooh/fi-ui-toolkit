@@ -7,6 +7,7 @@
         :required="props_obj.required"
         :id="props_obj.id"
         :name="props_obj.id"
+        :data-model-value="props_obj.checkbox_value"
         @change="handleOnChange?.($event)"
         @click="handleOnClick?.($event)"
     />

@@ -114,6 +114,9 @@ class InputTransformerUtil {
             .toLowerCase();
     }
 
+    // Method to add spacing between camel case
+    public static spaceCamelCase(text: string): string { return this.toPascalCase(text)?.replace(/([a-z])([A-Z])/g, '$1 $2'); }
+
     /** 🔄 Convert snake_case to plural snake_case */
     public static pluralizeSnakeCase(snake_str: string): string {
         const parts = snake_str.split("_");
@@ -267,6 +270,127 @@ class InputTransformerUtil {
 
         return form_data;
     }
+
+    /**
+     * Converts a nested field path like "name.type.2.role"
+     * into a flat, underscore-separated string "name_type_role"
+     * by removing numeric indices.
+     *
+     * @param input - The dot-delimited field path string
+     * @returns A sanitized key string
+     */
+    public static normalizeFieldKey(input: string): string {
+        if (!input) return "";
+
+        // Step 1: Remove any `.number` segments (e.g. ".0", ".1")
+        const withoutNumbers = input.replace(/\.\d+/g, "");
+
+        // Step 2: Replace remaining dots with underscores
+        const normalized = withoutNumbers.replace(/\./g, "_");
+
+        return normalized;
+    }
+
+    public static resolveTypedValue(raw: any): any {
+        // Already a non-string value – return as is
+        if (typeof raw !== "string") { return raw; }
+
+        const value = raw.trim();
+
+        // 1. --- Handle boolean ---
+        if (value === "true") { return true; }
+
+        if (value === "false") { return false; }
+
+        // 2. --- Handle null / undefined ---
+        if (value === "null") { return null; }
+
+        if (value === "undefined") { return undefined; }
+
+        // 3. --- Handle numbers (int or float) ---
+        // Only convert if the entire string matches a number
+        if (/^-?\d+(\.\d+)?$/.test(value)) { return Number(value); }
+
+        // 4. --- Handle array strings like "[1,2,3]" or "['a','b']" ---
+        if (
+            (value.startsWith("[") && value.endsWith("]")) ||
+            (value.startsWith("{") && value.endsWith("}"))
+        ) {
+            try {
+                return JSON.parse(value.replace(/'/g, '"'));
+            } catch {
+                return value; // fallback
+            }
+        }
+
+        // 5. --- Return as string if no rule matched ---
+        return value;
+    }
+
+
+    public static buildFormDataObject(
+        input_id: string,
+        input_value: string | number | boolean,
+        form_data: Record<string, any> = {}
+    ): Record<string, any> {
+        const keys          = input_id.split(".");
+        const reolved_value = this.resolveTypedValue(input_value);
+        let current: any    = form_data;
+
+        for (let i = 0; i < keys.length; i++) {
+            const key               = keys[i];
+            const next_key          = keys[i + 1];
+            const is_last           = i === keys.length - 1;
+            const is_array_index    = !isNaN(Number(key));
+            const is_array          = key === "[]";
+
+            // Handle numeric key → array index
+            if (is_array_index) {
+                const index = Number(key);
+
+                if (!Array.isArray(current)) {
+                    // Convert current to an array if it isn't one yet
+                    current = [];
+                }
+
+                // Ensure the array is long enough
+                while (current.length <= index) { current.push({}); }
+
+                if (is_last) {
+                    current[index] = reolved_value;
+                } 
+                else {
+                    if (typeof current[index] !== "object" || current[index] === null) { current[index] = {}; }
+                    current = current[index];
+                }
+            } 
+            else if (is_array) {
+                console.log({ current, is_array })
+                if (!Array.isArray(current)) {
+                    // Convert current to an array if it isn't one yet
+                    current = [];
+                }
+
+                current.push(reolved_value)
+            }
+            else {
+                // Object key
+                if (is_last) { current[key] = reolved_value; } 
+                
+                else {
+                    // Check if next_key is numeric → means this key should hold an array
+                    const is_next_array = !isNaN(Number(next_key)) || is_array;
+
+                    if (!(key in current)) { current[key] = is_next_array ? [] : {}; }
+
+                    current = current[key];
+                }
+            }
+        }
+
+        return form_data;
+    }
+
 
     // Optional helper to reset temp storage (useful on form reset)
     public static resetTempObjectMap(): void {

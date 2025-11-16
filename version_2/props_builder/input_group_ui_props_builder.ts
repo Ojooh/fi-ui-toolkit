@@ -39,7 +39,7 @@ class InputGroupUIPropsBuilder {
             switch_btn_id = "", label_text = "", no_options_content = "",
             loader_content = RenderHtmlUtil.renderLoaderHtml({ class_style: "w-10 h-10 flex items-center"}),
             caret_content = SVGIcons.trinagular_caret_down_svg_icon,
-            options = [], additional_parms = {}
+            options = [], additional_parms = {}, checkbox_value = undefined
         } = content_config;
 
         const { length = 6, rows = 8, min = 1, max = 100 } = number_config;
@@ -51,21 +51,24 @@ class InputGroupUIPropsBuilder {
         } = event_methods_config;
 
         const  {
-            input_class_style = "", wrapper_class_style = "", loader_class_style = "", 
+            input_class_style = "", wrapper_class_style = "", same_row_wrapper_class_style = "", loader_class_style = "", 
             switch_btn_class_style = "", label_text_class_style = "", knob_class_style = "", 
             active_class_style = "", inactive_class_style = "", caret_icon_class = "", 
             dropdown_wrapper_class_style = "", options_wrapper_class_style = "", option_class_style = "",
-            option_content_class_style = "",
-        } = class_styles_config
+            option_content_class_style = "", checkbox_input_class_style = ""
+        } = class_styles_config;
+
+        const main_wapper_class_style = input_type === "checkbox" ? same_row_wrapper_class_style : wrapper_class_style;
+        const main_input_class_style = input_type === "checkbox" ? checkbox_input_class_style : input_class_style;
 
         return { 
             id: input_id, type: input_type, placeholder: input_placeholder, value: input_value, 
             is_loading, read_only, required, is_checked, cache_enabled,
             switch_btn_id, label_text, no_options_content, loader_content, caret_content,
-            options, additional_parms, length, rows, min, max,
+            options, additional_parms, length, rows, min, max, checkbox_value,
             on_change, on_click, on_key_up, on_key_down, 
             render_option_label, get_option_value, fetch_method,
-            input_class_style, wrapper_class_style, loader_class_style, 
+            input_class_style: main_input_class_style, wrapper_class_style: main_wapper_class_style, loader_class_style, 
             switch_btn_class_style, label_text_class_style, knob_class_style, 
             active_class_style, inactive_class_style, caret_icon_class, 
             dropdown_wrapper_class_style, options_wrapper_class_style, option_class_style,
@@ -88,9 +91,11 @@ class InputGroupUIPropsBuilder {
 
         const input_config = { input_class_style, wrapper_class_style, ...input_config_options };
 
+        const main_wapper_class_style = input_config.type === "checkbox" ? input_config.wrapper_class_style : wrapper_class_style;
+
         // Return the reactive input group props
         return reactive({
-            wrapper_class_style,
+            wrapper_class_style: main_wapper_class_style,
             label_class_style,
             label_required_class_style,
             label_text,

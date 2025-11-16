@@ -11,6 +11,7 @@ export interface InputGroupClassStyleInterface {
     label_class_style?: string;
     label_required_class_style?: string;
     input_class_style?: string;
+    same_row_wrapper_class_style?: string;
 }
 
 export interface SearchFieldClassStyleInterface {
@@ -53,6 +54,8 @@ export interface InputUIContentPropsInterface {
     options?: Array<{ value: string | number; label_text: string }>;
 
     additional_parms?: Record<string, any>;
+
+    checkbox_value?: InputValueType
 }
 
 export interface InputUINumberPropsInterface {
@@ -84,6 +87,8 @@ export interface InputUIEventMethodsPropsInterface {
 export interface InputUIClassStylesPropsInterface {
     input_class_style?: string;
 
+    checkbox_input_class_style?: string;
+
     wrapper_class_style?: string;
 
     loader_class_style?: string;
@@ -107,6 +112,8 @@ export interface InputUIClassStylesPropsInterface {
     option_class_style?: string;
     
     option_content_class_style?: string;
+
+    same_row_wrapper_class_style?: string;
 }
 
 export interface InputUIPropsInterface {
@@ -137,6 +144,8 @@ export interface InputUIPropsInterface {
     cache_enabled?: boolean;
 
     value: InputValueType;
+
+    checkbox_value?: InputValueType;
 
     /** Select/Dropdown options */
     options?: Array<{ value: string | number; label_text: string }>;

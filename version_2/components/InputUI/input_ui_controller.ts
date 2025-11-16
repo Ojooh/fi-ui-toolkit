@@ -73,6 +73,17 @@ class InputUIController extends BaseController {
         }
     };
 
+    protected async handleOnMountedLogic(): Promise<void> {
+        const { type, id } = this.props;
+
+        if( type === "otp" ) {
+            const input_key = `${id}_0`;
+            document.getElementById(input_key)?.focus();
+        }
+        
+    }
+
+
 }
 
 export default InputUIController;

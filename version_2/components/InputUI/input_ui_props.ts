@@ -28,6 +28,8 @@ const InputUIProps   = {
 
     value: { type: [String, Array, Boolean, Number], default: "", required: false },
 
+    checkbox_value: { type: [String, Array, Boolean, Number], default: "", required: false },
+
     options: { type: Array as PropType<Array<{ value: string | number; label_text: string }>>, default: () => [], required: false },
 
     required: { type: Boolean, default: false, required: false },

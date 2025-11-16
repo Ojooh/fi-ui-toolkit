@@ -28,20 +28,50 @@ class InputUIEventHandler extends BaseEventHandler {
 
     // Method to handle on click event
     public handleOnClick (event: MouseEvent, options?: InputEventMethodOptions) {
-        const { on_click } = this.controller.props;
+        const { on_click }  = this.controller.props;
 
         if(!on_click) { return; }
 
-        on_click(event);
+        const target = event.target as HTMLInputElement | HTMLTextAreaElement | null;
+
+        let new_value: string | boolean | number | null = "";
+
+        if (!target) return;
+
+        const data_model_value  = target.getAttribute("data-model-value");
+        const raw_input_value   = this.controller.state_refs.input_value.value;
+
+        if(data_model_value) {
+            new_value = raw_input_value ? data_model_value : null;
+        }
+        else {
+            new_value = raw_input_value;
+        }
+
+        on_click(event, new_value);
     }
 
     // Method to handle on change event
     public handleOnChange (event: Event | InputEvent, options?: InputEventMethodOptions) {
         const { on_change } = this.controller.props;
 
-        const new_value = this.controller.state_refs.input_value.value;
-
         if(!on_change) { return; }
+
+        const target = event.target as HTMLInputElement | HTMLTextAreaElement | null;
+
+        let new_value: string | boolean | number | null = "";
+
+        if (!target) return;
+
+        const data_model_value  = target.getAttribute("data-model-value");
+        const raw_input_value   = this.controller.state_refs.input_value.value;
+
+        if(data_model_value) {
+            new_value = raw_input_value ? data_model_value : null;
+        }
+        else {
+            new_value = raw_input_value;
+        }
 
         on_change(event, new_value);
     }
