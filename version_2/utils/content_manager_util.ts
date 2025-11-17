@@ -104,10 +104,36 @@ class ContentManagerUtil {
 
     /** Get a specific API response value */
     public getAPIResponseValue<T = any>(api_response: string): T {
-        return (
-            this.merged_api_responses[api_response] ??
-            this.merged_api_responses["error_occurred"]
-        );
+        let dynamic_params: Record<string, string> = {};
+
+        // 1️⃣ Extract dynamic values inside [ ... ]
+        const bracket_matches = [...api_response.matchAll(/\[([^\]]+)\]/g)];
+
+        if (bracket_matches.length > 0) {
+            bracket_matches.forEach((match, index) => {
+                dynamic_params[`val_${index + 1}`] = match[1];  // val_1, val_2, ...
+            });
+
+            // Replace [xxx] → [*] to build the lookup key
+            api_response = api_response.replace(/\[[^\]]+\]/g, "[*]");
+        }
+
+        // 2️⃣ Get template
+        let template = this.merged_api_responses[api_response];
+
+        if (!template) {
+            template = this.merged_api_responses["error_occurred"];
+        }
+
+        // 3️⃣ Replace placeholders in template
+        if (typeof template === "string") {
+            Object.entries(dynamic_params).forEach(([key, value]) => {
+                const regex = new RegExp(`%${key}%`, "g"); 
+                template = template.replace(regex, value);
+            });
+        }
+
+        return template as T;
     }
 }
 

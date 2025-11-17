@@ -40,15 +40,15 @@ class LoggerUtil {
         // }
     }
 
-    log (...args: unknown[]): void { this._log('log', '#3498db', ...args); } 
+    log (...args: any[]): void { this._log('log', '#3498db', ...args); } 
 
-    info (...args: unknown[]): void { this._log('info', '#2ecc71', ...args); }
+    info (...args: any[]): void { this._log('info', '#2ecc71', ...args); }
 
-    warn (...args: unknown[]): void { this._log('warn', '#f1c40f', ...args); }
+    warn (...args: any[]): void { this._log('warn', '#f1c40f', ...args); }
 
-    error (...args: unknown[]): void { this._log('error', '#e74c3c', ...args); }
+    error (...args: any[]): void { this._log('error', '#e74c3c', ...args); }
 
-    debug (...args: unknown[]): void { this._log('debug', '#9b59b6', ...args); }
+    debug (...args: any[]): void { this._log('debug', '#9b59b6', ...args); }
 }
 
 export default LoggerUtil;

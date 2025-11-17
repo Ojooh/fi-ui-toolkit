@@ -65,14 +65,15 @@ class InputUIEventHandler extends BaseEventHandler {
 
         const data_model_value  = target.getAttribute("data-model-value");
         const raw_input_value   = this.controller.state_refs.input_value.value;
-        console.log({ data_model_value, raw_input_value });
 
         if(data_model_value) {
-            new_value = raw_input_value ? data_model_value : null;
+            new_value = data_model_value
         }
         else {
             new_value = raw_input_value;
         }
+
+        // console.log({ new_value, data_model_value, raw_input_value})
 
         on_change(event, new_value);
     }

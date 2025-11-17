@@ -381,6 +381,13 @@ class InputTransformerUtil {
                 // 2. ensure unique values
                 if (!current.includes(resolved_value)) { current.push(resolved_value); }
 
+                // 3. remove value if in  array already
+                else {
+                    const index = current.indexOf(resolved_value);
+
+                    if (index !== -1) { current.splice(index, 1); }
+                }
+
                 continue;
             }
             
@@ -405,6 +412,12 @@ class InputTransformerUtil {
                         current.pop();
                         current.push(resolved_value);
                     }
+                }
+                // 3. remove value if in  array already
+                else {
+                    const index = current.indexOf(resolved_value);
+
+                    if (index !== -1) { current.splice(index, 1); }
                 }
 
                 continue;

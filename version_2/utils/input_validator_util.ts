@@ -97,28 +97,79 @@ class InputValidatorUtil {
     }
 
     // Detect changes in object keys
-    public static hasInputChanged( new_input: Record<string, any>, existing_data: Record<string, any>, keys_to_check: string[] ): boolean {
+    public static hasInputChanged(
+        new_input: Record<string, any>,
+        existing_data: Record<string, any>,
+        keys_to_check: string[]
+    ): boolean {
+
+        // Normalize values (booleans, "true"/"false", "1"/"0", null-like)
         const normalize = (val: any): any => {
-            if (typeof val === "boolean") return val;
-            if (val === 1 || val === "1") return true;
-            if (val === 0 || val === "0") return false;
+            if (val === "true") return true;
+            if (val === "false") return false;
+
+            if (val === "1") return true;
+            if (val === "0") return false;
+
             return val;
         };
 
-        for (const key of keys_to_check) {
-            if (!(key in new_input)) { continue; } 
-            
-            const a = normalize(new_input[key]);
-            const b = normalize(existing_data[key]);
+        // Deep compare utility
+        const deepEqual = (a: any, b: any): boolean => {
+            a = normalize(a);
+            b = normalize(b);
 
-            if (typeof a === "object" || typeof b === "object") {
-                if (JSON.stringify(a) !== JSON.stringify(b)) { return true; }
-            } 
-            else if (a !== b) { return true; }
+            if (a === b) return true;
+
+            // Handle null
+            if (a === null || b === null) return a === b;
+
+            // Compare Arrays
+            if (Array.isArray(a) && Array.isArray(b)) {
+                if (a.length !== b.length) return false;
+                for (let i = 0; i < a.length; i++) {
+                    if (!deepEqual(a[i], b[i])) return false;
+                }
+                return true;
+            }
+
+            // If one is array and other isn't
+            if (Array.isArray(a) !== Array.isArray(b)) return false;
+
+            // Compare Objects
+            if (typeof a === "object" && typeof b === "object") {
+                const a_keys = Object.keys(a);
+                const b_keys = Object.keys(b);
+
+                if (a_keys.length !== b_keys.length) return false;
+
+                for (const key of a_keys) {
+                    if (!deepEqual(a[key], b[key])) return false;
+                }
+
+                return true;
+            }
+
+            // Primitive mismatch
+            return false;
+        };
+
+        // Main logic: check only provided keys
+        for (const key of keys_to_check) {
+            if (!(key in new_input)) continue;
+
+            const newVal = normalize(new_input[key]);
+            const oldVal = normalize(existing_data[key]);
+
+            if (!deepEqual(newVal, oldVal)) {
+                console.log("🔺 CHANGED:", key, { newVal, oldVal });
+                return true;
+            }
         }
 
         return false;
     }
+
 }
 
 export default InputValidatorUtil
