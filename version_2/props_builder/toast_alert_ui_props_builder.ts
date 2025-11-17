@@ -87,7 +87,7 @@ class ToastAlertUIPropsBuilder {
         const status_class_style        = this.getStatusClassStyle(status_class_styles, status);
         const wrapper_class_style       = `${class_styles?.wrapper_class_style} ${border_class_style} ${status_class_style}`;
         const icon_wrapper_class_style  = `${class_styles?.icon_wrapper_class_style} ${status_class_style}`;
-        const icon_class_style          = `${class_styles?.wrapper_class_style}`;
+        const icon_class_style          = `${class_styles?.icon_class_style}`;
         const message_class_style       = `${class_styles?.message_class_style} ${status_class_style}`;
         const on_close                  = event_handler?.handleOnCloseToastAlertClick.bind(event_handler) ?? null;
 

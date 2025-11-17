@@ -333,58 +333,97 @@ class InputTransformerUtil {
         input_value: string | number | boolean,
         form_data: Record<string, any> = {}
     ): Record<string, any> {
-        const keys          = input_id.split(".");
-        const reolved_value = this.resolveTypedValue(input_value);
-        let current: any    = form_data;
+        const keys                  = input_id.split(".");
+        const resolved_value        = this.resolveTypedValue(input_value);
+        const array_length_pattern  = /^\[(\d+)\]$/;
+        let current: any            = form_data;
 
         for (let i = 0; i < keys.length; i++) {
             const key               = keys[i];
             const next_key          = keys[i + 1];
             const is_last           = i === keys.length - 1;
-            const is_array_index    = !isNaN(Number(key));
-            const is_array          = key === "[]";
+            const is_index          = !isNaN(Number(key));
+            const is_push_array     = key === "[]";
+            const is_limited_array  = array_length_pattern.test(key); // "[5]" pattern
 
-            // Handle numeric key → array index
-            if (is_array_index) {
+            // ----------------------------------------------------------
+            // CASE 1: NUMERIC INDEX  — e.g. "users.0.name"
+            // ----------------------------------------------------------
+            if (is_index) {
                 const index = Number(key);
 
-                if (!Array.isArray(current)) {
-                    // Convert current to an array if it isn't one yet
-                    current = [];
-                }
+                // Convert current to an array if it isn't one yet
+                if (!Array.isArray(current)) { current = []; }
 
                 // Ensure the array is long enough
                 while (current.length <= index) { current.push({}); }
 
-                if (is_last) {
-                    current[index] = reolved_value;
-                } 
+                if (is_last) { current[index] = resolved_value; } 
+
                 else {
                     if (typeof current[index] !== "object" || current[index] === null) { current[index] = {}; }
+
                     current = current[index];
                 }
+                continue;
             } 
-            else if (is_array) {
-                console.log({ current, is_array })
-                if (!Array.isArray(current)) {
-                    // Convert current to an array if it isn't one yet
-                    current = [];
-                }
 
-                current.push(reolved_value)
+            // ----------------------------------------------------------
+            // CASE 2: PUSH MODE "[]" — push if value is valid, unique
+            // ----------------------------------------------------------
+            if (is_push_array) {
+                // Convert current to an array if it isn't one yet
+                if (!Array.isArray(current)) { current = []; }
+
+                // 1. do not push null or undefined
+                if (resolved_value === null || resolved_value === undefined) { return form_data; }
+
+                // 2. ensure unique values
+                if (!current.includes(resolved_value)) { current.push(resolved_value); }
+
+                continue;
             }
-            else {
-                // Object key
-                if (is_last) { current[key] = reolved_value; } 
-                
-                else {
-                    // Check if next_key is numeric → means this key should hold an array
-                    const is_next_array = !isNaN(Number(next_key)) || is_array;
+            
+            // ----------------------------------------------------------
+            // CASE 3: LIMITED ARRAY MODE "[5]"
+            // ----------------------------------------------------------
+            if (is_limited_array) {
+                const max_size = Number(key.match(array_length_pattern)![1]);
 
-                    if (!(key in current)) { current[key] = is_next_array ? [] : {}; }
+                // Convert current to an array if it isn't one yet
+                if (!Array.isArray(current)) { current = []; }
 
-                    current = current[key];
+                // ignore null/undefined
+                if (resolved_value === null || resolved_value === undefined) { return form_data; }
+
+                // allow unique constraint
+                if (!current.includes(resolved_value)) {
+                    if (current.length < max_size) { current.push(resolved_value); }
+                    
+                    else {
+                        // If array is full → pop last → push new
+                        current.pop();
+                        current.push(resolved_value);
+                    }
                 }
+
+                continue;
+            }
+
+            // ----------------------------------------------------------
+            // CASE 4: NORMAL OBJECT KEY
+            // ----------------------------------------------------------
+            if (is_last) { current[key] = resolved_value; }
+            
+            else {
+                const next_is_index             = !isNaN(Number(next_key));
+                const next_is_array_symbol      = next_key === "[]" || array_length_pattern.test(next_key);
+
+                if (!(key in current)) {
+                    current[key] = next_is_index || next_is_array_symbol ? [] : {};
+                }
+
+                current = current[key];
             }
         }
 
