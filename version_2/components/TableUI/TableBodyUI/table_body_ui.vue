@@ -37,10 +37,16 @@
                     :class="props.body_cell_class_style" 
                 >
                     <!-- Render plain string -->
-                    <div v-if="col.content_type === 'plain'" :class="col.col_class_style">{{ record[col.field_key] }}</div>
+                    <div v-if="col.content_type === 'plain'" :class="col.col_class_style">
+                        {{ InputTransformerUtil.getValueByDotPath(record, col?.field_key, "") }}
+                    </div>
 
-                    <!-- Render plain string -->
-                    <div v-else-if="col.content_type === 'formatted'" :class="col.col_class_style" v-html="col?.formatter?.(record[col.field_key])"></div>
+                    <!-- Render formatted string -->
+                    <div 
+                        v-else-if="col.content_type === 'formatted'" 
+                        :class="col.col_class_style" 
+                        v-html="col?.formatter?.(InputTransformerUtil.getValueByDotPath(record, col?.field_key, null))"
+                    ></div>
 
                     <component 
                         v-else :is="col.component"
@@ -59,6 +65,7 @@
 <script setup lang="ts">
 import TableBodyUIProps         from "./table_body_ui_props";
 import TableBodyUIController    from "./table_body_ui_controller";
+import InputTransformerUtil     from "../../../utils/input_formatter_util";
 
 const props             = defineProps(TableBodyUIProps);
 const controller        = new TableBodyUIController(props);

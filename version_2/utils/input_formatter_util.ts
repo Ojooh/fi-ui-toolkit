@@ -449,6 +449,23 @@ class InputTransformerUtil {
         this._temp_object_map = {};
     }
 
+    public static getValueByDotPath(
+        obj: Record<string, any>,
+        path: string,
+        default_value: any = null
+    ): any {
+        if (!obj || typeof path !== "string") { return default_value; }
+
+        if (!path.trim()) { return default_value; }
+
+        return path.split(".").reduce((acc, key) => {
+            if (acc && typeof acc === "object" && key in acc) {
+                return acc[key];
+            }
+            return default_value;
+        }, obj);
+    }
+
 }
 
 export default InputTransformerUtil;

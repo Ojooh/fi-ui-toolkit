@@ -70,12 +70,19 @@ class SelectSearchInputUIEventhandler extends BaseEventHandler {
 
     // Method to handle on search input update
     public onSearchInput (event: Event) {
+        const { props } = this.controller;
+
+        if(props.read_only) { return }
+
         const target_el                     = (event.target as HTMLInputElement);
         const updated_search_selected_text  = target_el?.value || "";
+        const is_open                       = updated_search_selected_text ? true : false;
 
-        this.updateControllerAttributes({ search_selected_text: updated_search_selected_text  });
+        this.updateControllerAttributes({ is_open, search_selected_text: updated_search_selected_text  });
 
         this.fetchRecordOptions(updated_search_selected_text);
+
+        if(!updated_search_selected_text) { this.onOptionSelected(event, {}) }
         return;
     }
 
@@ -115,7 +122,9 @@ class SelectSearchInputUIEventhandler extends BaseEventHandler {
 
     // Method to toggle dropdown
     public toggleDropdown  (value: boolean) {
-        const { record_options = [], search_selected_text = "" } = this.controller;
+        const { record_options = [], search_selected_text = "", props } = this.controller;
+
+        if(props.read_only) { return }
 
         this.updateControllerAttributes({ is_open: value})
 
