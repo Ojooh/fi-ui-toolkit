@@ -45,7 +45,7 @@
                     <div 
                         v-else-if="col.content_type === 'formatted'" 
                         :class="col.col_class_style" 
-                        v-html="col?.formatter?.(InputTransformerUtil.getValueByDotPath(record, col?.field_key, null))"
+                        v-html="col?.formatter?.(InputTransformerUtil.getValueByDotPath(record, col?.field_key, null), record)"
                     ></div>
 
                     <component 

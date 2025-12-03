@@ -1,4 +1,4 @@
-import dayjs            from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import isSameOrAfter    from "dayjs/plugin/isSameOrAfter";
 import { ENVInterface } from "@v2/types/env_type";
 
@@ -15,7 +15,7 @@ class InputValidatorUtil {
     // Regex patterns
     private static module_name_regex_reg_exp = /^[A-Za-z.'\s/_-]*$/;
     private static module_namey_regex_reg_exp = /^[A-Za-z0-9.'\s,/_\-()&]*$/;
-    private static email_regex_reg_exp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    private static email_regex_reg_exp = /^(?=.{1,255}$)[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]{1,190}\.[a-zA-Z]{2,}$/i;
     private static tel_regex_reg_exp = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
     private static pass_regex_reg_exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){6,}.+$/;
     private static url_regex_reg_exp          = /^(https?:\/\/)?((localhost|[a-zA-Z0-9-_.]+)(:[0-9]{1,5})?)(\/[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*)?$/;
@@ -30,6 +30,10 @@ class InputValidatorUtil {
     // Environment
     public static isProduction(): boolean { return this.ENV?.VITE_MODE === "production"; }
     public static isStaging(): boolean { return this.ENV?.VITE_MODE === "staging"; }
+
+    public static isAdmin(name: string) { return ["SuperAdmin", "AdminI", "AdminT"].includes(name); }
+
+    public static isSuperAdmin(name: string) { return name === "SuperAdmin"; }
 
     // Currency type
     public static isFiat(currency_obj: { type?: string } | null | undefined): boolean {
@@ -90,6 +94,21 @@ class InputValidatorUtil {
         const date = dayjs(date_string);
         return date.isValid() && date.isAfter(dayjs());
     }
+
+    public static isValidDateAndDifference(
+            input?: string | null,
+            unit: "years" | "days" | "hours" | "minutes" | "seconds" = "years"
+        ): { date: Dayjs; difference: number } | null {
+            if(!input) { return null }
+            
+            const date = dayjs(input);
+
+            // Check validity
+            if (!date.isValid()) { return null; }
+
+            // Compute difference between now and the input date
+            return { date, difference: dayjs().diff(date, unit) };
+        }
 
     // Boolean string
     public static isTruthyString(value: any): boolean {

@@ -5,6 +5,7 @@
         :is="controller.getInputComponent(props.type)"
         :props_obj="props" 
         :state_refs="state_refs"
+        :componentss="componentss"
         :handleOnChange="event_handler?.handleOnChange.bind(event_handler)"
         :handleOnClick="event_handler?.handleOnClick.bind(event_handler)"
         :handleOnKeyup="event_handler?.handleOnKeyUp.bind(event_handler)"
@@ -20,9 +21,10 @@
 import InputUIProps         from "./input_ui_props";
 import InputUIController    from "./input_ui_controller";
 
+
 const props             = defineProps(InputUIProps);
 const controller        = new InputUIController(props);
 const event_handler     = controller.event_handler;
-const { state_refs }    = controller.getComponentDefinition();
+const { state_refs, components: componentss }    = controller.getComponentDefinition();
 const {input_value} = state_refs
 </script>

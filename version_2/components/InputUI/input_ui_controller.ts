@@ -1,5 +1,6 @@
 
 import { ref }                      from "vue";
+
 import BaseController               from "../../base_classes/base_controller";
 import InputUIEventHandler          from "./input_ui_event_handler";
 import TextInput                    from "./variants/text_input.vue";
@@ -11,6 +12,8 @@ import SelectInput                  from "./variants/select_input.vue";
 import NumberInput                  from "./variants/number_input.vue";
 import FileInput                    from "./variants/file_input.vue";
 import SelectSearchInput            from "./variants/select_search_input.vue";
+import PhoneNumberInput             from "./variants/phone_number_input.vue";
+
 
 class InputUIController extends BaseController {
     public event_handler: InputUIEventHandler;
@@ -68,6 +71,8 @@ class InputUIController extends BaseController {
                 return FileInput;
             case "select_search":
                 return SelectSearchInput;
+            case "phone_number":
+                return PhoneNumberInput;
             default:
                 return TextInput;
         }
@@ -80,6 +85,8 @@ class InputUIController extends BaseController {
             const input_key = `${id}_0`;
             document.getElementById(input_key)?.focus();
         }
+
+        if(type === "phone_number") { this.event_handler.handleOnVUeTelInputMounted(); }
         
     }
 

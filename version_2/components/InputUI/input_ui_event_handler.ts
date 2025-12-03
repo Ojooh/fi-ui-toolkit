@@ -57,13 +57,13 @@ class InputUIEventHandler extends BaseEventHandler {
 
         if(!on_change) { return; }
 
-        const target = event.target as HTMLInputElement | HTMLTextAreaElement | null;
+        const target = event?.target as HTMLInputElement | HTMLTextAreaElement | null;
 
         let new_value: string | boolean | number | null = "";
 
         if (!target) return;
 
-        const data_model_value  = target.getAttribute("data-model-value");
+        const data_model_value  = target?.getAttribute?.("data-model-value");
         const raw_input_value   = this.controller.state_refs.input_value.value;
 
         if(data_model_value) {
@@ -164,6 +164,23 @@ class InputUIEventHandler extends BaseEventHandler {
         if(!on_change) { return; }
 
         on_change(event, new_value.join(""));
+    }
+
+    public handleOnVUeTelInputMounted () {
+        const { props = {} } = this.controller;
+
+        const { id, placeholder, read_only, value } = props;
+
+        console.log({ props })
+
+        const tel_input = document.querySelector<HTMLInputElement>(`#${id} input`);
+
+        if(!tel_input) { return }
+
+        tel_input.name = this.name;
+        tel_input.placeholder = placeholder;
+        tel_input.readOnly = read_only;
+        tel_input.value = value;
     }
 }
 

@@ -14,3 +14,21 @@ export interface SearchSelectInputControllerAttributesInterface {
     current_page?: number;
     total_pages?: number;
 }
+
+export interface PhoneNumberCountryInfo {
+  name: string;
+  iso2: string;
+  dialCode: string;
+  priority: number;
+  areaCodes: string[] | null;
+}
+
+export interface PhoneNumberResult {
+  countryCallingCode: string;
+  nationalNumber: string;
+  number: string;
+  country: PhoneNumberCountryInfo;
+  countryCode: string;    // same as country.iso2 but included separately
+  valid: boolean;
+  formatted: string;
+}
