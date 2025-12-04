@@ -60,3 +60,24 @@ export interface TitleAndSubTitleHTMLInterface {
   title_class_style?: string;
   sub_title_class_style?: string;
 }
+
+export interface QRColor {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+    hex: string;
+}
+
+export interface QRCodeOptions {
+    width?: number;                   // Total width of QR image
+    scale?: number;                   // Scale factor if width not provided
+    margin?: number;                  // Margin around QR code
+    color?: {
+        dark?: QRColor;               // Dark color for modules
+        light?: QRColor;              // Light/background color
+    };
+    type?: string;                     // MIME type e.g., 'image/png'
+    rendererOpts?: Record<string, any>; // Additional renderer options
+}
+
