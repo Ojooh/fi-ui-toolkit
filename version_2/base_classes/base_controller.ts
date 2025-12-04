@@ -6,7 +6,8 @@ import {
     computed, 
     watch, 
     onMounted, 
-    onBeforeUnmount 
+    onBeforeUnmount,
+    watchEffect
 } from "vue";
 import { useRoute, useRouter }              from "vue-router";
 import LoggerUtil                           from "../utils/logger_util";
@@ -79,7 +80,18 @@ class BaseController {
         // Computed
         const computed_data = this.getUIComputedData();
         Object.entries(computed_data).forEach(([key, getter]) => {
-            this.computed_refs[key] = computed(getter);
+            // Check if the getter is async
+            if (getter.constructor.name === 'AsyncFunction') {
+                // Async: store a ref and call getter to update it
+                const valueRef = ref<any>(null);
+                watchEffect(async () => {
+                    valueRef.value = await getter();
+                });
+                this.computed_refs[key] = valueRef;
+            } else {
+                // Sync: store computed
+                this.computed_refs[key] = computed(getter);
+            }
         });
 
         // Watchers

@@ -1,6 +1,8 @@
 // qr_code_util.ts
 import QRCode from "qrcode";
 
+import { QRCodeOptions } from "../types/util_type"
+
 class QRCodeUtil {
     public static readonly name = "qr_code_util";
 
@@ -12,11 +14,9 @@ class QRCodeUtil {
      */
     public static async generateDataUrl(
         text: string,
-        options: QRCode.QRCodeToDataURLOptions = {}
+        options: QRCodeOptions = {}
     ): Promise<string> {
-        if (!text || typeof text !== "string") {
-            throw new Error("QRCodeUtil.generateDataUrl: input text must be a valid string.");
-        }
+        if (!text || typeof text !== "string") { return "" }
 
         try {
             return await QRCode.toDataURL(text, {
@@ -39,7 +39,7 @@ class QRCodeUtil {
      */
     public static async generateBuffer(
         text: string,
-        options: QRCode.QRCodeToBufferOptions = {}
+        options: QRCodeOptions = {}
     ): Promise<Buffer> {
         if (!text || typeof text !== "string") {
             throw new Error("QRCodeUtil.generateBuffer: input text must be a valid string.");
